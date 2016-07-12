@@ -1,8 +1,4 @@
-## REST API, mongoDB
+## REST API, mongoDB, JWT, Angular2
 
-build/run:
-```
-    install: npm i
-    start server: npm start
-    endpoint: localhost:3000/api/books
-```
+[back-end](back-end/readme.md)
+[front-end](front-end/readme.md)
