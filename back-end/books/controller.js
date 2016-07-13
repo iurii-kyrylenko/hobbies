@@ -1,4 +1,5 @@
-const Book = require('./model');
+const mongoose = require('mongoose');
+const Book = mongoose.model('Book');
 
 const controller = {
 
