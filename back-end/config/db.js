@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
-const CONNECTION_STRING = 'mongodb://localhost/test';
-
-mongoose.connect(CONNECTION_STRING);
+mongoose.connect(process.env.CONNECTION_STRING);
 
 mongoose.connection
     .on('connected', () => console.log('mongo connected'))
