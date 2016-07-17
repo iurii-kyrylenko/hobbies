@@ -35,7 +35,25 @@ const login = (req, res) => {
     authFn(req, res);
 };
 
+// Use this middleware after authorization. It addresses following use cases:
+// User is deleted after login.
+// Or valid JWT for deleted user is used for authorization.
+const checkUser = (req, res, next) => {
+    User.findById(req.user._id, (err, user) => {
+        if(err) {
+            res.sendStatus(400);
+            return;
+        }
+        if(!user) {
+            res.sendStatus(401);
+            return;
+        }
+        next();
+    });
+};
+
 module.exports = {
     register,
-    login
+    login,
+    checkUser
 };

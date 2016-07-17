@@ -2,14 +2,16 @@ const mongoose = require('mongoose');
 const Book = mongoose.model('Book');
 
 const getBooks = (req, res) => {
-    console.log('req.user:', req.user);
-    Book.find((err, books) => {
-        if(err) {
-            res.sendStatus(400);
-            return;
+    Book.find(
+        { userId: req.user._id },
+        (err, books) => {
+            if(err) {
+                res.sendStatus(400);
+                return;
+            }
+            res.send(books);
         }
-        res.send(books);
-    });
+    );
 };
 
 const getBook = (req, res) => {
@@ -18,7 +20,7 @@ const getBook = (req, res) => {
             res.sendStatus(400);
             return;
         }
-        if(!book) {
+        if(!book || !book.userId.equals(req.user._id)) {
             res.sendStatus(404);
             return;
          }
@@ -28,6 +30,7 @@ const getBook = (req, res) => {
 
 const addBook = (req, res) => {
     const book = new Book(req.body);
+    book.userId = req.user._id;
     book.save((err) => {
         if(err) {
             res.sendStatus(400);
@@ -43,7 +46,7 @@ const changeBook = (req, res) => {
             res.sendStatus(400);
             return;
         }
-        if(!book) {
+        if(!book || !book.userId.equals(req.user._id)) {
             res.sendStatus(404);
             return;
         }
@@ -67,7 +70,7 @@ const deleteBook = (req, res) => {
             res.sendStatus(400);
             return;
         }
-        if(!book) {
+        if(!book || !book.userId.equals(req.user._id)) {
             res.sendStatus(404);
             return;
         }
