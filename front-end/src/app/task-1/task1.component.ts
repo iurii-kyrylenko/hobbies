@@ -4,7 +4,7 @@ import{ Http } from '@angular/http';
 @Component({
     template: `
         <h3>Task-1</h3>
-        <button type="button" class="btn btn-primary" (click)="login()">Log in</button>
+        <button type="button" class="btn btn-default" (click)="login()">Log in</button>
     `
 })
 export class Task1Component {
