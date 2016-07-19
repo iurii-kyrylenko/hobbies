@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+    <div class="navbar-header navbar-brand">
+      My Hobbies
+    </div>
+
+    <div class="navbar-header">
+      <img style="height:50px" src="../../public/images/angular.png">
+    </div>
+
+  <ul class="nav navbar-nav">
+    <li><a [routerLink]="['/task1']" routerLinkActive="active">Books</a></li>
+    <li><a [routerLink]="['/task2']" routerLinkActive="active">Movies</a></li>
+  </ul>
+
+  <div class="navbar-right">
+    <p class="navbar-text">Logged in as Iurii Kyrylenko</p>
+    <button type="button" class="btn btn-default navbar-btn">Log out</button>
+  </div>
+ </div>
+</nav>
+
+<router-outlet></router-outlet>

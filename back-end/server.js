@@ -14,6 +14,13 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }));
 
+// Allow CORS
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 server.use(passport.initialize());
 
 server.use('/api/users', usersRouter);
