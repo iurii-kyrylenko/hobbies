@@ -1,37 +1,7 @@
-/*
-body {
-    background: #3f7dba;
-    color: #fff;
-}
-.logo img {
-  vertical-align: middle;
-}
-nav a {
-  padding: 5px 10px;
-  width:64px;
-  text-decoration: none;
-  text-align: center;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #eee;
-  border-radius: 4px;
-}
-nav a:visited, a:link {
-  color: #607D8B;
-}
-nav a:hover {
-  color: #039be5;
-  background-color: #CFD8DC;
-}
-nav a.active {
-  color: #039be5;
-}
-*/
-
 body {
   margin: 20px;
 }
-li a.active {
+a.active {
   color: #000 !important;
   text-shadow: 2px 2px #ccc;
 }

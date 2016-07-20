@@ -1,20 +1,15 @@
 import { Component } from '@angular/core';
-import{ Http } from '@angular/http';
+import { Http } from '@angular/http';
 
 @Component({
     template: `
-        <h3>Task-1</h3>
+        <h3>Login</h3>
         <button type="button" class="btn btn-default" (click)="login()">Log in</button>
     `
 })
-export class Task1Component {
-    constructor(private http: Http) {}
+export class LoginComponent {
 
-    getBooks() {
-        this.http.get('http://localhost:3000/api/books').subscribe((res) => {
-            console.log(res);
-        });
-    }
+    constructor(private http: Http) {}
 
     login() {
         this.http.post('http://localhost:3000/api/users/login', {

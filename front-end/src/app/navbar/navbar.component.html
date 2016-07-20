@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+  <div class="navbar-header">
+    <a [routerLink]="['/home']" routerLinkActive="active" class="navbar-brand">
+      My Hobbies
+    </a>
+  </div>
+
+  <ul *ngIf="isLoggedIn" class="nav navbar-nav">
+    <li>
+      <a [routerLink]="['/books']" routerLinkActive="active">
+        <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+        &nbsp;Books
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/movies']" routerLinkActive="active">
+      <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+      &nbsp;Movies
+      </a>
+    </li>
+  </ul>
+
+  <ul *ngIf="!isLoggedIn" class="nav navbar-nav navbar-right">
+    <li>
+      <a [routerLink]="['/login']" routerLinkActive="active">
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+        &nbsp;Log-in
+      </a>
+    </li>
+  </ul>
+
+  <ul *ngIf="isLoggedIn" class="nav navbar-nav navbar-right">
+    <li class="navbar-text">Logged in as Iurii Kyrylenko</li>
+    <li>
+      <a href="#">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+        &nbsp;Log-out
+      </a>
+    </li>
+  </ul>
+
+  </div>
+</nav>

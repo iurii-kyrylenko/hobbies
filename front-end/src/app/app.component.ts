@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { Task1Component } from './task-1/task1.component';
-import { Task2Component } from './task-2/task2.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 import '../../public/css/styles.css';
 
 @Component({
     selector: 'my-app',
-    template: require('./app.component.html'),
-    styles: [require('./app.component.css')],
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, NavbarComponent ],
+    template: `
+        <my-navbar></my-navbar>
+        <router-outlet></router-outlet>
+    `,
+
 })
 
-export class AppComponent { }
+export class AppComponent {}

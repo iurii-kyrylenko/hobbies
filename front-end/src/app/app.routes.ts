@@ -1,11 +1,16 @@
 import { provideRouter, RouterConfig } from '@angular/router';
-import { Task1Component } from './task-1/task1.component';
-import { Task2Component } from './task-2/task2.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './authentication/login.component';
+import { BooksComponent } from './books/books.component';
+import { MoviesComponent } from './movies/movies.component';
 
 export const routes: RouterConfig = [
-    { path: '', redirectTo: '/task1', pathMatch: 'full' },
-    { path: 'task1', component: Task1Component },
-    { path: 'task2', component: Task2Component }
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'books', component: BooksComponent },
+    { path: 'movies', component: MoviesComponent },
+    { path: '**', redirectTo: '/home' },
 ];
 
 export const APP_ROUTER_PROVIDERS = [
