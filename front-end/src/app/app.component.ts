@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AuthService } from './authentication/auth.service';
 
 import '../../public/css/styles.css';
 
@@ -11,6 +12,7 @@ import '../../public/css/styles.css';
         <my-navbar></my-navbar>
         <router-outlet></router-outlet>
     `,
+    providers: [AuthService]
 
 })
 

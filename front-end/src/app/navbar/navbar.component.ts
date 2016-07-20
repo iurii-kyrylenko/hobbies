@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import { AuthService } from '../authentication/auth.service';
 
 @Component({
     selector: 'my-navbar',
@@ -8,5 +9,10 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 })
 export class NavbarComponent {
-    isLoggedIn = false;
+
+    constructor(public auth: AuthService) {}
+
+    logout() {
+        this.auth.logout();
+    }
 }

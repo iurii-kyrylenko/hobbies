@@ -7,7 +7,7 @@
     </a>
   </div>
 
-  <ul *ngIf="isLoggedIn" class="nav navbar-nav">
+  <ul *ngIf="auth.isLoggedIn" class="nav navbar-nav">
     <li>
       <a [routerLink]="['/books']" routerLinkActive="active">
         <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
@@ -22,7 +22,7 @@
     </li>
   </ul>
 
-  <ul *ngIf="!isLoggedIn" class="nav navbar-nav navbar-right">
+  <ul *ngIf="!auth.isLoggedIn" class="nav navbar-nav navbar-right">
     <li>
       <a [routerLink]="['/login']" routerLinkActive="active">
         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
@@ -31,10 +31,10 @@
     </li>
   </ul>
 
-  <ul *ngIf="isLoggedIn" class="nav navbar-nav navbar-right">
-    <li class="navbar-text">Logged in as Iurii Kyrylenko</li>
+  <ul *ngIf="auth.isLoggedIn" class="nav navbar-nav navbar-right">
+    <li class="navbar-text">Logged in as {{auth.currentUser.name}}</li>
     <li>
-      <a href="#">
+      <a [routerLink]="['/home']" (click)="logout()">
         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
         &nbsp;Log-out
       </a>
