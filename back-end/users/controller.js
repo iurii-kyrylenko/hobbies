@@ -10,6 +10,12 @@ const register = (req, res) => {
     user.setPassword(req.body.password);
 
     user.save((err) => {
+        // Validations error
+        if (err) {
+            res.status(400).json(err);
+            return;
+        }
+
         const token = user.generateJwt();
         res.status(200).json({ token });
     });
