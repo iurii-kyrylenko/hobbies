@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { AuthUser } from './user';
+import { AppConfig } from '../config';
 
 @Injectable()
 export class AuthService {
 
     constructor(
         private http: Http,
-        private router: Router
+        private router: Router,
+        private config: AppConfig
     ) {}
 
     get isLoggedIn() {
@@ -31,28 +33,32 @@ export class AuthService {
         return new AuthUser(payload.name, payload.email);
     }
 
-    /********
-     * TO DO:
-     * 1. Remove delay.
-     * 2. Pass user login as parameters.
-     * 3. Pass redirect URL as parameter.
-     ********/
-    login() {
-        this.http.post('http://localhost:3000/api/users/login', {
-            email: 'user1@gmail.com', password: '123'
-        })
-        .delay(2000)
+    get authHeader() {
+        let headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this.getToken());
+        return { headers };
+    }
+
+    login(email: string, password: string, redirectUrl: string) {
+        const url = this.config.apiUrl + '/users/login';
+        this.http.post(url, { email, password })
+        .delay(1000) // !!! remove !!!
         .map(res => res.json().token)
         .subscribe(token => {
             this.saveToken(token);
-            this.router.navigate(['/home']);
+            this.router.navigate([redirectUrl]);
         });
     }
 
-    /********
-     * TO DO:
-     ********/
-    register() {
+    register(name: string, email: string, password: string, redirectUrl: string) {
+        const url = this.config.apiUrl + '/users/register';
+        this.http.post(url, { name, email, password })
+        .delay(1000) // !!! remove !!!
+        .map(res => res.json().token)
+        .subscribe(token => {
+            this.saveToken(token);
+            this.router.navigate([redirectUrl]);
+        });
     }
 
     logout() {
