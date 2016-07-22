@@ -1,6 +1,7 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authentication/login.component';
+import { RegisterComponent } from './authentication/register.component';
 import { BooksComponent } from './books/books.component';
 import { MoviesComponent } from './movies/movies.component';
 import { AuthService } from './authentication/auth.service';
@@ -11,6 +12,7 @@ export const routes: RouterConfig = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent, canActivate: [LoggedOutGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [LoggedOutGuard] },
     { path: 'books', component: BooksComponent, canActivate: [LoggedInGuard] },
     { path: 'movies', component: MoviesComponent, canActivate: [LoggedInGuard] },
     { path: '**', redirectTo: '/home' },

@@ -1,23 +1,18 @@
 import { Component } from '@angular/core';
+import { NgForm }    from '@angular/forms';
 import { AuthService } from './auth.service';
+import { LoginUser } from './user';
 
 @Component({
-    template: `
-        <h3>Login</h3>
-        <button type="button" class="btn btn-default" (click)="login()">Log in</button>
-        <button type="button" class="btn btn-default" (click)="register()">Register</button>
-    `
+    template: require('./login.component.html')
 })
 export class LoginComponent {
+
+    user = new LoginUser();
 
     constructor(private auth: AuthService) {}
 
     login() {
-        this.auth.login('user1@gmail.com', '123', '/home');
+        this.auth.login(this.user.email, this.user.password, '/home');
     }
-
-    register() {
-        this.auth.register('user3', 'user3@gmail.com', '123', '/home');
-    }
-
 }

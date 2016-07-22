@@ -9,7 +9,9 @@ import '../../public/css/styles.css';
     directives: [ROUTER_DIRECTIVES, NavbarComponent ],
     template: `
         <my-navbar></my-navbar>
-        <router-outlet></router-outlet>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
     `
 })
 

@@ -1,7 +1,20 @@
 body {
   margin: 20px;
 }
+/*
+ * Navigation
+ */
 a.active {
   color: #000 !important;
   text-shadow: 2px 2px #ccc;
+}
+/*
+ * Form validation
+ */
+.ng-valid[required] {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid {
+  border-left: 5px solid #a94442; /* red */
 }

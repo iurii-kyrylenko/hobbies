@@ -3,7 +3,8 @@
 
   <div class="navbar-header">
     <a [routerLink]="['/home']" routerLinkActive="active" class="navbar-brand">
-      My Hobbies
+      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+      &nbsp;My Hobbies
     </a>
   </div>
 
@@ -26,17 +27,28 @@
     <li>
       <a [routerLink]="['/login']" routerLinkActive="active">
         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-        &nbsp;Log-in
+        &nbsp;Log in
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/register']" routerLinkActive="active">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        &nbsp;Sign up
       </a>
     </li>
   </ul>
 
   <ul *ngIf="auth.isLoggedIn" class="nav navbar-nav navbar-right">
-    <li class="navbar-text">Logged in as {{auth.currentUser.name}}</li>
+    <li>
+      <a>
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        Logged in as: <i>{{auth.currentUser.email}}</i>
+      </a>
+    </li>
     <li>
       <a [routerLink]="['/home']" (click)="logout()">
         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-        &nbsp;Log-out
+        &nbsp;Log out
       </a>
     </li>
   </ul>
