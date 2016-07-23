@@ -13,6 +13,6 @@ export class LoginComponent {
     constructor(private auth: AuthService) {}
 
     login() {
-        this.auth.login(this.user.email, this.user.password, '/home');
+        this.auth.login(this.user, '/home');
     }
 }

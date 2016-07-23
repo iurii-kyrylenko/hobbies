@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
-import { AuthUser } from './user';
+import { AuthUser, LoginUser, RegisterUser } from './user';
 import { AppConfig } from '../config';
 
 @Injectable()
@@ -39,9 +39,9 @@ export class AuthService {
         return { headers };
     }
 
-    login(email: string, password: string, redirectUrl: string) {
+    login(user: LoginUser, redirectUrl: string) {
         const url = this.config.apiUrl + '/users/login';
-        this.http.post(url, { email, password })
+        this.http.post(url, user)
         .delay(1000) // !!! remove !!!
         .map(res => res.json().token)
         .subscribe(token => {
@@ -50,9 +50,9 @@ export class AuthService {
         });
     }
 
-    register(name: string, email: string, password: string, redirectUrl: string) {
+    register(user: RegisterUser, redirectUrl: string) {
         const url = this.config.apiUrl + '/users/register';
-        this.http.post(url, { name, email, password })
+        this.http.post(url, user)
         .delay(1000) // !!! remove !!!
         .map(res => res.json().token)
         .subscribe(token => {

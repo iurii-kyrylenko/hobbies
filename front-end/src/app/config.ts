@@ -7,13 +7,16 @@ export const provideConfig = () => {
 
 @Injectable()
 export class AppConfig {
-    apiUrl: string
+    apiUrl: string;
+    reCaptchaSiteKey: string;
 }
 
 const devConfig = {
-    apiUrl: 'http://localhost:3000/api'
+    apiUrl: 'http://localhost:3000/api',
+    reCaptchaSiteKey: 'K_6LeUuSUTAAAAAElwIcAHk994ErqNeqw7aQxlsw_H'
 };
 
 const prodConfig = {
-    apiUrl: '/api'
+    apiUrl: '/api',
+    reCaptchaSiteKey: 'K_6LeUuSUTAAAAAElwIcAHk994ErqNeqw7aQxlsw_H'
 };
