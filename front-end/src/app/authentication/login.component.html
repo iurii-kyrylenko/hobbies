@@ -8,11 +8,16 @@
                     type="text"
                     class="form-control"
                     [(ngModel)]="user.email"
-                    required
+                    required validate-email
                     name="email"
                     #email="ngModel">
                 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-                    Email is required
+                    <div *ngIf="email.errors?.required">
+                        Email address is required
+                    </div>
+                    <div *ngIf="email.errors?.invalidEmail && !email.errors?.required">
+                        Invalid email address
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -21,13 +26,14 @@
                     type="password"
                     class="form-control"
                     [(ngModel)]="user.password"
-                    required name="password"
+                    required
+                    name="password"
                     #password="ngModel">
                 <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                     Password is required
                 </div>
             </div>
-            <button type="submit" [disabled]="!loginForm.form.valid" class="btn btn-default">
+            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-default">
                 Log in
             </button>
         </form>
