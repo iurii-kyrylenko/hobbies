@@ -11,7 +11,7 @@ a.active {
 /*
  * Form validation
  */
-.ng-valid {
+.ng-valid[required] {
   border-left: 5px solid #42A948; /* green */
 }
 

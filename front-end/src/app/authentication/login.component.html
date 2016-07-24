@@ -1,15 +1,18 @@
 <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
 
-        <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <form (ngSubmit)="login()" #loginForm="ngForm">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input
                     type="text"
                     class="form-control"
-                    formControlName="email">
-                <div [hidden]="ctrlEmail.valid || ctrlEmail.pristine" class="alert alert-danger">
-                    Email is invalid
+                    [(ngModel)]="user.email"
+                    required
+                    name="email"
+                    #email="ngModel">
+                <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                    Email is required
                 </div>
             </div>
             <div class="form-group">
@@ -17,12 +20,14 @@
                 <input
                     type="password"
                     class="form-control"
-                    formControlName="password">
-                <div [hidden]="ctrlPassword.valid || ctrlPassword.pristine" class="alert alert-danger">
+                    [(ngModel)]="user.password"
+                    required name="password"
+                    #password="ngModel">
+                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                     Password is required
                 </div>
             </div>
-            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-default">
+            <button type="submit" [disabled]="!loginForm.form.valid" class="btn btn-default">
                 Log in
             </button>
         </form>
