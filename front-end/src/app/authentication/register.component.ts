@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { NgForm }    from '@angular/forms';
 import { AuthService } from './auth.service';
 import { RegisterUser } from './user';
+import { UserNameValidator } from '../validators/username.validator';
+import { EmailValidator } from '../validators/email.validator';
+import { PasswordValidator } from '../validators/password.validator';
 import { ReCaptchaComponent } from './recaptcha.component';
 import { AppConfig } from '../config';
 
 @Component({
     template: require('./register.component.html'),
-    directives: [ReCaptchaComponent]
+    directives: [UserNameValidator, EmailValidator, PasswordValidator, ReCaptchaComponent]
 })
 export class RegisterComponent {
 

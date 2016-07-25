@@ -5,7 +5,7 @@ import { AppComponent } from './app/app.component';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 import { LocationStrategy, PathLocationStrategy, HashLocationStrategy } from '@angular/common';
-import { provideConfig } from './app/config'
+import { provideConfig } from './app/config';
 
 if (process.env.ENV === 'production') {
     enableProdMode();
