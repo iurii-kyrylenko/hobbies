@@ -2,6 +2,7 @@
     <div class="col-sm-4 col-sm-offset-4">
 
         <form novalidate (ngSubmit)="register()" #registerForm="ngForm">
+
             <div class="form-group">
                 <label for="name">Name</label>
                 <input
@@ -16,6 +17,7 @@
                     {{name.errors?.message}}
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="email">Email</label>
                 <input
@@ -30,40 +32,50 @@
                     {{email.errors?.message}}
                 </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input
-                    type="password"
-                    placeholder="Password"
-                    class="form-control"
-                    [(ngModel)]="user.password"
-                    validate-password
-                    name="password"
-                    #password="ngModel">
-                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-                    {{password.errors?.message}}
+
+            <div ngModelGroup #passwordGroup="ngModelGroup" validate-confirmation>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        class="form-control"
+                        [(ngModel)]="user.password"
+                        validate-password
+                        name="password"
+                        #password="ngModel">
+                    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                        {{password.errors?.message}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmation">Confirmation</label>
+                    <input
+                        type="password"
+                        placeholder="Password confirmation"
+                        class="form-control"
+                        [(ngModel)]="passwordConfirmation"
+                        required
+                        name="confirmation"
+                        #confirmation="ngModel">
+                    <div [hidden]="confirmation.valid || confirmation.pristine" class="alert alert-danger">
+                        Confirmation is required
+                    </div>
+                </div>
+
+                <div [hidden]="!passwordGroup.errors" class="alert alert-danger">
+                    {{passwordGroup.errors?.message}}
                 </div>
             </div>
-            <div class="form-group">
-                <label for="confirmation">Confirmation</label>
-                <input
-                    type="password"
-                    placeholder="Password confirmation"
-                    class="form-control"
-                    [(ngModel)]="passwordConfirmation"
-                    required
-                    name="confirmation"
-                    #confirmation="ngModel">
-                <div [hidden]="confirmation.valid || confirmation.pristine" class="alert alert-danger">
-                    Confirmation is required
-                </div>
-            </div>
+
             <div class="form-group">
                 <re-captcha
                     [siteKey]="config.reCaptchaSiteKey"
                     (captchaResponse)="getCaptchaResponse($event)">                        
                 </re-captcha>
             </div>
+
             <button
                 type="submit"
                 [disabled]="!registerForm.form.valid || !user.captchaResponse"
