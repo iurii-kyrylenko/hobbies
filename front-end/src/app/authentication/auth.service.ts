@@ -50,15 +50,18 @@ export class AuthService {
         });
     }
 
-    register(user: RegisterUser, redirectUrl: string) {
+    register(user: RegisterUser, redirectUrl: string, reset: () => void) {
         const url = this.config.apiUrl + '/users/register';
         this.http.post(url, user)
-        .delay(1000) // !!! remove !!!
+        // .delay(1000) // !!! remove !!!
         .map(res => res.json().token)
-        .subscribe(token => {
-            this.saveToken(token);
-            this.router.navigate([redirectUrl]);
-        });
+        .subscribe(
+            token => {
+                this.saveToken(token);
+                this.router.navigate([redirectUrl]);
+            },
+            err => reset()
+        );
     }
 
     logout() {

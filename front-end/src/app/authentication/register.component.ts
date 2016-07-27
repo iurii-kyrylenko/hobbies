@@ -29,10 +29,15 @@ export class RegisterComponent {
     ) {}
 
     register() {
-        this.auth.register(this.user, '/home');
+        this.auth.register(this.user, '/home', this.reset.bind(this));
     }
 
     getCaptchaResponse(res: string) {
         this.user.captchaResponse = res;
+    }
+
+    reset() {
+        window['grecaptcha'].reset();
+        this.user.captchaResponse = '';
     }
 }
