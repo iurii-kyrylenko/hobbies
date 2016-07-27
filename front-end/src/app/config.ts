@@ -13,10 +13,10 @@ export class AppConfig {
 
 const devConfig = {
     apiUrl: 'http://localhost:3000/api',
-    reCaptchaSiteKey: 'K_6LeUuSUTAAAAAElwIcAHk994ErqNeqw7aQxlsw_H'
+    reCaptchaSiteKey: '6LeUuSUTAAAAAElwIcAHk994ErqNeqw7aQxlsw_H'
 };
 
 const prodConfig = {
     apiUrl: '/api',
-    reCaptchaSiteKey: 'K_6LeUuSUTAAAAAElwIcAHk994ErqNeqw7aQxlsw_H'
+    reCaptchaSiteKey: '6LeUuSUTAAAAAElwIcAHk994ErqNeqw7aQxlsw_H'
 };

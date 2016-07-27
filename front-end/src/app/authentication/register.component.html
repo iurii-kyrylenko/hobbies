@@ -14,7 +14,7 @@
                     name="name"
                     #name="ngModel">
                 <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                    {{name.errors?.message}}
+                    <small>{{name.errors?.message}}</small>
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
                     name="email"
                     #email="ngModel">
                 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-                    {{email.errors?.message}}
+                    <small>{{email.errors?.message}}</small>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                         name="password"
                         #password="ngModel">
                     <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-                        {{password.errors?.message}}
+                        <small>{{password.errors?.message}}</small>
                     </div>
                 </div>
 
@@ -60,12 +60,12 @@
                         name="confirmation"
                         #confirmation="ngModel">
                     <div [hidden]="confirmation.valid || confirmation.pristine" class="alert alert-danger">
-                        Confirmation is required
+                        <small>Confirmation is required</small>
                     </div>
                 </div>
 
                 <div [hidden]="!passwordGroup.errors" class="alert alert-danger">
-                    {{passwordGroup.errors?.message}}
+                    <small>{{passwordGroup.errors?.message}}</small>
                 </div>
             </div>
 

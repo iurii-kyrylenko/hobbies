@@ -13,7 +13,7 @@
                     name="email"
                     #email="ngModel">
                 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-                    {{email.errors?.message}}
+                    <small>{{email.errors?.message}}</small>
                 </div>
             </div>
             <div class="form-group">
@@ -27,7 +27,7 @@
                     name="password"
                     #password="ngModel">
                 <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-                    {{password.errors?.message}}
+                    <small>{{password.errors?.message}}</small>
                 </div>
             </div>
             <button type="submit" [disabled]="!loginForm.valid" class="btn btn-default">

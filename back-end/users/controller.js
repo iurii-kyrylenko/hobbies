@@ -1,6 +1,33 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const request = require('request');
+
+const validateCaptchaResponse = (req, res, next) => {
+    const postData = {
+        response: req.body.captchaResponse,
+        secret: process.env.CAPTCHA_SECRET
+    };
+
+    const options = {
+        method: 'post',
+        form: postData,
+        url: process.env.CAPTCHA_API
+    };
+
+    request(options, (err, _, body) => {
+        if(err) {
+            res.sendStatus(400);
+            return;
+        }
+        const success = JSON.parse(body).success;
+        if(!success) {
+            res.sendStatus(403);
+            return;
+        }
+        next();
+    });
+};
 
 const register = (req, res) => {
     const user = new User();
@@ -59,6 +86,7 @@ const checkUser = (req, res, next) => {
 };
 
 module.exports = {
+    validateCaptchaResponse,
     register,
     login,
     checkUser

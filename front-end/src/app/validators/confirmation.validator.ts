@@ -16,6 +16,6 @@ export class ConfirmationValidator implements Validator {
         const v1 = fg.controls[keys[0]].value;
         const v2 = fg.controls[keys[1]].value;
         if(!v1 || !v2 || v1 === v2) return null;
-        return { message: 'Confirmation incorrect' };
+        return { message: 'Password mismatch' };
     }
 }
