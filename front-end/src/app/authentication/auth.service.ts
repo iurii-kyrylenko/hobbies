@@ -3,6 +3,8 @@ import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { AuthUser, LoginUser, RegisterUser } from './user';
 import { AppConfig } from '../config';
+import { NotificationService } from '../notifications/notification.service';
+import { Notification } from '../notifications/notification';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +12,8 @@ export class AuthService {
     constructor(
         private http: Http,
         private router: Router,
-        private config: AppConfig
+        private config: AppConfig,
+        private ntfs: NotificationService
     ) {}
 
     get isLoggedIn() {
@@ -44,10 +47,22 @@ export class AuthService {
         this.http.post(url, user)
         .delay(1000) // !!! remove !!!
         .map(res => res.json().token)
-        .subscribe(token => {
-            this.saveToken(token);
-            this.router.navigate([redirectUrl]);
-        });
+        .subscribe(
+            token => {
+                this.saveToken(token);
+                this.router.navigate([redirectUrl]);
+                this.ntfs.notify({
+                    type: 'info',
+                    message: 'You have been looged in'
+                });
+            },
+            err => {
+                this.ntfs.notify({
+                    type: 'danger',
+                    message: 'You have failed to log in'
+                });
+           }
+        );
     }
 
     register(user: RegisterUser, redirectUrl: string, reset: () => void) {
@@ -66,6 +81,10 @@ export class AuthService {
 
     logout() {
         this.removeToken();
+        this.ntfs.notify({
+            type: 'info',
+            message: 'You have been looged out'
+        });
     }
 
     private saveToken(token: any) {
