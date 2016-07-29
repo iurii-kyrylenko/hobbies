@@ -45,46 +45,37 @@ export class AuthService {
     login(user: LoginUser, redirectUrl: string) {
         const url = this.config.apiUrl + '/users/login';
         this.http.post(url, user)
-        .delay(1000) // !!! remove !!!
         .map(res => res.json().token)
         .subscribe(
             token => {
                 this.saveToken(token);
                 this.router.navigate([redirectUrl]);
-                this.ntfs.notify({
-                    type: 'info',
-                    message: 'You have been looged in'
-                });
+                this.ntfs.notifyInfo('You have been looged in');
             },
-            err => {
-                this.ntfs.notify({
-                    type: 'danger',
-                    message: 'You have failed to log in'
-                });
-           }
+            err => this.ntfs.notifyWarning('You have failed to log in. Try again with another credentials.')
         );
     }
 
     register(user: RegisterUser, redirectUrl: string, reset: () => void) {
         const url = this.config.apiUrl + '/users/register';
         this.http.post(url, user)
-        // .delay(1000) // !!! remove !!!
         .map(res => res.json().token)
         .subscribe(
             token => {
                 this.saveToken(token);
                 this.router.navigate([redirectUrl]);
+                this.ntfs.notifyInfo('You have been registered and logged in.');
             },
-            err => reset()
+            err => {
+                reset();
+                this.ntfs.notifyWarning('You have failed to register. Try again with another email address.')
+            }
         );
     }
 
     logout() {
         this.removeToken();
-        this.ntfs.notify({
-            type: 'info',
-            message: 'You have been looged out'
-        });
+        this.ntfs.notifyInfo('You have been logged out.');
     }
 
     private saveToken(token: any) {

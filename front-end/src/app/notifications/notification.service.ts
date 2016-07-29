@@ -8,7 +8,23 @@ export class NotificationService {
 
     notifications$ = this.notificationsSource.asObservable();
 
-    notify(notificacation: Notification) {
+    private notify(notificacation: Notification) {
         this.notificationsSource.next(notificacation);
+    }
+
+    notifySuccess(message: string) {
+        this.notify({ type: 'success', message });
+    }
+
+    notifyInfo(message: string) {
+        this.notify({ type: 'info', message });
+    }
+
+    notifyWarning(message: string) {
+        this.notify({ type: 'warning', message });
+    }
+
+    notifyDanger(message: string) {
+        this.notify({ type: 'danger', message });
     }
 }

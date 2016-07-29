@@ -4,7 +4,12 @@ import { NotificationService} from './notification.service';
 @Component({
     selector: 'my-notifier',
     template: `
-        <div [ngClass]="alertClass" class="alert">{{message}}</div>
+        <div *ngIf="message" [ngClass]="alertClass" class="alert">
+            <button type="button" class="close" (click)="message = null">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+        </div>
     `
 })
 export class NotifierComponent implements OnInit {
