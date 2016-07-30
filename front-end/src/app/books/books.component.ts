@@ -11,14 +11,22 @@ import { AuthService } from '../authentication/auth.service';
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search">
                     <div class="input-group-btn">
-                        <a class="btn btn-default"><i class="glyphicon glyphicon-search"></i></a>
-                        <a class="btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i></a>
+                        <a class="btn btn-default" title="Apply Search Filter"><i class="glyphicon glyphicon-search"></i></a>
+                        <a class="btn btn-default" title="Add Book"><i class="glyphicon glyphicon-plus-sign"></i></a>
                     </div>
                 </div>
             </div>
             <ul class="list-group">
                 <li *ngFor="let book of books | async" class="list-group-item">
-                    {{book.completed | date:'yyyy-MM-dd'}}: [{{book.mode}}] {{book.title}} by {{book.author}}
+                <div class="input-group">
+                    <div class="valign">
+                        {{book.completed | date:'yyyy-MM-dd'}}: [{{book.mode}}] {{book.title}} by {{book.author}}
+                    </div>
+                    <div class="input-group-btn">
+                        <a class="btn btn-default" title="Edit Book"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a class="btn btn-default"title="Remove Book"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </div>
                 </li>
             </ul>
         </div>

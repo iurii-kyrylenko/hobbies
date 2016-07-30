@@ -24,3 +24,19 @@ input.form-control.ng-invalid {
     padding-top: 7.5px;
     margin-right: 12px;
  }
+/*
+ * Vertical align text in table
+ */
+ .input-group .valign {
+    display:table-cell;
+    vertical-align:middle;
+}
+/*
+ * Glyphicon opacity
+ */
+a > i {
+    opacity: 0.5;
+}
+a:hover > i {
+    opacity: 1.0;
+}
