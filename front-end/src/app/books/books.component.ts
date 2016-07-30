@@ -5,8 +5,23 @@ import { AuthService } from '../authentication/auth.service';
 
 @Component({
     template: `
-        <h3>Books</h3>
-        <pre class="well">{{books | async | json}}</pre>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title with-controls pull-left">Books</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-btn">
+                        <a class="btn btn-default"><i class="glyphicon glyphicon-search"></i></a>
+                        <a class="btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i></a>
+                    </div>
+                </div>
+            </div>
+            <ul class="list-group">
+                <li *ngFor="let book of books | async" class="list-group-item">
+                    {{book.completed | date:'yyyy-MM-dd'}}: [{{book.mode}}] {{book.title}} by {{book.author}}
+                </li>
+            </ul>
+        </div>
     `
 })
 export class BooksComponent implements OnInit {

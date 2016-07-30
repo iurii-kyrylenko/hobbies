@@ -10,10 +10,8 @@ import '../../public/css/styles.css';
     directives: [ROUTER_DIRECTIVES, NavbarComponent, NotifierComponent],
     template: `
         <my-navbar></my-navbar>
-            <my-notifier></my-notifier>
-        <div class="container">
-            <router-outlet></router-outlet>
-        </div>
+        <my-notifier></my-notifier>
+        <router-outlet></router-outlet>
     `
 })
 

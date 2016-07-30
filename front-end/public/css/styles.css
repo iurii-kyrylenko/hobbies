@@ -14,7 +14,13 @@ a.active {
 input.form-control.ng-valid {
   border-left: 5px solid #42A948; /* green */
 }
-
 input.form-control.ng-invalid {
   border-left: 5px solid #a94442; /* red */
 }
+/*
+ * Panel title when controls are expected
+ */
+ .panel-title.with-controls.pull-left {
+    padding-top: 7.5px;
+    margin-right: 12px;
+ }
