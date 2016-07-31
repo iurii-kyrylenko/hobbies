@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Http } from '@angular/http';
 import { AppConfig } from '../config';
 import { AuthService } from '../authentication/auth.service';
@@ -12,7 +13,7 @@ import { AuthService } from '../authentication/auth.service';
                     <input type="text" class="form-control" placeholder="Search">
                     <div class="input-group-btn">
                         <a class="btn btn-default" title="Apply Search Filter"><i class="glyphicon glyphicon-search"></i></a>
-                        <a class="btn btn-default" title="Add Book"><i class="glyphicon glyphicon-plus-sign"></i></a>
+                        <a [routerLink]="['new']" class="btn btn-default" title="Add Book"><i class="glyphicon glyphicon-plus-sign"></i></a>
                     </div>
                 </div>
             </div>
@@ -23,14 +24,15 @@ import { AuthService } from '../authentication/auth.service';
                         {{book.completed | date:'yyyy-MM-dd'}}: [{{book.mode}}] {{book.title}} by {{book.author}}
                     </div>
                     <div class="input-group-btn">
-                        <a class="btn btn-default" title="Edit Book"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book"><i class="glyphicon glyphicon-pencil"></i></a>
                         <a class="btn btn-default"title="Remove Book"><i class="glyphicon glyphicon-remove"></i></a>
                     </div>
                 </div>
                 </li>
             </ul>
         </div>
-    `
+    `,
+    directives: [ROUTER_DIRECTIVES]
 })
 export class BookListComponent implements OnInit {
 
