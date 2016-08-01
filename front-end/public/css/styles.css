@@ -11,10 +11,10 @@ a.active {
 /*
  * Form validation
  */
-input.form-control.ng-valid {
+input.form-control.ng-valid, select.form-control.ng-valid {
   border-left: 5px solid #42A948; /* green */
 }
-input.form-control.ng-invalid {
+input.form-control.ng-invalid, select.form-control.ng-invalid {
   border-left: 5px solid #a94442; /* red */
 }
 /*

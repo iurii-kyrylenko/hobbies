@@ -1,0 +1,70 @@
+<div class="row">
+
+    <div class="col-sm-4">
+        <h4>{{header}}</h4>
+    </div>
+
+    <div class="col-sm-4">
+
+        <form novalidate (ngSubmit)="submit()" #bookForm="ngForm">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input
+                    type="text"
+                    placeholder="Book title"
+                    class="form-control"
+                    [(ngModel)]="book.title"
+                    required
+                    name="title"
+                    #title="ngModel">
+                <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+                    <small>Book title is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Author"
+                    [(ngModel)]="book.author"
+                    required
+                    name="author"
+                    #author="ngModel">
+                <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
+                    <small>Author is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+            <label for="mode">Book type</label>
+            <select
+                class="form-control"
+                [(ngModel)]="book.mode"
+                required
+                name="mode"
+                #mode="ngModel">
+                <option [value]="'r'">Regular book</option>
+                <option [value]="'a'">Audio book</option>
+                <option [value]="'r-a'">Both: Regular and Audio</option>
+            </select>
+            </div>
+            <div class="form-group">
+                <label for="completed">Completed</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Completion date: YYYY-MM-DD"
+                    [(ngModel)]="book.completed"
+                    required
+                    name="completed"
+                    #completed="ngModel">
+                <div [hidden]="completed.valid || completed.pristine" class="alert alert-danger">
+                    <small>Completion date is required</small>
+                </div>
+            </div>
+            <button type="submit" [disabled]="!bookForm.valid" class="btn btn-default">OK</button>
+            <a [routerLink]="['../']" class="btn btn-default">Cancel</a>
+        </form>
+
+    </div>
+</div>

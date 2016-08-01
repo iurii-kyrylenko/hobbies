@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title with-controls pull-left">Books</h4>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-btn">
+                <a class="btn btn-default" title="Apply Search Filter"><i class="glyphicon glyphicon-search"></i></a>
+                <a [routerLink]="['new']" class="btn btn-default" title="Add Book"><i class="glyphicon glyphicon-plus-sign"></i></a>
+            </div>
+        </div>
+    </div>
+    <ul class="list-group">
+        <li *ngFor="let book of books | async" class="list-group-item">
+        <div class="input-group">
+            <div class="valign">
+                {{book.completed | date:'yyyy-MM-dd'}}: [{{book.mode}}] {{book.title}} by {{book.author}}
+            </div>
+            <div class="input-group-btn">
+                <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book"><i class="glyphicon glyphicon-pencil"></i></a>
+                <a class="btn btn-default"title="Remove Book"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+        </div>
+        </li>
+    </ul>
+</div>
