@@ -4,10 +4,11 @@ import { Book } from './book';
 import { Http } from '@angular/http';
 import { AppConfig } from '../config';
 import { AuthService } from '../authentication/auth.service';
+import { DateInputComponent } from '../customization/date-input.component';
 
 @Component({
     template: require('./book-form.template.html'),
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, DateInputComponent]
 })
 export class EditBookComponent implements OnInit, OnDestroy {
 

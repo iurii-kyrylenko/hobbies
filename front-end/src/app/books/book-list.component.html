@@ -13,7 +13,7 @@
         <li *ngFor="let book of books | async" class="list-group-item">
         <div class="input-group">
             <div class="valign">
-                {{book.completed | date:'yyyy-MM-dd'}}: [{{book.mode}}] {{book.title}} by {{book.author}}
+                {{book.completed}}: [{{book.mode}}] {{book.title}} by {{book.author}}
             </div>
             <div class="input-group-btn">
                 <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book"><i class="glyphicon glyphicon-pencil"></i></a>
