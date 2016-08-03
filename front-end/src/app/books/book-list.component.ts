@@ -23,6 +23,10 @@ export class BookListComponent implements OnInit {
     ngOnInit() {
         const url = this.config.apiUrl + '/books';
         this.books = this.http.get(url, this.auth.authHeader)
-        .map(res => res.json());
+        .map(res => {
+            const books = res.json();
+            books.forEach((book: any) => book.completed = new Date(book.completed));
+            return books;
+        });
     }
 }

@@ -25,7 +25,6 @@ export class NewBookComponent {
     ) {}
 
     submit() {
-        console.log(this.book);
         const apiUrl = this.config.apiUrl + '/books';
         this.http
             .post(apiUrl, this.book, this.auth.authHeader)
@@ -33,7 +32,7 @@ export class NewBookComponent {
                 this.ntfs.notifySuccess('New book has been added :-)');
                 this.router.navigate(['/books']);
             }, err => {
-                this.ntfs.notifySuccess('Something went wrong when adding new book :-(');
+                this.ntfs.notifyDanger('Something went wrong when adding new book :-(');
             });
     }
 }
