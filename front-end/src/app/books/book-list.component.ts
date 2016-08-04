@@ -29,4 +29,20 @@ export class BookListComponent implements OnInit {
             return books;
         });
     }
+
+    /*
+     * Date pipe doesn't work in Safari.
+     * TO DO: Move to a service.
+     */
+    formatDate(date: Date) {
+        const months = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+        if(!date) return null;
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+        return `${months[month]} ${day}, ${year}`;
+    }
 }

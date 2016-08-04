@@ -1,4 +1,5 @@
 <div class="panel panel-default">
+
     <div class="panel-heading">
         <h4 class="panel-title with-controls pull-left">Books</h4>
         <div class="input-group">
@@ -9,17 +10,36 @@
             </div>
         </div>
     </div>
-    <ul class="list-group">
-        <li *ngFor="let book of books | async" class="list-group-item">
-        <div class="input-group">
-            <div class="valign">
-                {{book.completed}}: [{{book.mode}}] {{book.title}} by {{book.author}}
-            </div>
-            <div class="input-group-btn">
-                <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book"><i class="glyphicon glyphicon-pencil"></i></a>
-                <a class="btn btn-default"title="Remove Book"><i class="glyphicon glyphicon-remove"></i></a>
-            </div>
-        </div>
-        </li>
-    </ul>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 12%">Completed</th>
+                <th style="width: 8%">Mode</th>
+                <th style="width: 25%">Author</th>
+                <th>Title</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of books | async">
+                <!-- Date pipe doesn't work in Safari -->
+                <td>{{formatDate(book.completed)}}</td>
+                <td>{{book.mode}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.title}}</td>
+                <td>
+                    <div class="pull-right">
+                        <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+                        <a class="btn btn-default"title="Remove Book">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+       </tbody>
+    </table>
+
 </div>

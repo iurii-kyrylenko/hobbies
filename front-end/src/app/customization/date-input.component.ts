@@ -55,6 +55,9 @@ export class DateInputComponent implements ControlValueAccessor {
         this.onTouchedCallback = fn;
     }
 
+    /*
+    * TO DO: Move to a service.
+    */
     formatDate() {
         const months = [
             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -64,6 +67,6 @@ export class DateInputComponent implements ControlValueAccessor {
         const year = this.bindValue.getFullYear();
         const month = this.bindValue.getMonth();
         const day = this.bindValue.getDate();
-        return `${months[month]} ${day} ${year}`;
+        return `${months[month]} ${day}, ${year}`;
     }
 }

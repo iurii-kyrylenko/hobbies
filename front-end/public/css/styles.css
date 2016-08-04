@@ -27,9 +27,8 @@ input.form-control.ng-invalid, select.form-control.ng-invalid {
 /*
  * Vertical align text in table
  */
- .input-group .valign {
-    display:table-cell;
-    vertical-align:middle;
+ .table td {
+    vertical-align: middle !important;
 }
 /*
  * Glyphicon opacity
