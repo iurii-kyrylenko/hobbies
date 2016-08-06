@@ -1,3 +1,9 @@
+<my-modal #deleteConfirm title="Removing Book" submitButtonLabel="Yes" cancelButtonLabel="No">
+    <modal-content>
+        Are you sure you want to remove <span class="badge">{{deleteConfirm.modalData}}</span>?
+    </modal-content>
+</my-modal>
+
 <div class="panel panel-default">
 
     <div class="panel-heading">
@@ -11,35 +17,36 @@
         </div>
     </div>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th style="width: 12%">Completed</th>
-                <th style="width: 8%">Mode</th>
-                <th style="width: 25%">Author</th>
-                <th>Title</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let book of books | async">
-                <!-- Date pipe doesn't work in Safari -->
-                <td>{{formatDate(book.completed)}}</td>
-                <td>{{book.mode}}</td>
-                <td>{{book.author}}</td>
-                <td>{{book.title}}</td>
-                <td>
-                    <div class="pull-right">
-                        <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book">
-                            <i class="glyphicon glyphicon-pencil"></i>
-                        </a>
-                        <a class="btn btn-default"title="Remove Book">
-                            <i class="glyphicon glyphicon-remove"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-       </tbody>
-    </table>
-
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 15%">Completed</th>
+                    <th style="width: 8%">Mode</th>
+                    <th style="width: 25%">Author</th>
+                    <th>Title</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books | async">
+                    <!-- Date pipe doesn't work in Safari -->
+                    <td>{{formatDate(book.completed)}}</td>
+                    <td>{{book.mode}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.title}}</td>
+                    <td>
+                        <div class="input-group-btn text-right">
+                            <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </a>
+                            <a (click)="removeConfirm(book)" class="btn btn-default"title="Remove Book">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+           </tbody>
+        </table>
+    </div>
 </div>

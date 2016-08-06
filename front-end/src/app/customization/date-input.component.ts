@@ -28,7 +28,6 @@ export class DateInputComponent implements ControlValueAccessor {
     private onChangeCallback: (_: any) => void = noop;
 
     get value(): any {
-        console.log('get:', this.innerValue);
         return this.innerValue;
     };
 
@@ -41,7 +40,6 @@ export class DateInputComponent implements ControlValueAccessor {
     }
 
     writeValue(value: any) {
-        console.log('write:', value);
         if (!value) return;
         this.bindValue = value;
         this.innerValue = this.formatDate();
