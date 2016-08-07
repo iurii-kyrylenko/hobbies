@@ -2,16 +2,30 @@ const mongoose = require('mongoose');
 const Book = mongoose.model('Book');
 
 const getBooks = (req, res) => {
-    Book.find(
-        { userId: req.user._id },
-        (err, books) => {
-            if(err) {
-                res.sendStatus(400);
-                return;
-            }
-            res.send(books);
+
+    const cb = (err, books) => {
+        if(err) {
+            res.sendStatus(400);
+            return;
         }
-    );
+        res.send(books);
+    };
+
+    const query = Book.where({ userId: req.user._id });
+    const term = req.query.term;
+
+    if(!term) {
+        return query.exec(cb);
+    }
+
+    const re = new RegExp(term, 'i');
+
+    return query
+        .or([
+            { title: {$regex: re} },
+            { author: {$regex: re} }
+        ])
+        .exec(cb);
 };
 
 const getBook = (req, res) => {

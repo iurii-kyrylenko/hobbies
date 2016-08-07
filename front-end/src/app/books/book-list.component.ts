@@ -7,6 +7,7 @@ import { AppConfig } from '../config';
 import { AuthService } from '../authentication/auth.service';
 import { ModalComponent } from '../customization/modal.component';
 import { NotificationService } from '../notifications/notification.service';
+import { BookStateService } from './books-state.service';
 
 @Component({
     template: require('./book-list.component.html'),
@@ -22,7 +23,8 @@ export class BookListComponent implements OnInit {
         private http: Http,
         private config: AppConfig,
         private auth: AuthService,
-        private ntfs: NotificationService
+        private ntfs: NotificationService,
+        private state: BookStateService
     ) {}
 
     ngOnInit() {
@@ -31,7 +33,10 @@ export class BookListComponent implements OnInit {
 
     getBooks() {
         const url = this.config.apiUrl + '/books';
-        this.books = this.http.get(url, this.auth.authHeader)
+        const requestOptions = Object.assign(
+            {}, this.auth.authHeader, this.state.searchParams
+        );
+        this.books = this.http.get(url, requestOptions)
         .map(res => {
             const books = res.json();
             books.forEach((book: any) => book.completed = new Date(book.completed));
@@ -55,6 +60,11 @@ export class BookListComponent implements OnInit {
             }, err => {
                 this.ntfs.notifyDanger('Something went wrong when removing a book :-(');
             });
+    }
+
+    applySearch(term: string) {
+        this.state.searchFilter = term;
+        this.getBooks();
     }
 
     /*
