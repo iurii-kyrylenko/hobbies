@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "engines": {
+    "node": "4.4.2"
+  },
+  "author": "Iurii Kyrylenko",
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {

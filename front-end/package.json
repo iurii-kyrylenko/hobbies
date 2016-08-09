@@ -6,7 +6,7 @@
     "start": "webpack-dev-server --inline --progress --port 8080",
     "test": "karma start",
     "test-watch": "karma start --single-run false --auto-watch true",
-    "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
+    "build": "rimraf ../back-end/public && webpack --config config/webpack.prod.js --progress --profile --bail",
     "postinstall": "typings install"
   },
   "license": "MIT",
