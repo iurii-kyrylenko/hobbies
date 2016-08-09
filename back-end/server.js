@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 require('./config/db');
 require('./config/passport');
 
