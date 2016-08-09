@@ -28,4 +28,4 @@ server.route('/*').get(function(req, res) {
     return res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
