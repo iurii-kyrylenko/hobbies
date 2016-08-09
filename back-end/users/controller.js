@@ -22,6 +22,7 @@ const validateCaptchaResponse = (req, res, next) => {
         }
         const success = JSON.parse(body).success;
         if(!success) {
+            console.log('validateCaptcha:', body);
             res.sendStatus(403);
             return;
         }
