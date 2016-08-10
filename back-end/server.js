@@ -1,4 +1,6 @@
-//require('dotenv').config();
+// Uncomment for local environment or start the server using "heroku local"
+// require('dotenv').config();
+
 require('./config/db');
 require('./config/passport');
 

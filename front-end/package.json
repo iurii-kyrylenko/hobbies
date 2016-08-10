@@ -9,6 +9,7 @@
     "build": "rimraf ../back-end/public && webpack --config config/webpack.prod.js --progress --profile --bail",
     "postinstall": "typings install"
   },
+  "author": "Iurii Kyrylenko",
   "license": "MIT",
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",

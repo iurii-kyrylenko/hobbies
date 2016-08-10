@@ -10,7 +10,7 @@
     "node": "4.4.2"
   },
   "author": "Iurii Kyrylenko",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {},
   "dependencies": {
     "body-parser": "^1.15.2",
