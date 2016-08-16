@@ -11,7 +11,9 @@ const getBooks = (req, res) => {
         res.send(books);
     };
 
-    const query = Book.where({ userId: req.user._id });
+    // Descending sort on the completion date
+    const query = Book.where({ userId: req.user._id }).sort('-completed');
+
     const term = req.query.term;
 
     if(!term) {
