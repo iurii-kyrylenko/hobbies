@@ -33,9 +33,20 @@ input.form-control.ng-invalid, select.form-control.ng-invalid {
 /*
  * Glyphicon opacity
  */
-a > i {
+a > i, label > i {
     opacity: 0.5;
 }
-a:hover > i {
+a:hover > i, label:hover > i {
     opacity: 1.0;
+}
+/*
+ * Hide file input element
+ */
+input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }

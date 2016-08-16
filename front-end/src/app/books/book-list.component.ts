@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Book } from './book';
 import { AppConfig } from '../config';
@@ -18,6 +18,7 @@ export class BookListComponent implements OnInit {
     books: Observable<Book[]>;
 
     @ViewChild('deleteConfirm') deleteConfirm: ModalComponent;
+    @ViewChild('uploadForm') uploadForm: any;
 
     constructor(
         private http: Http,
@@ -82,4 +83,49 @@ export class BookListComponent implements OnInit {
         const day = date.getDate();
         return `${months[month]} ${day}, ${year}`;
     }
+
+    /*
+     * TO DO: Implement as a separate component
+     */
+    uploadChange(event: any) {
+
+        const files = event.target.files;
+        if(!files.length) return;
+
+        const apiUrl = this.config.apiUrl + '/books/upload';
+        this.uploadRequest(apiUrl, files, this.auth.authHeader.headers)
+            .then(() => {
+                this.getBooks();
+                this.ntfs.notifySuccess('Books have been uploaded :-)');
+            }, () => {
+                this.ntfs.notifyDanger('Something went wrong when uploading books :-(');
+            });
+
+        this.uploadForm.nativeElement.reset();
+    }
+
+    private uploadRequest(url: string, files: Array<File>, headers: Headers) {
+        return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            for(var i = 0; i < files.length; i++) {
+                formData.append("uploads[]", files[i], files[i].name);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+            xhr.open("POST", url, true);
+            headers.forEach((values, name, headers) => {
+                xhr.setRequestHeader(name, values[0]);
+            });
+            xhr.send(formData);
+        });
+    }
+
 }

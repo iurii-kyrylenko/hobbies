@@ -15,5 +15,6 @@ router.get('/:id', booksController.getBook);
 router.post('/', booksController.addBook);
 router.put('/:id', booksController.changeBook);
 router.delete('/:id', booksController.deleteBook);
+router.post('/upload', booksController.uploadBooks);
 
 module.exports = router;
