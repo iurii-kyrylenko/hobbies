@@ -6,6 +6,15 @@ build/run:
     start server: heroku local
 ```
 
+JSON file to upload books:
+```
+[
+    { "title": "t-0001", "author": "a-0001", "completed": "2016-01-01", "mode": "r" },
+    { "title": "t-0002", "author": "a-0002", "completed": "2016-01-02", "mode": "a" },
+    { "title": "t-0003", "author": "a-0003", "completed": "2016-01-03", "mode": "r-a" }
+]
+```
+
 local configuration (.env file):
 ```
     CONNECTION_STRING = <connection string to mongodb>
