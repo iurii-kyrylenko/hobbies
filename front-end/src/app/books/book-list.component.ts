@@ -93,7 +93,7 @@ export class BookListComponent implements OnInit {
         if(!files.length) return;
 
         const apiUrl = this.config.apiUrl + '/books/upload';
-        this.uploadRequest(apiUrl, files, this.auth.authHeader.headers)
+        this.uploadRequest(apiUrl, files[0], this.auth.authHeader.headers)
             .then(() => {
                 this.getBooks();
                 this.ntfs.notifySuccess('Books have been uploaded :-)');
@@ -104,13 +104,13 @@ export class BookListComponent implements OnInit {
         this.uploadForm.nativeElement.reset();
     }
 
-    private uploadRequest(url: string, files: Array<File>, headers: Headers) {
+    private uploadRequest(url: string, file: File, headers: Headers) {
+
         return new Promise((resolve, reject) => {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();
-            for(var i = 0; i < files.length; i++) {
-                formData.append("uploads[]", files[i], files[i].name);
-            }
+            formData.append("upload", file, file.name);
+
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
@@ -120,6 +120,7 @@ export class BookListComponent implements OnInit {
                     }
                 }
             }
+
             xhr.open("POST", url, true);
             headers.forEach((values, name, headers) => {
                 xhr.setRequestHeader(name, values[0]);
@@ -127,5 +128,4 @@ export class BookListComponent implements OnInit {
             xhr.send(formData);
         });
     }
-
 }

@@ -98,14 +98,8 @@ const deleteBook = (req, res) => {
     });
 };
 
-/*
- * TO DO: Change mock data to the real request data
- */
 const uploadBooks = (req, res) => {
-    const data = [
-        { title: 't-0001', author: 'a-0001', completed: '2016-01-01', mode: 'r' },
-        { title: 't-0002', author: 'a-0002', completed: '2016-01-02', mode: 'a' },
-    ];
+    const data = JSON.parse(req.file.buffer);
     const tasks = [];
     for(var i = 0; i < data.length; i++) {
         var book = new Book(data[i]);
@@ -114,7 +108,7 @@ const uploadBooks = (req, res) => {
     }
     Promise.all(tasks)
         .then(() => res.sendStatus(200))
-        .catch(() => res.sendStatus(500));
+        .catch(() => res.sendStatus(400));
 };
 
 module.exports = {
