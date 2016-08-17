@@ -10,7 +10,7 @@ import { NotificationService } from '../notifications/notification.service';
 import { BookStateService } from './books-state.service';
 
 @Component({
-    template: require('./book-list.component.html'),
+    templateUrl: './book-list.component.html',
     directives: [ROUTER_DIRECTIVES, ModalComponent]
 })
 export class BookListComponent implements OnInit {

@@ -9,7 +9,7 @@ import { ReCaptchaComponent } from './recaptcha.component';
 import { AppConfig } from '../config';
 
 @Component({
-    template: require('./register.component.html'),
+    templateUrl: './register.component.html',
     directives: [
         UserNameValidator,
         EmailValidator,

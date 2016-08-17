@@ -8,7 +8,7 @@ import { DateInputComponent } from '../customization/date-input.component';
 import { NotificationService } from '../notifications/notification.service';
 
 @Component({
-    template: require('./book-form.template.html'),
+    templateUrl: './book-form.template.html',
     directives: [ROUTER_DIRECTIVES, DateInputComponent]
 })
 export class NewBookComponent {

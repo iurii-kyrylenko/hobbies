@@ -5,7 +5,7 @@ import { EmailValidator } from '../validators/email.validator';
 import { PasswordValidator } from '../validators/password.validator';
 
 @Component({
-    template: require('./login.component.html'),
+    templateUrl: './login.component.html',
     directives: [EmailValidator, PasswordValidator]
 })
 export class LoginComponent {

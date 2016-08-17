@@ -4,7 +4,7 @@ import { AuthService } from '../authentication/auth.service';
 
 @Component({
     selector: 'my-navbar',
-    template: require('./navbar.component.html'),
+    templateUrl: './navbar.component.html',
     directives: [ROUTER_DIRECTIVES]
 
 })
