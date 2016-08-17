@@ -1,13 +1,13 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { Routes } from '@angular/router';
+import { LocationStrategy, PathLocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { userRoutes } from './authentication/user.routes';
 import { booksRoutes } from './books/books.routes';
 import { moviesRoutes } from './movies/movies.routes';
-import { AuthService } from './authentication/auth.service';
 import { LoggedInGuard } from './authentication/logged-in.guard';
 import { LoggedOutGuard } from './authentication/logged-out.guard';
 
-export const routes: RouterConfig = [
+export const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     ... userRoutes,
@@ -16,9 +16,8 @@ export const routes: RouterConfig = [
     { path: '**', redirectTo: '/home' },
 ];
 
-export const APP_ROUTER_PROVIDERS = [
-    provideRouter(routes),
-    AuthService,
+export const appRoutingProviders: any[] = [
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
     LoggedInGuard,
     LoggedOutGuard
 ];
