@@ -16,23 +16,22 @@ import { BooksComponent } from './books/books.component';
 import { BookListComponent } from './books/book-list.component';
 import { NewBookComponent } from './books/new-book.component';
 import { EditBookComponent } from './books/edit-book.component';
-import { MoviesComponent } from './movies/movies.component';
-import { MovieListComponent } from './movies/movie-list.component';
+import { MoviesModule } from './movies/movies.module';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        RouterModule.forRoot(appRoutes)
+        MoviesModule,
+        RouterModule.forRoot(appRoutes, { useHash: false })
     ],
     declarations: [
         AppComponent,
         // Consider to use submodules, instead:
         HomeComponent,
         LoginComponent, RegisterComponent,
-        BooksComponent, BookListComponent, NewBookComponent, EditBookComponent,
-        MoviesComponent, MovieListComponent
+        BooksComponent, BookListComponent, NewBookComponent, EditBookComponent
     ],
     providers: [
         appRoutingProviders,
