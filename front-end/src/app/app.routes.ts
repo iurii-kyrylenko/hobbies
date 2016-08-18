@@ -1,15 +1,11 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { userRoutes } from './authentication/user.routes';
-import { booksRoutes } from './books/books.routes';
 import { LoggedInGuard } from './authentication/logged-in.guard';
 import { LoggedOutGuard } from './authentication/logged-out.guard';
 
 export const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    ... userRoutes,
-    ... booksRoutes,
     { path: '**', redirectTo: '/home' },
 ];
 

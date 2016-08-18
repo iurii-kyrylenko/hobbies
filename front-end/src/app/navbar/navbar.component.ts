@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { AuthService } from '../authentication/auth.service';
 
 @Component({
     selector: 'my-navbar',
-    templateUrl: './navbar.component.html',
-    directives: [ROUTER_DIRECTIVES]
-
+    templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
 

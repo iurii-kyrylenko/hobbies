@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from './book';
 import { Http } from '@angular/http';
 import { AppConfig } from '../config';
@@ -9,7 +9,7 @@ import { NotificationService } from '../notifications/notification.service';
 
 @Component({
     templateUrl: './book-form.template.html',
-    directives: [ROUTER_DIRECTIVES, DateInputComponent]
+    directives: [DateInputComponent]
 })
 export class EditBookComponent implements OnInit, OnDestroy {
 

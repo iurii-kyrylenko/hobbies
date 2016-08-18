@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Book } from './book';
@@ -11,7 +10,7 @@ import { BookStateService } from './books-state.service';
 
 @Component({
     templateUrl: './book-list.component.html',
-    directives: [ROUTER_DIRECTIVES, ModalComponent]
+    directives: [ModalComponent]
 })
 export class BookListComponent implements OnInit {
 

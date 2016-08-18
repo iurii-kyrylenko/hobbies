@@ -1,37 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { appRoutes, appRoutingProviders } from './app.routes';
 import { provideConfig } from './config';
 import { NotificationService } from './notifications/notification.service';
 import { AuthService } from './authentication/auth.service';
-import { AppComponent } from './app.component';
-// Consider to use submodules, instead:
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './authentication/login.component';
-import { RegisterComponent } from './authentication/register.component';
-import { BooksComponent } from './books/books.component';
-import { BookListComponent } from './books/book-list.component';
-import { NewBookComponent } from './books/new-book.component';
-import { EditBookComponent } from './books/edit-book.component';
+import { UserModule } from './authentication/user.module';
+import { BooksModule } from './books/books.module';
 import { MoviesModule } from './movies/movies.module';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NotifierComponent } from './notifications/notifier.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     imports: [
         BrowserModule,
-        FormsModule,
         HttpModule,
+        UserModule,
+        BooksModule,
         MoviesModule,
         RouterModule.forRoot(appRoutes, { useHash: false })
     ],
     declarations: [
         AppComponent,
-        // Consider to use submodules, instead:
-        HomeComponent,
-        LoginComponent, RegisterComponent,
-        BooksComponent, BookListComponent, NewBookComponent, EditBookComponent
+        NavbarComponent,
+        NotifierComponent,
+        HomeComponent
     ],
     providers: [
         appRoutingProviders,

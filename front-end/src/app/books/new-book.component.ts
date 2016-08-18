@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Book } from './book';
 import { Http } from '@angular/http';
 import { AppConfig } from '../config';
@@ -9,7 +9,7 @@ import { NotificationService } from '../notifications/notification.service';
 
 @Component({
     templateUrl: './book-form.template.html',
-    directives: [ROUTER_DIRECTIVES, DateInputComponent]
+    directives: [DateInputComponent]
 })
 export class NewBookComponent {
 
