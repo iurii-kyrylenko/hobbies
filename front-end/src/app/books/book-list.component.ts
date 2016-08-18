@@ -9,8 +9,7 @@ import { NotificationService } from '../notifications/notification.service';
 import { BookStateService } from './books-state.service';
 
 @Component({
-    templateUrl: './book-list.component.html',
-    directives: [ModalComponent]
+    templateUrl: './book-list.component.html'
 })
 export class BookListComponent implements OnInit {
 

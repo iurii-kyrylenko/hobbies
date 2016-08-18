@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CustomizationModule } from '../customization/customization.module'
 import { booksRoutes } from './books.routes';
 import { BooksComponent } from './books.component';
 import { BookListComponent } from './book-list.component';
@@ -12,6 +13,7 @@ import { NewBookComponent } from './new-book.component';
     imports: [
         CommonModule,
         FormsModule,
+        CustomizationModule,
         RouterModule.forChild(booksRoutes)
     ],
     declarations: [

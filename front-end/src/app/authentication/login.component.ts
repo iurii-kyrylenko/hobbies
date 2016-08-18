@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { LoginUser } from './user';
-import { EmailValidator } from '../validators/email.validator';
-import { PasswordValidator } from '../validators/password.validator';
 
 @Component({
-    templateUrl: './login.component.html',
-    directives: [EmailValidator, PasswordValidator]
+    templateUrl: './login.component.html'
 })
 export class LoginComponent {
 

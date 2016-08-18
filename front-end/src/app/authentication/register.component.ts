@@ -1,22 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { RegisterUser } from './user';
-import { UserNameValidator } from '../validators/username.validator';
-import { EmailValidator } from '../validators/email.validator';
-import { PasswordValidator } from '../validators/password.validator';
-import { ConfirmationValidator } from '../validators/confirmation.validator';
-import { ReCaptchaComponent } from './recaptcha.component';
 import { AppConfig } from '../config';
 
 @Component({
-    templateUrl: './register.component.html',
-    directives: [
-        UserNameValidator,
-        EmailValidator,
-        PasswordValidator,
-        ConfirmationValidator,
-        ReCaptchaComponent
-    ]
+    templateUrl: './register.component.html'
 })
 export class RegisterComponent {
 
