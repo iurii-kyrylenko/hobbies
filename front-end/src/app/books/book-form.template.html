@@ -50,6 +50,7 @@
             </div>
             <div class="form-group">
                 <my-date-input
+                    title="Completed on"
                     [(ngModel)]="book.completed"
                     required
                     name="completed"
@@ -59,8 +60,8 @@
                     <small>Completion date has wrong format</small>
                 </div>
             </div>
-            <button type="submit" [disabled]="!bookForm.valid" class="btn btn-default">OK</button>
-            <a [routerLink]="['../']" class="btn btn-default">Cancel</a>
+            <button type="submit" [disabled]="!bookForm.valid" class="btn btn-default">Submit</button>
+            <a [routerLink]="['../']" class="btn btn-default">Reject</a>
         </form>
 
     </div>

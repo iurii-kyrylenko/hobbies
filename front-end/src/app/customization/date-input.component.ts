@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const noop = () => {};
@@ -13,7 +13,7 @@ const DATE_INPUT_CONTROL_VALUE_ACCESSOR = {
     selector: 'my-date-input',
     template: `
         <label for="completed">
-            Completed on
+            {{title}}
             <span class="label label-default">{{formatDate()}}</span>
         </label>
         <input [(ngModel)]="value" placeholder="Free date format" class="form-control">
@@ -21,6 +21,7 @@ const DATE_INPUT_CONTROL_VALUE_ACCESSOR = {
     providers: [DATE_INPUT_CONTROL_VALUE_ACCESSOR]
 })
 export class DateInputComponent implements ControlValueAccessor {
+    @Input() title = '';
     private innerValue = '';
     private bindValue: Date;
 

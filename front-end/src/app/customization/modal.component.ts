@@ -28,7 +28,7 @@ import { Subject } from 'rxjs';
             </div>
             <div class="modal-footer">
                 <ng-content select="modal-footer"></ng-content>
-                <button *ngIf="submitButtonLabel" type="button" class="btn btn-primary" (click)="submit()">{{ submitButtonLabel }}</button>
+                <button *ngIf="submitButtonLabel" type="button" class="btn btn-default" (click)="submit()">{{ submitButtonLabel }}</button>
                 <button *ngIf="cancelButtonLabel" type="button" class="btn btn-default" (click)="dismiss()">{{ cancelButtonLabel }}</button>
             </div>
         </div>
