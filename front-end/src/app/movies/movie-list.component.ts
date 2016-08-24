@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { ItemsStateService } from '../customization/items-state.service';
+
 
 @Component({
-    template: `
-        <h3>Movies</h3>
-    `
+    templateUrl: './movie-list.component.html'
 })
-export class MovieListComponent {}
+export class MovieListComponent {
+    constructor(private state: ItemsStateService) {}
+}

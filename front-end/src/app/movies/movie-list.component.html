@@ -1,10 +1,10 @@
 <item-list #itemList
     [state]="state"
-    apiSelector="books"
-    header="Books"
-    searchPlaceholder="Search for Author or Title"
-    addPrompt="Add Book"
-    uploadPrompt="Upload Books">
+    apiSelector="movies"
+    header="Movies"
+    searchPlaceholder="Search for Movie Name or Year of Production"
+    addPrompt="Add Movie"
+    uploadPrompt="Upload Movies">
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -12,28 +12,26 @@
                 <tr>
                     <th style="width: 10%"></th>
                     <th style="width: 15%">Completed</th>
-                    <th style="width: 8%">Mode</th>
-                    <th style="width: 25%">Author</th>
-                    <th>Title</th>
+                    <th style="width: 10%">Year</th>
+                    <th>Name</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let book of itemList.items | async">
+                <tr *ngFor="let movie of itemList.items | async">
                     <td>
                         <div class="input-group-btn">
-                            <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book">
+                            <a [routerLink]="[movie._id]" class="btn btn-default" title="Edit Movie">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
-                            <a (click)="itemList.removeConfirm(book)" class="btn btn-default" title="Remove Book">
+                            <a (click)="itemList.removeConfirm(movie)" class="btn btn-default" title="Remove Movie">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
                         </div>
                     </td>
                     <!-- Date pipe doesn't work in Safari -->
-                    <td>{{itemList.formatDate(book.completed)}}</td>
-                    <td>{{book.mode}}</td>
-                    <td>{{book.author}}</td>
-                    <td>{{book.title}}</td>
+                    <td>{{itemList.formatDate(movie.completed)}}</td>
+                    <td>{{movie.year}}</td>
+                    <td>{{movie.title}}</td>
                 </tr>
            </tbody>
         </table>

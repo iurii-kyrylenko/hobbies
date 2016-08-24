@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { BookStateService } from './books-state.service';
+import { ItemsStateService } from '../customization/items-state.service';
 
 @Component({
     template: `
         <router-outlet></router-outlet>
     `,
-    providers: [BookStateService]
+    providers: [ItemsStateService]
 })
 export class BooksComponent {}

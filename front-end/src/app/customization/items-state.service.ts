@@ -1,6 +1,6 @@
 import { URLSearchParams } from '@angular/http'
 
-export class BookStateService {
+export class ItemsStateService {
 
     searchFilter = '';
 

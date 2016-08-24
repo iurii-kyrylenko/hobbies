@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { DateInputComponent } from './date-input.component';
 import { ModalComponent } from './modal.component';
+import { ItemListComponent } from './item-list.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     declarations: [
         DateInputComponent,
-        ModalComponent
+        ModalComponent,
+        ItemListComponent
     ],
     exports: [
         DateInputComponent,
-        ModalComponent
+        ItemListComponent
     ]
 })
 export class CustomizationModule {}

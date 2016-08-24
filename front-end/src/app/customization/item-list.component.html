@@ -1,0 +1,37 @@
+<my-modal #deleteConfirm title="Removing Book" submitButtonLabel="Yes" cancelButtonLabel="No">
+    <modal-content>
+        Are you sure you want to remove <span class="badge">{{deleteConfirm.modalData}}</span>?
+    </modal-content>
+</my-modal>
+
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+
+        <h4 class="panel-title with-controls pull-left">{{header}}</h4>
+
+        <div class="input-group">
+
+            <input #search (keydown.enter)="applySearch(search.value)" (keydown.esc)="applySearch('')" [value]="state.searchFilter" type="text" class="form-control" placeholder={{searchPlaceholder}}>
+
+            <div class="input-group-btn">
+
+                <a (click)="applySearch(search.value)" class="btn btn-default" title="Apply Search Filter"><i class="glyphicon glyphicon-search"></i></a>
+
+                <a (click)="applySearch('')" class="btn btn-default" title="Clear Search Filter"><i class="glyphicon glyphicon-remove-sign"></i></a>
+
+                <a [routerLink]="['new']" class="btn btn-default" title={{addPrompt}}><i class="glyphicon glyphicon-plus"></i></a>
+
+                <label for="file" class="btn btn-default" title={{uploadPrompt}}><i class="glyphicon glyphicon-upload"></i></label>
+
+                <form #uploadForm>
+                    <input type="file" id="file" (change)="uploadChange($event)">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <ng-content></ng-content>
+
+</div>
