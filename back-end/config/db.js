@@ -9,5 +9,6 @@ mongoose.connection
     .on('disconnected', () => console.log('mongo disconnectes'));
 
 require('../books/model');
+require('../movies/model');
 require('../users/model');
 

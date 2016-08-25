@@ -11,6 +11,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const usersRouter = require('./users/router')
 const booksRouter = require('./books/router');
+const moviesRouter = require('./movies/router');
 const server = express();
 
 server.use(express.static(path.join(__dirname, 'public')));
@@ -25,6 +26,7 @@ server.use(passport.initialize());
 
 server.use('/api/users', usersRouter);
 server.use('/api/books', booksRouter);
+server.use('/api/movies', moviesRouter);
 
 server.route('/*').get(function(req, res) {
     return res.sendFile(path.join(__dirname, 'public/index.html'));

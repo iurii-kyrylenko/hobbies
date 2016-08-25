@@ -21,6 +21,7 @@ export class ItemListComponent implements OnInit {
     @Input() searchPlaceholder: string;
     @Input() addPrompt: string;
     @Input() uploadPrompt: string;
+    @Input() removeHeader: string;
     @Input() apiSelector: string;
 
     @ViewChild('deleteConfirm') deleteConfirm: ModalComponent;

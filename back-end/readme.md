@@ -15,6 +15,15 @@ JSON file to upload books:
 ]
 ```
 
+JSON file to upload books:
+```
+[
+    { "title": "t-0001", "year": "2001", "completed": "2016-01-01", "notes": "note-001" },
+    { "title": "t-0002", "year": "2002", "completed": "2016-01-02", "notes": "note-002" },
+    { "title": "t-0003", "year": "2003", "completed": "2016-01-03", "notes": "note-003" }
+]
+```
+
 local configuration (.env file):
 ```
     CONNECTION_STRING = <connection string to mongodb>

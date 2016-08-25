@@ -2,8 +2,9 @@
     [state]="state"
     apiSelector="movies"
     header="Movies"
-    searchPlaceholder="Search for Movie Name or Year of Production"
+    searchPlaceholder="Search for Movie title, Year of production or Notes"
     addPrompt="Add Movie"
+    removeHeader="Removing Movie"
     uploadPrompt="Upload Movies">
 
     <div class="table-responsive">
@@ -13,7 +14,8 @@
                     <th style="width: 10%"></th>
                     <th style="width: 15%">Completed</th>
                     <th style="width: 10%">Year</th>
-                    <th>Name</th>
+                    <th style="width: 40%">Name</th>
+                    <th>Notes</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +34,7 @@
                     <td>{{itemList.formatDate(movie.completed)}}</td>
                     <td>{{movie.year}}</td>
                     <td>{{movie.title}}</td>
+                    <td>{{movie.notes}}</td>
                 </tr>
            </tbody>
         </table>
