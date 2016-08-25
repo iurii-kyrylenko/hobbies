@@ -15,7 +15,7 @@ JSON file to upload books:
 ]
 ```
 
-JSON file to upload books:
+JSON file to upload movies:
 ```
 [
     { "title": "t-0001", "year": "2001", "completed": "2016-01-01", "notes": "note-001" },
