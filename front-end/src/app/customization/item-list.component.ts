@@ -8,6 +8,8 @@ import { ModalComponent } from './modal.component';
 import { NotificationService } from '../notifications/notification.service';
 import { ItemsStateService } from './items-state.service';
 
+const saveAs = require('file-saver/FileSaver.js').saveAs;
+
 @Component({
     selector: 'item-list',
     templateUrl: './item-list.component.html'
@@ -21,8 +23,10 @@ export class ItemListComponent implements OnInit {
     @Input() searchPlaceholder: string;
     @Input() addPrompt: string;
     @Input() uploadPrompt: string;
+    @Input() downloadPrompt: string;
     @Input() removeHeader: string;
     @Input() apiSelector: string;
+    @Input() exportFileName: string;
 
     @ViewChild('deleteConfirm') deleteConfirm: ModalComponent;
     @ViewChild('uploadForm') uploadForm: any;
@@ -88,6 +92,21 @@ export class ItemListComponent implements OnInit {
         const month = date.getMonth();
         const day = date.getDate();
         return `${months[month]} ${day}, ${year}`;
+    }
+
+    download() {
+        this.items.subscribe(data => {
+            const blob = new Blob(
+                [JSON.stringify(data, this.replaceForDownload, 1)],
+                {type: 'application/json'});
+            saveAs(blob, this.exportFileName);
+        });
+    }
+
+    private replaceForDownload(key: string, value: any) {
+        if(key === '_id') return undefined;
+        if(key === 'completed') return value.split(/T/)[0];
+        return value;
     }
 
     uploadChange(event: any) {

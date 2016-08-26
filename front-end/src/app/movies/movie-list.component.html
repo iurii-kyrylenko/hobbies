@@ -2,10 +2,12 @@
     [state]="state"
     apiSelector="movies"
     header="Movies"
-    searchPlaceholder="Search for Movie title, Year of production or Notes"
+    searchPlaceholder="Search for movie title, year of production or notes"
     addPrompt="Add Movie"
     removeHeader="Removing Movie"
-    uploadPrompt="Upload Movies">
+    downloadPrompt="Download Movies"
+    uploadPrompt="Upload Movies"
+    exportFileName="movies.json">
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -14,7 +16,7 @@
                     <th style="width: 10%"></th>
                     <th style="width: 15%">Completed</th>
                     <th style="width: 10%">Year</th>
-                    <th style="width: 40%">Name</th>
+                    <th style="width: 40%">Title</th>
                     <th>Notes</th>
                 </tr>
             </thead>

@@ -22,6 +22,8 @@
 
                 <a [routerLink]="['new']" class="btn btn-default" title={{addPrompt}}><i class="glyphicon glyphicon-plus"></i></a>
 
+                <a (click)="download()" class="btn btn-default" title="{{downloadPrompt}}"><i class="glyphicon glyphicon-download"></i></a>
+
                 <label for="file" class="btn btn-default" title={{uploadPrompt}}><i class="glyphicon glyphicon-upload"></i></label>
 
                 <form #uploadForm>

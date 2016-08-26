@@ -12,7 +12,10 @@ const getBooks = (req, res) => {
     };
 
     // Descending sort on the completion date
-    const query = Book.where({ userId: req.user._id }).sort('-completed');
+    const query = Book
+        .where({ userId: req.user._id })
+        .select('completed mode author title')
+        .sort('-completed');
 
     const term = req.query.term;
 

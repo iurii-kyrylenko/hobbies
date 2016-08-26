@@ -12,7 +12,10 @@ const getMovies = (req, res) => {
     };
 
     // Descending sort on the completion date
-    const query = Movie.where({ userId: req.user._id }).sort('-completed');
+    const query = Movie
+        .where({ userId: req.user._id })
+        .select('completed year title notes')
+        .sort('-completed');
 
     const term = req.query.term;
 
