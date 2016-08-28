@@ -2,15 +2,32 @@ import { URLSearchParams } from '@angular/http'
 
 export class ItemsStateService {
 
-    searchFilter = '';
+    term = ''
+    page: number;
+
+    get queryParams() {
+
+        const search = new URLSearchParams();
+
+        if(this.term.trim()) {
+            search.append('term', this.term);
+        }
+
+        if(this.page > 0) {
+            search.append('page', this.page.toString());
+        }
+
+        return { search };
+    }
 
     get searchParams() {
-        if(!this.searchFilter.trim()) {
-            return null;
-        }
-        const search = new URLSearchParams();
-        search.append('term', this.searchFilter);
-        return { search };
 
+        const search = new URLSearchParams();
+
+        if(this.term.trim()) {
+            search.append('term', this.term);
+        }
+
+        return { search };
     }
 }

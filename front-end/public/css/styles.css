@@ -20,14 +20,14 @@ input.form-control.ng-invalid, select.form-control.ng-invalid {
 /*
  * Panel title when controls are expected
  */
- .panel-title.with-controls.pull-left {
+.panel-title.with-controls.pull-left {
     padding-top: 7.5px;
     margin-right: 12px;
  }
 /*
  * Vertical align text in table
  */
- .table td {
+.table td {
     vertical-align: middle !important;
 }
 /*
@@ -49,4 +49,10 @@ input[type="file"] {
   overflow: hidden;
   position: absolute;
   z-index: -1;
+}
+/*
+ * Pagination
+ */
+.pagination {
+  margin: 8px 0 8px 8px;
 }

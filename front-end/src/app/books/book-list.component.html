@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let book of itemList.items | async">
+                <tr *ngFor="let book of itemList.items">
                     <td>
                         <div class="input-group-btn">
                             <a [routerLink]="[book._id]" class="btn btn-default" title="Edit Book">

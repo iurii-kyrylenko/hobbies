@@ -3,35 +3,58 @@ const Movie = mongoose.model('Movie');
 
 const getMovies = (req, res) => {
 
-    const cb = (err, movies) => {
-        if(err) {
-            res.sendStatus(400);
-            return;
+    const itemsPerPage = 5;
+
+    const queryBuilder = (req) => {
+        const query = Movie
+            .where({ userId: req.user._id })
+            .select('completed year title notes')
+            .sort('-completed');
+
+        const term = req.query.term;
+        if(term) {
+            const re = new RegExp(term, 'i');
+            query = query.or([
+                { title: {$regex: re} },
+                { year: {$regex: re} },
+                { notes: {$regex: re} }
+           ]);
         }
-        res.send(movies);
+        return query;
     };
 
-    // Descending sort on the completion date
-    const query = Movie
-        .where({ userId: req.user._id })
-        .select('completed year title notes')
-        .sort('-completed');
+    const getPagesCount = (itemsCount) => {
+        if(!itemsCount) return 0;
+        const int = Math.floor(itemsCount / itemsPerPage);
+        const mod = itemsCount % itemsPerPage;
+        return mod ? int + 1 : int;
+    };
 
-    const term = req.query.term;
+    const callbackBuilder = (res, pages) => {
+        return (err, items) => {
+            if(err) {
+                res.sendStatus(400);
+                return;
+            }
+            res.send({ items, pages });
+        };
+    };
 
-    if(!term) {
-        return query.exec(cb);
+    const page = req.query.page;
+
+    if(page) {
+        queryBuilder(req).count().then(count => {
+            const itemsToSkip = itemsPerPage * (page - 1);
+            queryBuilder(req)
+                .skip(itemsToSkip)
+                .limit(itemsPerPage)
+                .exec(callbackBuilder(res, getPagesCount(count)));
+        });
+    } else {
+        // get all items in one page
+        queryBuilder(req)
+        .exec(callbackBuilder(res, 1));
     }
-
-    const re = new RegExp(term, 'i');
-
-    return query
-        .or([
-            { title: {$regex: re} },
-            { year: {$regex: re} },
-            { notes: {$regex: re} }
-        ])
-        .exec(cb);
 };
 
 const getMovie = (req, res) => {

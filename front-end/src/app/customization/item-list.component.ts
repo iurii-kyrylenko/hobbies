@@ -16,7 +16,8 @@ const saveAs = require('file-saver/FileSaver.js').saveAs;
 })
 export class ItemListComponent implements OnInit {
 
-    items: Observable<Item[]>;
+    items: Item[];
+    pages: number;
 
     @Input() state: ItemsStateService;
     @Input() header: string;
@@ -39,20 +40,39 @@ export class ItemListComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.getItems();
+        this.pageReset();
     }
 
     getItems() {
         const url = `${this.config.apiUrl}/${this.apiSelector}`;
         const requestOptions = Object.assign(
-            {}, this.auth.authHeader, this.state.searchParams
+            {}, this.auth.authHeader, this.state.queryParams
         );
-        this.items = this.http.get(url, requestOptions)
+        this.http.get(url, requestOptions)
         .map(res => {
-            const items = res.json();
-            items.forEach((item: any) => item.completed = new Date(item.completed));
-            return items;
+            const data = res.json();
+            data.items.forEach((item: any) => item.completed = new Date(item.completed));
+            return data;
+        }).subscribe(data => {
+            this.items = data.items;
+            this.pages = data.pages;
         });
+    }
+
+    applySearch(term: string) {
+        this.state.term = term;
+        this.state.page = 1;
+        this.getItems();
+    }
+
+    pageChange(page: number) {
+        this.state.page = page;
+        this.getItems();
+    }
+
+    pageReset() {
+        this.state.page = 1;
+        this.getItems();
     }
 
     removeConfirm(item: Item) {
@@ -61,21 +81,16 @@ export class ItemListComponent implements OnInit {
          });
     }
 
-    removeBook(item: Item) {
+    private removeBook(item: Item) {
         const apiUrl = `${this.config.apiUrl}/${this.apiSelector}/${item._id}`;
         this.http
             .delete(apiUrl, this.auth.authHeader)
             .subscribe(res => {
-                this.getItems();
+                this.pageReset();
                 this.ntfs.notifySuccess('An item has been removed :-)');
             }, err => {
                 this.ntfs.notifyDanger('Something went wrong when removing an item :-(');
             });
-    }
-
-    applySearch(term: string) {
-        this.state.searchFilter = term;
-        this.getItems();
     }
 
     /*
@@ -95,16 +110,21 @@ export class ItemListComponent implements OnInit {
     }
 
     download() {
-        this.items.subscribe(data => {
+        const url = `${this.config.apiUrl}/${this.apiSelector}`;
+        const requestOptions = Object.assign(
+            {}, this.auth.authHeader, this.state.searchParams
+        );
+        this.http.get(url, requestOptions).map(res => res.json()).subscribe(data => {
             const blob = new Blob(
-                [JSON.stringify(data, this.replaceForDownload, 1)],
+                [JSON.stringify(data.items, this.replaceForDownload, 1)],
                 {type: 'application/json'});
             saveAs(blob, this.exportFileName);
         });
-    }
+     }
 
     private replaceForDownload(key: string, value: any) {
         if(key === '_id') return undefined;
+        if(value === '') return undefined;
         if(key === 'completed') return value.split(/T/)[0];
         return value;
     }
@@ -117,7 +137,7 @@ export class ItemListComponent implements OnInit {
         const apiUrl = `${this.config.apiUrl}/${this.apiSelector}/upload`;
         this.uploadRequest(apiUrl, files[0], this.auth.authHeader.headers)
             .then(() => {
-                this.getItems();
+                this.pageReset();
                 this.ntfs.notifySuccess('Items have been uploaded :-)');
             }, () => {
                 this.ntfs.notifyDanger('Something went wrong when uploading items :-(');

@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { DateInputComponent } from './date-input.component';
 import { ModalComponent } from './modal.component';
 import { ItemListComponent } from './item-list.component';
+import { PagerComponent } from './pager.component';
+
 
 @NgModule({
     imports: [
@@ -15,7 +17,8 @@ import { ItemListComponent } from './item-list.component';
     declarations: [
         DateInputComponent,
         ModalComponent,
-        ItemListComponent
+        ItemListComponent,
+        PagerComponent
     ],
     exports: [
         DateInputComponent,

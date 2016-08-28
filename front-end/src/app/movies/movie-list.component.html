@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let movie of itemList.items | async">
+                <tr *ngFor="let movie of itemList.items">
                     <td>
                         <div class="input-group-btn">
                             <a [routerLink]="[movie._id]" class="btn btn-default" title="Edit Movie">
