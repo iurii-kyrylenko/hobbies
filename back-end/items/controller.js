@@ -1,24 +1,26 @@
-const mongoose = require('mongoose');
-const Book = mongoose.model('Book');
-
-const getBooks = (req, res) => {
+const getItems = (Model, req, res) => {
 
     const itemsPerPage = 5;
 
     const queryBuilder = (req) => {
-        const query = Book
+        const query = Model
             .where({ userId: req.user._id })
-            .select('completed mode author title')
-            .sort('-completed');
+            .select(Model.projectionFields)
+            .sort(Model.sortFields);
 
         const term = req.query.term;
+
         if(term) {
             const re = new RegExp(term, 'i');
-            query = query.or([
-                { title: {$regex: re} },
-                { author: {$regex: re} }
-            ]);
+            const searchFields = Model.searchFields.split(' ');
+            const searchExpressions = searchFields.map(field => {
+                var exp = {};
+                exp[field] = {$regex: re};
+                return exp;
+            });
+            query = query.or(searchExpressions);
         }
+
         return query;
     };
 
@@ -56,24 +58,24 @@ const getBooks = (req, res) => {
     }
 };
 
-const getBook = (req, res) => {
-    Book.findById(req.params.id, (err, book) => {
+const getItem = (Model, req, res) => {
+    Model.findById(req.params.id, (err, item) => {
         if(err) {
             res.sendStatus(400);
             return;
         }
-        if(!book || !book.userId.equals(req.user._id)) {
+        if(!item || !item.userId.equals(req.user._id)) {
             res.sendStatus(404);
             return;
          }
-        res.send(book);
+        res.send(item);
     });
 };
 
-const addBook = (req, res) => {
-    const book = new Book(req.body);
-    book.userId = req.user._id;
-    book.save((err) => {
+const addItem = (Model, req, res) => {
+    const item = new Model(req.body);
+    item.userId = req.user._id;
+    item.save((err) => {
         if(err) {
             res.sendStatus(400);
             return;
@@ -82,21 +84,18 @@ const addBook = (req, res) => {
     });
 };
 
-const changeBook = (req, res) => {
-    Book.findById(req.params.id, (err, book) => {
+const changeItem = (Model, req, res) => {
+    Model.findById(req.params.id, (err, item) => {
         if(err) {
             res.sendStatus(400);
             return;
         }
-        if(!book || !book.userId.equals(req.user._id)) {
+        if(!item || !item.userId.equals(req.user._id)) {
             res.sendStatus(404);
             return;
         }
-        book.title = req.body.title;
-        book.author = req.body.author;
-        book.completed = req.body.completed;
-        book.mode = req.body.mode;
-        book.save((err) => {
+        item.setFromObject(req.body);
+        item.save((err) => {
             if(err) {
                 res.sendStatus(400);
                 return;
@@ -106,17 +105,17 @@ const changeBook = (req, res) => {
     });
 };
 
-const deleteBook = (req, res) => {
-    Book.findById(req.params.id, (err, book) => {
+const deleteItem = (Model, req, res) => {
+    Model.findById(req.params.id, (err, item) => {
         if(err) {
             res.sendStatus(400);
             return;
         }
-        if(!book || !book.userId.equals(req.user._id)) {
+        if(!item || !item.userId.equals(req.user._id)) {
             res.sendStatus(404);
             return;
         }
-        book.remove((err) => {
+        item.remove((err) => {
             if(err) {
                 res.sendStatus(400);
                 return;
@@ -126,24 +125,29 @@ const deleteBook = (req, res) => {
     });
 };
 
-const uploadBooks = (req, res) => {
+const uploadItems = (Model, req, res) => {
     const data = JSON.parse(req.file.buffer);
     const tasks = [];
     for(var i = 0; i < data.length; i++) {
-        var book = new Book(data[i]);
-        book.userId = req.user._id;
-        tasks.push(book.save());
+        var item = new Model(data[i]);
+        item.userId = req.user._id;
+        tasks.push(item.save());
     }
     Promise.all(tasks)
         .then(() => res.sendStatus(200))
         .catch(() => res.sendStatus(400));
 };
 
-module.exports = {
-    getBooks,
-    getBook,
-    addBook,
-    changeBook,
-    deleteBook,
-    uploadBooks
-};
+const mongoose = require('mongoose');
+
+module.exports = (modelName) => {
+    const Model = mongoose.model(modelName);
+    return {
+        getItems: (req, res) => getItems(Model, req, res),
+        getItem: (req, res) => getItem(Model, req, res),
+        addItem: (req, res) => addItem(Model, req, res),
+        changeItem: (req, res) => changeItem(Model, req, res),
+        deleteItem: (req, res) => deleteItem(Model, req, res),
+        uploadItems: (req, res) => uploadItems(Model, req, res)
+    };
+}

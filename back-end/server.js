@@ -9,9 +9,10 @@ const passport = require('passport');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const usersRouter = require('./users/router')
-const booksRouter = require('./books/router');
-const moviesRouter = require('./movies/router');
+const usersRouter = require('./users/router');
+const itemsRouterFactory = require('./items/router');
+const booksRouter = itemsRouterFactory('Book');
+const moviesRouter = itemsRouterFactory('Movie');
 const server = express();
 
 server.use(express.static(path.join(__dirname, 'public')));

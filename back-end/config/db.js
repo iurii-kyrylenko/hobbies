@@ -8,7 +8,7 @@ mongoose.connection
     .on('error', () => console.log('mongo connection error'))
     .on('disconnected', () => console.log('mongo disconnectes'));
 
-require('../books/model');
-require('../movies/model');
+require('../items/book.model');
+require('../items/movie.model');
 require('../users/model');
 
