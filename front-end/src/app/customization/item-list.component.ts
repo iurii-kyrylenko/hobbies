@@ -20,7 +20,6 @@ export class ItemListComponent implements OnInit {
     pages: number;
 
     @Input() state: ItemsStateService;
-    @Input() header: string;
     @Input() searchPlaceholder: string;
     @Input() addPrompt: string;
     @Input() uploadPrompt: string;

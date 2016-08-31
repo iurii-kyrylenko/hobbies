@@ -4,38 +4,34 @@
     </modal-content>
 </my-modal>
 
-<div class="panel panel-default">
+<div class="input-group">
 
-    <div class="panel-heading">
+    <input #search (keydown.enter)="applySearch(search.value)" (keydown.esc)="applySearch('')" [value]="state.term" type="text" class="form-control" placeholder={{searchPlaceholder}}>
 
-        <h4 class="panel-title with-controls pull-left">{{header}}</h4>
+    <div class="input-group-btn">
 
-        <div class="input-group">
+        <a (click)="applySearch(search.value)" class="btn btn-default" title="Apply Search Filter"><i class="glyphicon glyphicon-search"></i></a>
 
-            <input #search (keydown.enter)="applySearch(search.value)" (keydown.esc)="applySearch('')" [value]="state.term" type="text" class="form-control" placeholder={{searchPlaceholder}}>
+        <a (click)="applySearch('')" class="btn btn-default" title="Clear Search Filter"><i class="glyphicon glyphicon-remove-sign"></i></a>
 
-            <div class="input-group-btn">
+        <a [routerLink]="['new']" class="btn btn-default" title={{addPrompt}}><i class="glyphicon glyphicon-plus"></i></a>
 
-                <a (click)="applySearch(search.value)" class="btn btn-default" title="Apply Search Filter"><i class="glyphicon glyphicon-search"></i></a>
+        <a (click)="download()" class="btn btn-default" title="{{downloadPrompt}}"><i class="glyphicon glyphicon-download"></i></a>
 
-                <a (click)="applySearch('')" class="btn btn-default" title="Clear Search Filter"><i class="glyphicon glyphicon-remove-sign"></i></a>
+        <label for="file" class="btn btn-default" title={{uploadPrompt}}><i class="glyphicon glyphicon-upload"></i></label>
 
-                <a [routerLink]="['new']" class="btn btn-default" title={{addPrompt}}><i class="glyphicon glyphicon-plus"></i></a>
-
-                <a (click)="download()" class="btn btn-default" title="{{downloadPrompt}}"><i class="glyphicon glyphicon-download"></i></a>
-
-                <label for="file" class="btn btn-default" title={{uploadPrompt}}><i class="glyphicon glyphicon-upload"></i></label>
-
-                <form #uploadForm>
-                    <input type="file" id="file" (change)="uploadChange($event)">
-                </form>
-
-            </div>
-        </div>
     </div>
-
-    <ng-content></ng-content>
-
-    <my-pager *ngIf="pages" [pagesCount]="pages" [page]="state.page" (change)="pageChange($event)"></my-pager>
-
 </div>
+
+<form #uploadForm>
+    <input type="file" id="file" (change)="uploadChange($event)">
+</form>
+
+<my-pager *ngIf="pages" [pagesCount]="pages" [page]="state.page" (change)="pageChange($event)"></my-pager>
+
+<div class="panel panel-default">
+    <ng-content></ng-content>
+</div>
+
+<my-pager *ngIf="pages" [pagesCount]="pages" [page]="state.page" (change)="pageChange($event)"></my-pager>
+
