@@ -4,7 +4,7 @@
     </modal-content>
 </my-modal>
 
-<div class="input-group">
+<div class=" my-search input-group">
 
     <input #search (keydown.enter)="applySearch(search.value)" (keydown.esc)="applySearch('')" [value]="state.term" type="text" class="form-control" placeholder={{searchPlaceholder}}>
 
@@ -26,8 +26,6 @@
 <form #uploadForm>
     <input type="file" id="file" (change)="uploadChange($event)">
 </form>
-
-<my-pager *ngIf="pages" [pagesCount]="pages" [page]="state.page" (change)="pageChange($event)"></my-pager>
 
 <div class="panel panel-default">
     <ng-content></ng-content>

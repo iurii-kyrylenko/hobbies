@@ -44,21 +44,23 @@ input[type="file"] {
   z-index: -1;
 }
 /*
- * Fix panel
+ * Search bar
  */
-.panel {
-  margin-bottom: 0px !important;
+.my-search {
+  margin-bottom: 18px;
 }
 /*
  * Pager bar
  */
 .pagination {
-  margin-top: 5px;
-  margin-bottom: 0px;
+  margin-top: 0px;
 }
 .pagination > li > a, .pagination > li > a:hover {
   color: #000;
-  border: 0;
+  padding: 8px 0 6px;
+  width: 33px;
+  height: 40px;
+  text-align: center;
 }
 /*
  * Table header
