@@ -31,5 +31,5 @@
     <ng-content></ng-content>
 </div>
 
-<my-pager *ngIf="pages" [pagesCount]="pages" [page]="state.page" (change)="pageChange($event)"></my-pager>
+<my-pager *ngIf="pages" [frame]="8" [pagesCount]="pages" [page]="state.page" (change)="pageChange($event)"></my-pager>
 

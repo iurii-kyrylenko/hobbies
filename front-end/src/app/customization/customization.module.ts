@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -23,6 +23,7 @@ import { PagerComponent } from './pager.component';
     exports: [
         DateInputComponent,
         ItemListComponent
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CustomizationModule {}

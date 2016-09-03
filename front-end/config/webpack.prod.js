@@ -25,7 +25,7 @@ module.exports = webpackMerge(commonConfig, {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
-      mangle: { screw_ie8 : true, keep_fnames: true },
+      mangle: { screw_ie8 : true, keep_fnames: false },
       compress: { screw_ie8: true },
       comments: false
     }),
