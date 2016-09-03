@@ -11,7 +11,6 @@ describe('PagerComponent', () => {
         pager = fixture.componentInstance;
 
         pager.frame = 10;
-        pager.pagesCount = 50;
         pager.pagesCount = 100;
     });
 
