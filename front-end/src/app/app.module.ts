@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { appRoutes, appRoutingProviders } from './app.routes';
-import { provideConfig } from './config';
+import { AppConfig } from './config'
 import { NotificationService } from './notifications/notification.service';
 import { AuthService } from './authentication/auth.service';
 import { UserModule } from './authentication/user.module';
@@ -31,7 +31,7 @@ import { HomeComponent } from './home/home.component';
     ],
     providers: [
         appRoutingProviders,
-        provideConfig(),
+        AppConfig,
         NotificationService,
         AuthService
     ],
