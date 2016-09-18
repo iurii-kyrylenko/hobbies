@@ -13,13 +13,14 @@ After logging in you will be able to:
 
 Your data is not accessible to other users.
 
-## Technologies:
+## Technologies
 Node.js, Express, MongoDB, JWT, Angular 2, webpack
 
-Detailed descriptions:
+## [Demo](https://ik-hobbies.herokuapp.com)
+
+## Detailed descriptions
 * [back-end](back-end/readme.md)
 * [front-end](front-end/readme.md)
 
 ## License
-
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
