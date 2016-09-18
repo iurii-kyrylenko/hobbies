@@ -9,7 +9,5 @@ import '@angular/router';
 import 'rxjs';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.css';
-// Three.js
-import 'three/build/three';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
