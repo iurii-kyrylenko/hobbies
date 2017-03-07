@@ -20,7 +20,8 @@ Node.js, Express, MongoDB, JWT, Angular 2, webpack
 
 ## Detailed descriptions
 * [back-end](back-end/readme.md)
-* [front-end](front-end/readme.md)
+* [front-end Angular-2](front-end-ng2/readme.md)
+* [front-end Vue.js](front-end-vue/readme.md)
 
 ## License
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
