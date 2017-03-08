@@ -3,10 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import Vuelidate from 'vuelidate'
 import 'bootstrap/dist/css/bootstrap.css'
 
 Vue.config.productionTip = false
+
+// plug-in registration
+Vue.use(Vuelidate)
 
 /* eslint-disable no-new */
 new Vue({
