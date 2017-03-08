@@ -41,6 +41,22 @@
         </router-link>
       </ul>
 
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            Logged in as: name email
+          </a>
+        </li>
+
+        <router-link tag="li" to="/home">
+          <a>
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+            &nbsp;Log out
+          </a>
+        </router-link>
+      </ul>
+
     </div>
   </nav>
 </template>

@@ -14,7 +14,7 @@ After logging in you will be able to:
 Your data is not accessible to other users.
 
 ## Technologies
-Node.js, Express, MongoDB, JWT, Angular 2, webpack
+Node.js, Express, MongoDB, JWT, Angular 2, Vue.js, webpack
 
 ## [Demo](https://ik-hobbies.herokuapp.com)
 
