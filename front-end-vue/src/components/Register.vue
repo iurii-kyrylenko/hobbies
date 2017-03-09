@@ -89,7 +89,7 @@
     computed: {
       vmsgName () {
         if (!this.$v.name.required) { return 'Name is required' }
-        if (!this.$v.name.minLength) { return 'Name requires at least 5 letters or digits, does not contain spaces and begins with letter' }
+        if (!this.$v.name.name) { return 'Name requires at least 5 letters or digits, does not contain spaces and begins with letter' }
       },
       vmsgEmail () {
         if (!this.$v.email.required) { return 'Email address is required' }
