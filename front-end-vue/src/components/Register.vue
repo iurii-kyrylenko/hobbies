@@ -51,7 +51,7 @@
 </template>
 
 <script>
-  import { required, email, sameAs } from 'vuelidate/lib/validators'
+  import vh, { userName, email, password, confirmation } from '@/helpers/validators'
 
   export default {
     data () {
@@ -63,46 +63,16 @@
       }
     },
     validations: {
-      name: {
-        required,
-        name: value => {
-          const regexp = /^[A-Za-z][A-Za-z0-9]{4,}$/
-          return regexp.test(value)
-        }
-      },
-      email: {
-        required,
-        email
-      },
-      password: {
-        required,
-        password: value => {
-          const regexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\S{8,}$/
-          return regexp.test(value)
-        }
-      },
-      confirmation: {
-        required,
-        confirmation: sameAs('password')
-      }
+      name: vh.vrules(userName),
+      email: vh.vrules(email),
+      password: vh.vrules(password),
+      confirmation: vh.vrules(confirmation)
     },
     computed: {
-      vmsgName () {
-        if (!this.$v.name.required) { return 'Name is required' }
-        if (!this.$v.name.name) { return 'Name requires at least 5 letters or digits, does not contain spaces and begins with letter' }
-      },
-      vmsgEmail () {
-        if (!this.$v.email.required) { return 'Email address is required' }
-        if (!this.$v.email.email) { return 'Invalid email address' }
-      },
-      vmsgPassword () {
-        if (!this.$v.password.required) { return 'Password is required' }
-        if (!this.$v.password.password) { return 'Password requires at least 8 characters without spaces, one number, one lowercase and one uppercase letter' }
-      },
-      vmsgConfirmation () {
-        if (!this.$v.confirmation.required) { return 'Password is required' }
-        if (!this.$v.confirmation.confirmation) { return 'Password mismatch' }
-      }
+      vmsgName () { return vh.vmsg(this.$v.name, userName) },
+      vmsgEmail () { return vh.vmsg(this.$v.email, email) },
+      vmsgPassword () { return vh.vmsg(this.$v.password, password) },
+      vmsgConfirmation () { return vh.vmsg(this.$v.confirmation, confirmation) }
     },
     methods: {
       validateBeforeSubmit () {

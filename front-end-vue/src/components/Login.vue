@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import { required, email } from 'vuelidate/lib/validators'
+  import vh, { email, password } from '@/helpers/validators'
 
   export default {
     data () {
@@ -43,27 +43,12 @@
       }
     },
     validations: {
-      email: {
-        required,
-        email
-      },
-      password: {
-        required,
-        password: value => {
-          const regexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\S{8,}$/
-          return regexp.test(value)
-        }
-      }
+      email: vh.vrules(email),
+      password: vh.vrules(password)
     },
     computed: {
-      vmsgEmail () {
-        if (!this.$v.email.required) { return 'Email address is required' }
-        if (!this.$v.email.email) { return 'Invalid email address' }
-      },
-      vmsgPassword () {
-        if (!this.$v.password.required) { return 'Password is required' }
-        if (!this.$v.password.password) { return 'Password requires at least 8 characters without spaces, one number, one lowercase and one uppercase letter' }
-      }
+      vmsgEmail () { return vh.vmsg(this.$v.email, email) },
+      vmsgPassword () { return vh.vmsg(this.$v.password, password) }
     },
     methods: {
       validateBeforeSubmit () {
