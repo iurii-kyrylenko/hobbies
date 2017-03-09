@@ -49,12 +49,12 @@
           </a>
         </li>
 
-        <router-link tag="li" to="/home">
-          <a>
+        <li>
+          <a href="#" @click.prevent="logout">
             <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
             &nbsp;Log out
           </a>
-        </router-link>
+        </li>
       </ul>
 
     </div>
@@ -67,6 +67,12 @@
   export default {
     computed: {
       ...mapGetters('auth', ['isLoggedIn', 'currentUser'])
+    },
+    methods: {
+      logout () {
+        this.$store.dispatch('auth/logout')
+        this.$router.push('/home')
+      }
     }
   }
 </script>

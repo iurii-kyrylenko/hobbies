@@ -1,11 +1,27 @@
+import axios from 'axios'
+
 const state = {
   token: localStorage['jwt']
 }
 
 const mutations = {
+  setToken (state, token) {
+    state.token = token
+  },
+  resetToken (state) {
+    state.token = ''
+  }
 }
 
 const actions = {
+  async login ({ commit }, user) {
+    const endpoint = 'http://localhost:3000/api/users/login'
+    const { data } = await axios.post(endpoint, user)
+    commit('setToken', data.token)
+  },
+  logout ({ commit }) {
+    commit('resetToken')
+  }
 }
 
 const getPayload = ({ token }) => {

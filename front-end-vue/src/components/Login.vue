@@ -56,8 +56,14 @@
         if (this.$v.$invalid) return
         this.submitForm()
       },
-      submitForm () {
-        console.log('Submitted data:', { ...this.$data })
+      async submitForm () {
+        try {
+          await this.$store.dispatch('auth/login', { ...this.$data })
+          console.log('OK')
+          this.$router.push('/home')
+        } catch (e) {
+          console.log('ER')
+        }
       }
     }
   }
