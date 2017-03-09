@@ -9,7 +9,7 @@
         </router-link>
       </div>
 
-      <ul class="nav navbar-nav">
+      <ul v-if="isLoggedIn" class="nav navbar-nav">
         <router-link tag="li" active-class="active" to="/books">
           <a>
             <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
@@ -25,7 +25,7 @@
         </router-link>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul v-if="!isLoggedIn" class="nav navbar-nav navbar-right">
         <router-link tag="li" active-class="active" to="/login">
           <a>
             <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
@@ -41,11 +41,11 @@
         </router-link>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul v-if="isLoggedIn" class="nav navbar-nav navbar-right">
         <li>
           <a>
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            Logged in as: name email
+            Logged in as: <{{ currentUser.name }}>{{ currentUser.email }}
           </a>
         </li>
 
@@ -60,6 +60,16 @@
     </div>
   </nav>
 </template>
+
+<script>
+  import { mapGetters } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapGetters('auth', ['isLoggedIn', 'currentUser'])
+    }
+  }
+</script>
 
 <style>
   a.active {
