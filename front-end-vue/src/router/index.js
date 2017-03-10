@@ -5,10 +5,11 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Books from '@/components/Books'
 import Movies from '@/components/Movies'
+import Store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/home',
@@ -36,3 +37,23 @@ export default new Router({
     }
   ]
 })
+
+// Navigation guards
+//
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = Store.getters['auth/isLoggedIn']
+  switch (to.path) {
+    case '/register':
+    case '/login':
+      next(!isLoggedIn)
+      break
+    case '/books':
+    case '/movies':
+      next(isLoggedIn)
+      break
+    default:
+      next(true)
+  }
+})
+
+export default router

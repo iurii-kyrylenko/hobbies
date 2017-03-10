@@ -1,7 +1,9 @@
 import axios from 'axios'
+import { init } from '../plugins/localStorage'
+import config from '@/helpers/config'
 
 const state = {
-  token: localStorage['jwt']
+  token: init
 }
 
 const mutations = {
@@ -15,7 +17,7 @@ const mutations = {
 
 const actions = {
   async login ({ commit }, user) {
-    const endpoint = 'http://localhost:3000/api/users/login'
+    const endpoint = config.apiUrl + '/users/login'
     const { data } = await axios.post(endpoint, user)
     commit('setToken', data.token)
   },
