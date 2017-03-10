@@ -40,6 +40,13 @@
           <p class="text-danger" v-show="$v.confirmation.$error">{{ vmsgConfirmation }}</p>
         </div>
 
+        <div class="form-group">
+          <re-captcha
+              :siteKey="reCaptchaSiteKey"
+              @captchaResponse="getCaptchaResponse">
+          </re-captcha>
+        </div>
+
         <button type="submit" class="btn btn-default">
           Sign up
         </button>
@@ -52,14 +59,23 @@
 
 <script>
   import vh, { userName, email, password, confirmation } from '@/helpers/validators'
+  import ReCaptcha from './ReCaptcha'
+  import config from '@/helpers/config'
+  import { mapMutations } from 'vuex'
+
+  const getUser = ({ name, email, password, captchaResponse }) =>
+    ({ name, email, password, captchaResponse })
 
   export default {
+    components: { ReCaptcha },
     data () {
       return {
         name: '',
         email: '',
         password: '',
-        confirmation: ''
+        captchaResponse: '',
+        confirmation: '',
+        reCaptchaSiteKey: config.reCaptchaSiteKey
       }
     },
     validations: {
@@ -75,13 +91,28 @@
       vmsgConfirmation () { return vh.vmsg(this.$v.confirmation, confirmation) }
     },
     methods: {
+      ...mapMutations('notification', ['notify']),
+      getCaptchaResponse (res) {
+        this.captchaResponse = res
+      },
+      reset () {
+        window['grecaptcha'].reset()
+        this.captchaResponse = ''
+      },
       validateBeforeSubmit () {
         this.$v.$touch()
-        if (this.$v.$invalid) return
+        if (this.$v.$invalid || !this.captchaResponse) return
         this.submitForm()
       },
-      submitForm () {
-        console.log('Submitted data:', { ...this.$data })
+      async submitForm () {
+        try {
+          await this.$store.dispatch('auth/register', getUser(this.$data))
+          this.notify({ msg: 'You have been registered and logged in.', type: 'info' })
+          this.$router.push('/home')
+        } catch (e) {
+          this.reset()
+          this.notify({ msg: 'You have failed to register. Try again with another email address.', type: 'danger' })
+        }
       }
     }
   }

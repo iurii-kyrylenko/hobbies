@@ -21,6 +21,11 @@ const actions = {
     const { data } = await axios.post(endpoint, user)
     commit('setToken', data.token)
   },
+  async register ({ commit }, user) {
+    const endpoint = config.apiUrl + '/users/register'
+    const { data } = await axios.post(endpoint, user)
+    commit('setToken', data.token)
+  },
   logout ({ commit }) {
     commit('resetToken')
   }
