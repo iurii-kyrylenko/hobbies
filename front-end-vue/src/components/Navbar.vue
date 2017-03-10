@@ -45,7 +45,7 @@
         <li>
           <a>
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            Logged in as: <{{ currentUser.name }}>{{ currentUser.email }}
+            Logged in as: &lt;{{ currentUser.name }}&gt;{{ currentUser.email }}
           </a>
         </li>
 
@@ -62,15 +62,17 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
 
   export default {
     computed: {
       ...mapGetters('auth', ['isLoggedIn', 'currentUser'])
     },
     methods: {
+      ...mapMutations('notification', ['notify']),
       logout () {
         this.$store.dispatch('auth/logout')
+        this.notify({ msg: 'You have been logged out.', type: 'info' })
         this.$router.push('/home')
       }
     }

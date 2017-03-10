@@ -34,6 +34,7 @@
 
 <script>
   import vh, { email, password } from '@/helpers/validators'
+  import { mapMutations } from 'vuex'
 
   export default {
     data () {
@@ -51,6 +52,7 @@
       vmsgPassword () { return vh.vmsg(this.$v.password, password) }
     },
     methods: {
+      ...mapMutations('notification', ['notify']),
       validateBeforeSubmit () {
         this.$v.$touch()
         if (this.$v.$invalid) return
@@ -59,10 +61,10 @@
       async submitForm () {
         try {
           await this.$store.dispatch('auth/login', { ...this.$data })
-          console.log('OK')
+          this.notify({ msg: 'You have been looged in.', type: 'info' })
           this.$router.push('/home')
         } catch (e) {
-          console.log('ER')
+          this.notify({ msg: 'You have failed to log in. Try again with another credentials.', type: 'danger' })
         }
       }
     }
