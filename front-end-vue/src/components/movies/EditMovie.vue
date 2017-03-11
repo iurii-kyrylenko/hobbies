@@ -1,5 +1,5 @@
 <template>
   <div>
-  [ Movies ]
+    [ EditMovie ]
   </div>
 </template>
