@@ -34,11 +34,21 @@
         <slot></slot>
     </div>
 
+    <pager v-if="true"
+           :frame="8"
+           :pageCount="20"
+           :page="page"
+           @change="page = $event">
+    </pager>
+
   </div>
 </template>
 
 <script>
+  import Pager from './Pager'
+
   export default {
+    components: { Pager },
     props: [
       'searchPlaceholder',
       'addPrompt',
@@ -46,11 +56,12 @@
       'downloadPrompt',
       'uploadPrompt',
       'exportFileName'
-    ]
+    ],
+    data: () => ({ page: 5 })
   }
 </script>
 
-<style>
+<style scoped>
   /*
    * Vertical align text in table
    */
@@ -82,19 +93,6 @@
    */
   .my-search {
     margin-bottom: 18px;
-  }
-  /*
-   * Pager bar
-   */
-  .pagination {
-    margin-top: 0px;
-  }
-  .pagination > li > a, .pagination > li > a:hover {
-    color: #000;
-    padding: 8px 0 6px;
-    width: 32px;
-    height: 40px;
-    text-align: center;
   }
   /*
    * Table header
