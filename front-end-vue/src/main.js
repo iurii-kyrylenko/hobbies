@@ -5,12 +5,14 @@ import App from './App'
 import router from './router'
 import store from './store'
 import Vuelidate from 'vuelidate'
+import { formatDate } from './helpers/formatters'
 import 'bootstrap/dist/css/bootstrap.css'
 
 Vue.config.productionTip = false
 
 // plug-in registration
 Vue.use(Vuelidate)
+Vue.filter('date', formatDate)
 
 /* eslint-disable no-new */
 new Vue({

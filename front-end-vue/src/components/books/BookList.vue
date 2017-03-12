@@ -1,6 +1,7 @@
 <template>
   <div>
-    <item-list searchPlaceholder="Search for book title or author"
+    <item-list selector="books"
+               searchPlaceholder="Search for book title or author"
                addPrompt="Add Book"
                removeHeader="Removing Book"
                downloadPrompt="Download Books"
@@ -18,7 +19,23 @@
             </tr>
           </thead>
             <tbody>
-           </tbody>
+              <tr v-for="book in books">
+                <td>
+                  <div class="input-group-btn">
+                      <router-link :to="book._id" append class="btn btn-default" title="Edit Book">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                      </router-link>
+                      <a @click.prevent="" class="btn btn-default" title="Remove Book">
+                        <i class="glyphicon glyphicon-remove"></i>
+                      </a>
+                  </div>
+                </td>
+                <td>{{ book.completed | date }}</td>
+                <td>{{ book.mode }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.title }}</td>
+              </tr>
+            </tbody>
         </table>
       </div>
     </item-list>
@@ -27,8 +44,12 @@
 
 <script>
   import ItemList from '../ItemList'
+  import { mapGetters } from 'vuex'
 
   export default {
-    components: { ItemList }
+    components: { ItemList },
+    computed: {
+      ...mapGetters('items', ['books'])
+    }
   }
 </script>

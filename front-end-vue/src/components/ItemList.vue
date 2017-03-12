@@ -3,15 +3,20 @@
 
     <div class="my-search input-group">
 
-        <input type="text" class="form-control" :placeholder="searchPlaceholder">
+        <input type="text" class="form-control"
+               ref="search"
+               :placeholder="searchPlaceholder"
+               :value="filter(selector)"
+               @keyup.enter="applySearch"
+               @keyup.esc="clearSearch">
 
         <div class="input-group-btn">
 
-          <a class="btn btn-default" title="Apply Search Filter">
+          <a @click="applySearch" class="btn btn-default" title="Apply Search Filter">
             <i class="glyphicon glyphicon-search"></i>
           </a>
 
-          <a class="btn btn-default" title="Clear Search Filter">
+          <a @click="clearSearch" class="btn btn-default" title="Clear Search Filter">
             <i class="glyphicon glyphicon-remove-sign"></i>
           </a>
 
@@ -36,9 +41,9 @@
 
     <pager v-if="true"
            :frame="8"
-           :pageCount="20"
-           :page="page"
-           @change="page = $event">
+           :pageCount="pageCount(selector)"
+           :page="page(selector)"
+           @change="changePage({ selector, page: $event })">
     </pager>
 
   </div>
@@ -46,10 +51,12 @@
 
 <script>
   import Pager from './Pager'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     components: { Pager },
     props: [
+      'selector',
       'searchPlaceholder',
       'addPrompt',
       'removeHeader',
@@ -57,11 +64,31 @@
       'uploadPrompt',
       'exportFileName'
     ],
-    data: () => ({ page: 5 })
+    computed: {
+      ...mapGetters('items', ['pageCount', 'page', 'filter'])
+    },
+    methods: {
+      ...mapActions('items', ['getItems', 'changePage', 'applyFilter']),
+      applySearch () {
+        this.applyFilter({
+          selector: this.selector,
+          filter: this.$refs.search.value.trim()
+        })
+      },
+      clearSearch () {
+        this.applyFilter({
+          selector: this.selector,
+          filter: ''
+        })
+      }
+    },
+    mounted () {
+      this.getItems(this.selector)
+    }
   }
 </script>
 
-<style scoped>
+<style>
   /*
    * Vertical align text in table
    */

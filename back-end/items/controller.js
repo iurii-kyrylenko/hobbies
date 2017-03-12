@@ -3,7 +3,7 @@ const getItems = (Model, req, res) => {
     const itemsPerPage = 5;
 
     const queryBuilder = (req) => {
-        const query = Model
+        let query = Model
             .where({ userId: req.user._id })
             .select(Model.projectionFields)
             .sort(Model.sortFields);
