@@ -24,7 +24,7 @@
             <i class="glyphicon glyphicon-plus"></i>
           </router-link>
 
-          <a class="btn btn-default" :title="downloadPrompt">
+          <a @click="download(selector)" class="btn btn-default" :title="downloadPrompt">
             <i class="glyphicon glyphicon-download"></i>
           </a>
 
@@ -61,14 +61,13 @@
       'addPrompt',
       'removeHeader',
       'downloadPrompt',
-      'uploadPrompt',
-      'exportFileName'
+      'uploadPrompt'
     ],
     computed: {
       ...mapGetters('items', ['pageCount', 'page', 'filter'])
     },
     methods: {
-      ...mapActions('items', ['getItems', 'changePage', 'applyFilter']),
+      ...mapActions('items', ['getItems', 'changePage', 'applyFilter', 'download']),
       applySearch () {
         this.applyFilter({
           selector: this.selector,

@@ -5,8 +5,7 @@
                addPrompt="Add Book"
                removeHeader="Removing Book"
                downloadPrompt="Download Books"
-               uploadPrompt="Upload Books"
-               exportFileName="books.json">
+               uploadPrompt="Upload Books">
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
