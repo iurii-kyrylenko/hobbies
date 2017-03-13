@@ -1,6 +1,7 @@
 <template>
   <div>
-    <item-list selector="books"
+    <item-list ref="itemList"
+               selector="books"
                searchPlaceholder="Search for book title or author"
                addPrompt="Add Book"
                removeHeader="Removing Book"
@@ -24,7 +25,7 @@
                       <router-link :to="book._id" append class="btn btn-default" title="Edit Book">
                         <i class="glyphicon glyphicon-pencil"></i>
                       </router-link>
-                      <a @click.prevent="" class="btn btn-default" title="Remove Book">
+                      <a @click="remove(book)" class="btn btn-default" title="Remove Book">
                         <i class="glyphicon glyphicon-remove"></i>
                       </a>
                   </div>
@@ -49,6 +50,11 @@
     components: { ItemList },
     computed: {
       ...mapGetters('items', ['books'])
+    },
+    methods: {
+      remove (book) {
+        this.$refs.itemList.openConfirm(book)
+      }
     }
   }
 </script>

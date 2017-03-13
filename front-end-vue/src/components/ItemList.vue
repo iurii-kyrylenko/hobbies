@@ -1,6 +1,13 @@
 <template>
   <div>
 
+    <modal ref="deleteConfirm" @close="closeConfirm">
+      <div slot="header"><h4>{{ removeHeader }}</h4></div>
+      <div slot="body">
+        Are you sure you want to remove <span class="badge">{{ itemTitle }}</span>?
+      </div>
+    </modal>
+
     <div class="my-search input-group">
 
         <input type="text" class="form-control"
@@ -55,10 +62,11 @@
 
 <script>
   import Pager from './Pager'
+  import Modal from './Modal'
   import { mapGetters, mapActions, mapMutations } from 'vuex'
 
   export default {
-    components: { Pager },
+    components: { Pager, Modal },
     props: [
       'selector',
       'searchPlaceholder',
@@ -67,11 +75,13 @@
       'downloadPrompt',
       'uploadPrompt'
     ],
+    data: () => ({ itemId: '', itemTitle: '' }),
     computed: {
       ...mapGetters('items', ['pageCount', 'page', 'filter'])
     },
     methods: {
-      ...mapActions('items', ['getItems', 'changePage', 'applyFilter', 'download', 'upload']),
+      ...mapActions('items',
+        ['getItems', 'changePage', 'applyFilter', 'download', 'upload', 'delete']),
       ...mapMutations('notification', ['notify']),
       applySearch () {
         this.applyFilter({
@@ -90,11 +100,25 @@
         if (!files.length) return
         try {
           await this.upload({ selector: this.selector, file: files[0] })
-          this.notify({ msg: 'Items have been uploaded :-)', type: 'info' })
+          this.notify({ msg: 'Items have been uploaded :)', type: 'info' })
         } catch (e) {
-          this.notify({ msg: 'Something went wrong when uploading items :-(', type: 'danger' })
+          this.notify({ msg: 'Something went wrong when uploading items :(', type: 'danger' })
         } finally {
           this.$refs.uploadForm.reset()
+        }
+      },
+      openConfirm ({ _id, title }) {
+        this.itemId = _id
+        this.itemTitle = title
+        this.$refs.deleteConfirm.open()
+      },
+      async closeConfirm (result) {
+        if (!result) return
+        try {
+          await this.delete({ selector: this.selector, id: this.itemId })
+          this.notify({ msg: 'An item has been removed :)', type: 'info' })
+        } catch (e) {
+          this.notify({ msg: 'Something went wrong when removing an item :(', type: 'danger' })
         }
       }
     },

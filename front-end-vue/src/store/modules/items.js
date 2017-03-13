@@ -101,6 +101,13 @@ const actions = {
     const headers = { Authorization: 'Bearer ' + rootState.auth.token }
     await uploadRequest(endpoint, file, headers)
     dispatch('applyFilter', { selector, filter: '' })
+  },
+
+  async delete ({ rootState, dispatch }, { selector, id }) {
+    const endpoint = `${config.apiUrl}/${selector}/${id}`
+    const headers = { Authorization: 'Bearer ' + rootState.auth.token }
+    await axios.delete(endpoint, { headers })
+    dispatch('changePage', { selector, page: 1 })
   }
 }
 
