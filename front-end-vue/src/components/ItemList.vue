@@ -35,8 +35,12 @@
         </div>
     </div>
 
+    <form ref="uploadForm">
+      <input type="file" id="file" @change="uploadChange">
+    </form>
+
     <div class="panel panel-default">
-        <slot></slot>
+      <slot></slot>
     </div>
 
     <pager v-if="true"
@@ -51,7 +55,7 @@
 
 <script>
   import Pager from './Pager'
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapGetters, mapActions, mapMutations } from 'vuex'
 
   export default {
     components: { Pager },
@@ -67,7 +71,8 @@
       ...mapGetters('items', ['pageCount', 'page', 'filter'])
     },
     methods: {
-      ...mapActions('items', ['getItems', 'changePage', 'applyFilter', 'download']),
+      ...mapActions('items', ['getItems', 'changePage', 'applyFilter', 'download', 'upload']),
+      ...mapMutations('notification', ['notify']),
       applySearch () {
         this.applyFilter({
           selector: this.selector,
@@ -79,6 +84,18 @@
           selector: this.selector,
           filter: ''
         })
+      },
+      async uploadChange (event) {
+        const files = event.target.files
+        if (!files.length) return
+        try {
+          await this.upload({ selector: this.selector, file: files[0] })
+          this.notify({ msg: 'Items have been uploaded :-)', type: 'info' })
+        } catch (e) {
+          this.notify({ msg: 'Something went wrong when uploading items :-(', type: 'danger' })
+        } finally {
+          this.$refs.uploadForm.reset()
+        }
       }
     },
     mounted () {

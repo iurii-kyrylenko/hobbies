@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from '@/helpers/config'
 import { saveAs } from 'file-saver/fileSaver'
+import { uploadRequest } from '@/helpers/upload'
 
 const state = {
   books: {
@@ -93,6 +94,13 @@ const actions = {
       [JSON.stringify(data.items, replaceForDownload, 1)],
       { type: 'application/json' })
     saveAs(blob, selector + '.json')
+  },
+
+  async upload ({ rootState, dispatch }, { selector, file }) {
+    const endpoint = `${config.apiUrl}/${selector}/upload`
+    const headers = { Authorization: 'Bearer ' + rootState.auth.token }
+    await uploadRequest(endpoint, file, headers)
+    dispatch('applyFilter', { selector, filter: '' })
   }
 }
 
