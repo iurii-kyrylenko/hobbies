@@ -46,8 +46,8 @@ const mutations = {
 
 const httpGetItems = async (rootState, selector, params) => {
   const endpoint = config.apiUrl + '/' + selector
-  const authHeader = { Authorization: 'Bearer ' + rootState.auth.token }
-  const { data } = await axios.get(endpoint, { headers: authHeader, params })
+  const headers = { Authorization: 'Bearer ' + rootState.auth.token }
+  const { data } = await axios.get(endpoint, { headers, params })
   return data
 }
 
@@ -101,14 +101,28 @@ const actions = {
     const endpoint = `${config.apiUrl}/${selector}/upload`
     const headers = { Authorization: 'Bearer ' + rootState.auth.token }
     await uploadRequest(endpoint, file, headers)
-    dispatch('applyFilter', { selector, filter: '' })
+    return dispatch('applyFilter', { selector, filter: '' })
   },
 
   async delete ({ rootState, dispatch }, { selector, id }) {
     const endpoint = `${config.apiUrl}/${selector}/${id}`
     const headers = { Authorization: 'Bearer ' + rootState.auth.token }
     await axios.delete(endpoint, { headers })
-    dispatch('changePage', { selector, page: 1 })
+    return dispatch('changePage', { selector, page: 1 })
+  },
+
+  async create ({ rootState, dispatch }, { selector, item }) {
+    const endpoint = config.apiUrl + '/' + selector
+    const headers = { Authorization: 'Bearer ' + rootState.auth.token }
+    await axios.post(endpoint, item, { headers })
+    return dispatch('changePage', { selector, page: 1 })
+  },
+
+  async modify ({ rootState, dispatch }, { selector, item, id }) {
+    const endpoint = `${config.apiUrl}/${selector}/${id}`
+    const headers = { Authorization: 'Bearer ' + rootState.auth.token }
+    await axios.put(endpoint, item, { headers })
+    return dispatch('changePage', { selector, page: 1 })
   }
 }
 

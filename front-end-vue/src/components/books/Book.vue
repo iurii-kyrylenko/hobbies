@@ -30,9 +30,9 @@
             <div class="form-group" :class="{ 'has-error': $v.mode.$error }">
                 <label class="control-label" for="mode">Book type</label>
                 <select id="mode"
-                       v-model="mode"
-                       class="form-control">
-                  <option disabled value="" style="opacity:0.5">Please select one...</option>
+                        v-model="mode"
+                        class="form-control">
+                  <option disabled value="">Please select one...</option>
                   <option value="r">Regular book</option>
                   <option value="a">Audio book</option>
                   <option value="r-a">Both: Regular and Audio</option>
@@ -58,7 +58,7 @@
 
 <script>
   import vh, { bookTitle, author, mode, completed } from '@/helpers/validators'
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   import DateInput from '@/components/DateInput'
 
   export default {
@@ -87,14 +87,30 @@
     },
     methods: {
       ...mapMutations('notification', ['notify']),
+      ...mapActions('items', ['create', 'modify']),
       validateBeforeSubmit () {
         this.$v.$touch()
         if (this.$v.$invalid) return
         this.submitForm()
       },
-      submitForm () {
-        // to do
-        console.log('submitted data:', { ...this.$data })
+      async submitForm () {
+        if (this.id) {
+          try {
+            await this.modify({ selector: 'books', item: { ...this.$data }, id: this.id })
+            this.$router.push('/books')
+            this.notify({ msg: 'A book has been modified :)', type: 'info' })
+          } catch (e) {
+            this.notify({ msg: 'Something went wrong when modifying a book :(', type: 'danger' })
+          }
+        } else {
+          try {
+            await this.create({ selector: 'books', item: { ...this.$data } })
+            this.$router.push('/books')
+            this.notify({ msg: 'New book has been added :)', type: 'info' })
+          } catch (e) {
+            this.notify({ msg: 'Something went wrong when adding new book :(', type: 'danger' })
+          }
+        }
       }
     },
     created () {
