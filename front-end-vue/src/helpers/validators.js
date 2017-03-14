@@ -50,6 +50,33 @@ export const confirmation = [
   }
 ]
 
+export const bookTitle = [
+  {
+    rule: required,
+    msg: 'Book title is required'
+  }
+]
+
+export const author = [
+  {
+    rule: required,
+    msg: 'Author is required'
+  }
+]
+
+export const mode = [
+  {
+    rule: required,
+    msg: 'Book type is required'
+  }
+]
+
+export const completed = [
+  {
+    rule: required
+  }
+]
+
 const vrules = (vdata) => {
   return vdata.reduce((acc, cur, i) => {
     acc[i] = cur.rule

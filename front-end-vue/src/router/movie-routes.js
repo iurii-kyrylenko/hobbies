@@ -1,7 +1,6 @@
-import Movies from '@/components/movies'
+import Movies from '@/components/movies/Movies'
 import MovieList from '@/components/movies/MovieList'
-import NewMovie from '@/components/movies/NewMovie'
-import EditMovie from '@/components/movies/EditMovie'
+import Movie from '@/components/movies/Movie'
 
 export default {
   path: '/movies',
@@ -13,11 +12,12 @@ export default {
     },
     {
       path: 'new',
-      component: NewMovie
+      component: Movie
     },
     {
       path: ':id',
-      component: EditMovie
+      component: Movie,
+      props: true
     }
   ]
 }

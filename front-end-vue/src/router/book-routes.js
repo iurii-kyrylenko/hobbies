@@ -1,7 +1,6 @@
-import Books from '@/components/books'
+import Books from '@/components/books/Books'
 import BookList from '@/components/books/BookList'
-import NewBook from '@/components/books/NewBook'
-import EditBook from '@/components/books/EditBook'
+import Book from '@/components/books/Book'
 
 export default {
   path: '/books',
@@ -13,11 +12,12 @@ export default {
     },
     {
       path: 'new',
-      component: NewBook
+      component: Book
     },
     {
       path: ':id',
-      component: EditBook
+      component: Book,
+      props: true
     }
   ]
 }

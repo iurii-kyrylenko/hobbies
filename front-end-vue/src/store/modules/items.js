@@ -3,19 +3,16 @@ import config from '@/helpers/config'
 import { saveAs } from 'file-saver/fileSaver'
 import { uploadRequest } from '@/helpers/upload'
 
+const hobby = {
+  items: [],
+  page: 1,
+  pageCount: 0,
+  filter: ''
+}
+
 const state = {
-  books: {
-    items: [],
-    page: 1,
-    pageCount: 0,
-    filter: ''
-  },
-  movies: {
-    items: [],
-    page: 1,
-    pageCount: 0,
-    filter: ''
-  }
+  ...{ books: hobby },
+  ...{ movies: hobby }
 }
 
 const getters = {
@@ -23,7 +20,11 @@ const getters = {
   movies: state => state.movies.items,
   page: state => selector => state[selector].page,
   pageCount: state => selector => state[selector].pageCount,
-  filter: state => selector => state[selector].filter
+  filter: state => selector => state[selector].filter,
+  item: state => selector => id => {
+    const res = state[selector].items.filter(({ _id }) => _id === id)
+    return !res.length ? null : res[0]
+  }
 }
 
 const mutations = {
