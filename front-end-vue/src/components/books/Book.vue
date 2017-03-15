@@ -10,34 +10,34 @@
         <form @submit.prevent="validateBeforeSubmit">
 
             <div class="form-group" :class="{ 'has-error': $v.title.$error }">
-                <label class="control-label" for="title">Title</label>
-                <input id="title"
-                       v-model.trim="title"
-                       @input="$v.title.$touch()"
-                       class="form-control" type="text" placeholder="Book title">
-                <p class="text-danger" v-show="$v.title.$error">{{ vmsgTitle }}</p>
+              <label class="control-label" for="title">Title</label>
+              <input id="title"
+                     v-model.trim="title"
+                     @input="$v.title.$touch()"
+                     class="form-control" type="text" placeholder="Book title">
+              <p class="text-danger" v-show="$v.title.$error">{{ vmsgTitle }}</p>
             </div>
 
             <div class="form-group" :class="{ 'has-error': $v.author.$error }">
-                <label class="control-label" for="author">Author</label>
-                <input id="author"
-                       v-model.trim="author"
-                       @input="$v.author.$touch()"
-                       class="form-control" type="text" placeholder="Author">
-                <p class="text-danger" v-show="$v.author.$error">{{ vmsgAuthor }}</p>
+              <label class="control-label" for="author">Author</label>
+              <input id="author"
+                     v-model.trim="author"
+                     @input="$v.author.$touch()"
+                     class="form-control" type="text" placeholder="Author">
+              <p class="text-danger" v-show="$v.author.$error">{{ vmsgAuthor }}</p>
             </div>
 
             <div class="form-group" :class="{ 'has-error': $v.mode.$error }">
-                <label class="control-label" for="mode">Book type</label>
-                <select id="mode"
-                        v-model="mode"
-                        class="form-control">
-                  <option disabled value="">Please select one...</option>
-                  <option value="r">Regular book</option>
-                  <option value="a">Audio book</option>
-                  <option value="r-a">Both: Regular and Audio</option>
-                </select>
-                <p class="text-danger" v-show="$v.mode.$error">{{ vmsgMode }}</p>
+              <label class="control-label" for="mode">Book type</label>
+              <select id="mode"
+                      v-model="mode"
+                      class="form-control">
+                <option disabled value="">Please select one...</option>
+                <option value="r">Regular book</option>
+                <option value="a">Audio book</option>
+                <option value="r-a">Both: Regular and Audio</option>
+              </select>
+              <p class="text-danger" v-show="$v.mode.$error">{{ vmsgMode }}</p>
             </div>
 
             <div class="form-group" :class="{ 'has-error': $v.completed.$error }">

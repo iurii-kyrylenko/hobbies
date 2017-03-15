@@ -1,10 +1,12 @@
-import Books from '@/components/books/Books'
 import BookList from '@/components/books/BookList'
 import Book from '@/components/books/Book'
 
 export default {
   path: '/books',
-  component: Books,
+  component: {
+    name: 'Books',
+    template: '<router-view />'
+  },
   children: [
     {
       path: '',

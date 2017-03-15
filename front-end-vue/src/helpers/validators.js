@@ -71,6 +71,20 @@ export const mode = [
   }
 ]
 
+export const movieTitle = [
+  {
+    rule: required,
+    msg: 'Movie title is required'
+  }
+]
+
+export const year = [
+  {
+    rule: required,
+    msg: 'Year is required'
+  }
+]
+
 export const completed = [
   {
     rule: required
