@@ -2,7 +2,7 @@
   <div>
     <slot></slot>
     <span class="label" :class="{ 'label-my-success': value, 'label-my-error': !value }">
-      {{ formatDate1 }}
+      {{ value | date }}
     </span>
     <input ref="textInput" :id="id" @input="updateDate($event.target.value)"
            placeholder="Enter date in free format..." class="form-control">
@@ -10,30 +10,13 @@
 </template>
 
 <script>
+  import { formatDate } from '@/helpers/formatters'
   export default {
     props: ['value', 'id'],
-    computed: {
-      formatDate () {
-        const months = [
-          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ]
-        const year = this.value.getFullYear()
-        const month = this.value.getMonth()
-        const day = this.value.getDate()
-        return `${months[month]} ${day}, ${year}`
-      },
-      formatDate1 () {
-        if (!this.value) return 'Invalid Date'
-        return this.formatDate
-      },
-      formatDate2 () {
-        if (!this.value) return null
-        return this.formatDate
-      }
-    },
     mounted () {
-      this.$refs.textInput.value = this.formatDate2
+      this.$refs.textInput.value = this.value
+        ? formatDate(this.value)
+        : null
     },
     methods: {
       updateDate (value) {
