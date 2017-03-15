@@ -3,16 +3,19 @@ import config from '@/helpers/config'
 import { saveAs } from 'file-saver/fileSaver'
 import { uploadRequest } from '@/helpers/upload'
 
-const hobby = {
-  items: [],
-  page: 1,
-  pageCount: 0,
-  filter: ''
-}
-
 const state = {
-  ...{ books: hobby },
-  ...{ movies: hobby }
+  books: {
+    items: [],
+    page: 1,
+    pageCount: 0,
+    filter: ''
+  },
+  movies: {
+    items: [],
+    page: 1,
+    pageCount: 0,
+    filter: ''
+  }
 }
 
 const getters = {
