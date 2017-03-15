@@ -43,6 +43,7 @@ const getters = {
     return payload.exp > (Date.now() / 1000)
   },
   currentUser (state) {
+    if (!state.token) return {}
     const { name, email } = getPayload(state)
     return { name, email }
   }
