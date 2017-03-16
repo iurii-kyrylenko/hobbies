@@ -1,5 +1,5 @@
-export const formatDate = (date) => {
-  if (!date) return 'Invalid date'
+export const formatDate = (date, error = 'Invalid date') => {
+  if (!date) return error
 
   const months = [
     'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
