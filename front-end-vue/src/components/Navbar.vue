@@ -10,19 +10,24 @@
       </div>
 
       <ul v-if="isLoggedIn" class="nav navbar-nav">
-        <router-link tag="li" active-class="active" to="/books">
-          <a>
-            <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-            &nbsp;Books
-          </a>
-        </router-link>
+        <li :class="{  active: isPersonalActive }">
+          <a href="#" @click.prevent="toggle">Personal <span class="caret"></span></a>
+          <ul :class="{ 'dropdown-menu': toggled, 'drop-hide': !toggled }">
+            <router-link @click.native="toggle" tag="li" active-class="active" to="/books">
+              <a>
+                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                &nbsp;Books
+              </a>
+            </router-link>
 
-        <router-link tag="li" active-class="active" to="/movies">
-          <a>
-            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
-            &nbsp;Movies
-          </a>
-        </router-link>
+            <router-link @click.native="toggle" tag="li" active-class="active" to="/movies">
+              <a>
+                <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                &nbsp;Movies
+              </a>
+            </router-link>
+          </ul>
+        </li>
       </ul>
 
       <ul v-if="!isLoggedIn" class="nav navbar-nav navbar-right">
@@ -66,9 +71,14 @@
 
   export default {
     computed: {
+      isPersonalActive () {
+        return this.$route.path.includes('/books') || this.$route.path.includes('/movies')
+      },
       ...mapGetters('auth', ['isLoggedIn', 'currentUser'])
     },
+    data: () => ({ toggled: false }),
     methods: {
+      toggle () { this.toggled = !this.toggled },
       ...mapMutations('notification', ['notify']),
       logout () {
         this.$store.dispatch('auth/logout')
@@ -80,6 +90,12 @@
 </script>
 
 <style>
+  .dropdown-menu {
+    display: block !important;
+  }
+  .drop-hide {
+    display: none;
+  }
   a.active {
     color: #000 !important;
     text-shadow: 2px 2px #ccc;

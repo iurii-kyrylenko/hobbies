@@ -1,12 +1,10 @@
 import MovieList from '@/components/movies/MovieList'
+import Movies from '@/components/movies/Movies'
 import Movie from '@/components/movies/Movie'
 
 export default {
   path: '/movies',
-  component: {
-    name: 'Movies',
-    template: '<router-view />'
-  },
+  component: Movies,
   children: [
     {
       path: '',
