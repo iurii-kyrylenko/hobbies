@@ -9,26 +9,12 @@
         </router-link>
       </div>
 
-      <ul v-if="isLoggedIn" class="nav navbar-nav">
-        <li :class="{  active: isPersonalActive }">
-          <a href="#" @click.prevent="toggle">Personal <span class="caret"></span></a>
-          <ul :class="{ 'dropdown-menu': toggled, 'drop-hide': !toggled }">
-            <router-link @click.native="toggle" tag="li" active-class="active" to="/books">
-              <a>
-                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                &nbsp;Books
-              </a>
-            </router-link>
+      <dropdown-menu header="Community" icon="glyphicon-globe"
+                     :content="[{title: 'People', icon: 'glyphicon-search', path: '/people'}]" />
 
-            <router-link @click.native="toggle" tag="li" active-class="active" to="/movies">
-              <a>
-                <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
-                &nbsp;Movies
-              </a>
-            </router-link>
-          </ul>
-        </li>
-      </ul>
+      <dropdown-menu v-if="isLoggedIn" v-once
+                     header="Personal" icon="glyphicon-sunglasses"
+                     :content="personal" />
 
       <ul v-if="!isLoggedIn" class="nav navbar-nav navbar-right">
         <router-link tag="li" active-class="active" to="/login">
@@ -68,17 +54,33 @@
 
 <script>
   import { mapGetters, mapMutations } from 'vuex'
+  import DropdownMenu from './DropdownMenu'
 
   export default {
+    components: { DropdownMenu },
+    data: () => ({
+      personal: [
+        {
+          title: 'My books',
+          path: '/books',
+          icon: 'glyphicon-book'
+        },
+        {
+          title: 'My movies',
+          path: '/movies',
+          icon: 'glyphicon-film'
+        },
+        {
+          title: 'My settings',
+          path: '/settings',
+          icon: 'glyphicon-cog'
+        }
+      ]
+    }),
     computed: {
-      isPersonalActive () {
-        return this.$route.path.includes('/books') || this.$route.path.includes('/movies')
-      },
       ...mapGetters('auth', ['isLoggedIn', 'currentUser'])
     },
-    data: () => ({ toggled: false }),
     methods: {
-      toggle () { this.toggled = !this.toggled },
       ...mapMutations('notification', ['notify']),
       logout () {
         this.$store.dispatch('auth/logout')
@@ -90,12 +92,6 @@
 </script>
 
 <style>
-  .dropdown-menu {
-    display: block !important;
-  }
-  .drop-hide {
-    display: none;
-  }
   a.active {
     color: #000 !important;
     text-shadow: 2px 2px #ccc;

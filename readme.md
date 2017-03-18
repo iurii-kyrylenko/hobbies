@@ -2,7 +2,7 @@
 
 HOBBIES is a web application for keeping track of books you have read/listened and movies you have watched.
 
-After logging in you will be able to:
+After logging in you are able to:
 
 * Add an item (book or movie) to the list.
 * Modify an existing item.
@@ -11,7 +11,9 @@ After logging in you will be able to:
 * Download items as a file in JSON format.
 * Upload items from JSON file.
 
-Your data is not accessible to other users.
+Soon you will have the possibilities to:
+* Share data with other people.
+* Change you personal settings.
 
 ## Technologies
 Node.js, Express, MongoDB, JWT, Angular 2, Vue.js, webpack
