@@ -10,9 +10,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const usersRouter = require('./users/router');
-const itemsRouterFactory = require('./items/router');
-const booksRouter = itemsRouterFactory('Book');
-const moviesRouter = itemsRouterFactory('Movie');
+const itemsRouter = require('./items/router');
+
 const server = express();
 
 server.use(express.static(path.join(__dirname, 'public')));
@@ -26,8 +25,10 @@ if(process.env.ALLOW_CORS === 'yes') {
 server.use(passport.initialize());
 
 server.use('/api/users', usersRouter);
-server.use('/api/books', booksRouter);
-server.use('/api/movies', moviesRouter);
+server.use('/api/books', itemsRouter.personal('Book'));
+server.use('/api/movies', itemsRouter.personal('Movie'));
+server.use('/api/shared/books', itemsRouter.shared('Book'));
+server.use('/api/shared/movies', itemsRouter.shared('Movie'));
 
 server.route('/*').get(function(req, res) {
     return res.sendFile(path.join(__dirname, 'public/index.html'));

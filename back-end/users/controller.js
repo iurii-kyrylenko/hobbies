@@ -86,9 +86,21 @@ const checkUser = (req, res, next) => {
     });
 };
 
+// Use this middleware in the public routes.
+// It gets user's id from request query and places it in request's body
+const checkSharedData = (req, res, next) => {
+    // To do: check user settings against the resourse name
+    // and decline request if resourse is not shared
+    if (req.query.user) {
+        req.user = { _id: req.query.user }
+    }
+    next();
+};
+
 module.exports = {
     validateCaptchaResponse,
     register,
     login,
-    checkUser
+    checkUser,
+    checkSharedData
 };

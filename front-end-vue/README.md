@@ -2,6 +2,19 @@
 
 > A front-end part for the hobbies project, implemented in Vue.js
 
+## Endpoints
+
+| Path                          | Method           | Auth  | Notes |
+| :---------------------------- |:-----------------| :----:|:------|
+| /users/login                  | post             |       |
+| /users/register               | post             |       |
+| /users                        | get              |       |
+| /shared/books, /shared/movies | get              |       | user id is placed in the query
+| /books, /movies               | get, post        | +     |
+| /books/id, /movies/id         | get, put, delete | +     |
+| /books/upload, /movies/upload | post             | +     |
+| /settings                     | get, put         | +     |
+
 ## Build Setup
 
 ``` bash

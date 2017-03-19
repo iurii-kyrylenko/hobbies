@@ -72,7 +72,7 @@
         },
         {
           title: 'My settings',
-          path: '/settings',
+          path: '/profile',
           icon: 'glyphicon-cog'
         }
       ]
