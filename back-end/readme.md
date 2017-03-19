@@ -1,12 +1,26 @@
 ## REST API, mongoDB, hosting SPA
 
-build/run:
+#### Endpoints
+
+| Path                          | Method           | Auth  | Notes
+|:------------------------------|:-----------------|:-----:|:------
+| /users/login                  | post             |       |
+| /users/register               | post             |       |
+| /users                        | get              |       |
+| /shared/books, /shared/movies | get              |       | user id in the query
+| /books, /movies               | get, post        | +     |
+| /books/id, /movies/id         | get, put, delete | +     |
+| /books/upload, /movies/upload | post             | +     |
+| /settings                     | get, put         | +     |
+
+
+##### build/run:
 ```
     install: npm i
     start server: heroku local
 ```
 
-JSON file to upload books:
+#### JSON file to upload books:
 ```
 [
     { "title": "t-0001", "author": "a-0001", "completed": "2016-01-01", "mode": "r" },
@@ -15,7 +29,7 @@ JSON file to upload books:
 ]
 ```
 
-JSON file to upload movies:
+#### JSON file to upload movies:
 ```
 [
     { "title": "t-0001", "year": "2001", "completed": "2016-01-01", "notes": "note-001" },
@@ -24,7 +38,7 @@ JSON file to upload movies:
 ]
 ```
 
-local configuration (.env file):
+#### local configuration (.env file):
 ```
     CONNECTION_STRING = <connection string to mongodb>
     JWT_SECRET = <JWT secret key>
@@ -34,7 +48,7 @@ local configuration (.env file):
     PORT = 3000
 ```
 
-remote configuration (process.env variables):
+#### remote configuration (process.env variables):
 ```
     CONNECTION_STRING = <connection string to mongodb>
     JWT_SECRET = <JWT secret key>
@@ -43,7 +57,7 @@ remote configuration (process.env variables):
     ALLOW_CORS = no
 ```
 
-deploy back-end to heroku (after building front-end):
+#### deploy back-end to heroku (after building front-end):
 ```
     cd ../
     git subtree push --prefix back-end heroku master
