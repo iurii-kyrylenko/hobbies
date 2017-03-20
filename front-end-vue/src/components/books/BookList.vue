@@ -1,7 +1,6 @@
 <template>
   <div>
     <item-list ref="itemList"
-               selector="books"
                searchPlaceholder="Search for book title or author"
                addPrompt="Add Book"
                removeHeader="Removing Book"
@@ -19,7 +18,7 @@
             </tr>
           </thead>
             <tbody>
-              <tr v-for="book in books">
+              <tr v-for="book in items">
                 <td>
                   <div class="input-group-btn">
                       <router-link :to="book._id" append class="btn btn-default" title="Edit Book">
@@ -49,7 +48,7 @@
   export default {
     components: { ItemList },
     computed: {
-      ...mapGetters('items', ['books'])
+      ...mapGetters('items', ['items'])
     },
     methods: {
       remove (book) {

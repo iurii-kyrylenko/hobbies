@@ -1,7 +1,6 @@
 <template>
   <div>
     <item-list ref="itemList"
-               selector="movies"
                searchPlaceholder="Search for movie title, year of production or notes"
                addPrompt="Add Movie"
                removeHeader="Removing Movie"
@@ -19,7 +18,7 @@
             </tr>
           </thead>
             <tbody>
-              <tr v-for="movie in movies">
+              <tr v-for="movie in items">
                 <td>
                   <div class="input-group-btn">
                       <router-link :to="movie._id" append class="btn btn-default" title="Edit Movie">
@@ -49,7 +48,7 @@
   export default {
     components: { ItemList },
     computed: {
-      ...mapGetters('items', ['movies'])
+      ...mapGetters('items', ['items'])
     },
     methods: {
       remove (movie) {

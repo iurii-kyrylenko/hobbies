@@ -50,6 +50,7 @@ router.beforeEach((to, from, next) => {
       break
     case '/books':
     case '/movies':
+    case '/profile':
       next(isLoggedIn)
       break
     default:

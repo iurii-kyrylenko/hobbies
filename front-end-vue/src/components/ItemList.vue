@@ -13,7 +13,7 @@
         <input type="text" class="form-control"
                ref="search"
                :placeholder="searchPlaceholder"
-               :value="filter(selector)"
+               :value="filter"
                @keyup.enter="applySearch"
                @keyup.esc="clearSearch">
 
@@ -31,7 +31,7 @@
             <i class="glyphicon glyphicon-plus"></i>
           </router-link>
 
-          <a @click="download(selector)" class="btn btn-default" :title="downloadPrompt">
+          <a @click="download" class="btn btn-default" :title="downloadPrompt">
             <i class="glyphicon glyphicon-download"></i>
           </a>
 
@@ -52,9 +52,9 @@
 
     <pager v-if="true"
            :frame="8"
-           :pageCount="pageCount(selector)"
-           :page="page(selector)"
-           @change="changePage({ selector, page: $event })">
+           :pageCount="pageCount"
+           :page="page"
+           @change="changePage">
     </pager>
 
   </div>
@@ -68,7 +68,6 @@
   export default {
     components: { Pager, Modal },
     props: [
-      'selector',
       'searchPlaceholder',
       'addPrompt',
       'removeHeader',
@@ -84,22 +83,16 @@
         ['getItems', 'changePage', 'applyFilter', 'download', 'upload', 'delete']),
       ...mapMutations('notification', ['notify']),
       applySearch () {
-        this.applyFilter({
-          selector: this.selector,
-          filter: this.$refs.search.value.trim()
-        })
+        this.applyFilter(this.$refs.search.value.trim())
       },
       clearSearch () {
-        this.applyFilter({
-          selector: this.selector,
-          filter: ''
-        })
+        this.applyFilter('')
       },
       async uploadChange (event) {
         const files = event.target.files
         if (!files.length) return
         try {
-          await this.upload({ selector: this.selector, file: files[0] })
+          await this.upload(files[0])
           this.notify({ msg: 'Items have been uploaded :)', type: 'info' })
         } catch (e) {
           this.notify({ msg: 'Something went wrong when uploading items :(', type: 'danger' })
@@ -115,7 +108,7 @@
       async closeConfirm (result) {
         if (!result) return
         try {
-          await this.delete({ selector: this.selector, id: this.itemId })
+          await this.delete(this.itemId)
           this.notify({ msg: 'An item has been removed :)', type: 'info' })
         } catch (e) {
           this.notify({ msg: 'Something went wrong when removing an item :(', type: 'danger' })
@@ -123,7 +116,7 @@
       }
     },
     mounted () {
-      this.getItems(this.selector)
+      this.getItems()
     }
   }
 </script>

@@ -96,7 +96,7 @@
       async submitForm () {
         if (this.id) {
           try {
-            await this.modify({ selector: 'books', item: { ...this.$data }, id: this.id })
+            await this.modify({ item: { ...this.$data }, id: this.id })
             this.$router.push('/books')
             this.notify({ msg: 'A book has been modified :)', type: 'info' })
           } catch (e) {
@@ -104,7 +104,7 @@
           }
         } else {
           try {
-            await this.create({ selector: 'books', item: { ...this.$data } })
+            await this.create({ ...this.$data })
             this.$router.push('/books')
             this.notify({ msg: 'New book has been added :)', type: 'info' })
           } catch (e) {
@@ -116,7 +116,7 @@
     created () {
       // New book
       if (!this.id) return
-      const book = this.item('books')(this.id)
+      const book = this.item(this.id)
       // A book has not been selected for editing
       if (!book) {
         this.$router.push('/books')

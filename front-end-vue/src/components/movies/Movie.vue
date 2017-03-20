@@ -88,7 +88,7 @@
       async submitForm () {
         if (this.id) {
           try {
-            await this.modify({ selector: 'movies', item: { ...this.$data }, id: this.id })
+            await this.modify({ item: { ...this.$data }, id: this.id })
             this.$router.push('/movies')
             this.notify({ msg: 'A movie has been modified :)', type: 'info' })
           } catch (e) {
@@ -96,7 +96,7 @@
           }
         } else {
           try {
-            await this.create({ selector: 'movies', item: { ...this.$data } })
+            await this.create({ ...this.$data })
             this.$router.push('/movies')
             this.notify({ msg: 'New movie has been added :)', type: 'info' })
           } catch (e) {
@@ -108,7 +108,7 @@
     created () {
       // New movie
       if (!this.id) return
-      const movie = this.item('movies')(this.id)
+      const movie = this.item(this.id)
       // A movie has not been selected for editing
       if (!movie) {
         this.$router.push('/movies')

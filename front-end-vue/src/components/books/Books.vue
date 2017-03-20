@@ -8,7 +8,11 @@
   import { mapMutations } from 'vuex'
   export default {
     methods: {
+      ...mapMutations('items', ['select']),
       ...mapMutations('notification', ['setStatus'])
+    },
+    created () {
+      this.select('books')
     },
     mounted () {
       this.setStatus('My Books')

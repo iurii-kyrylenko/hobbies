@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver/fileSaver'
 import { uploadRequest } from '@/helpers/upload'
 
 const state = {
+  selector: 'shared',
   books: {
     items: [],
     page: 1,
@@ -15,40 +16,48 @@ const state = {
     page: 1,
     pageCount: 0,
     filter: ''
+  },
+  shared: {
+    items: [],
+    page: 1,
+    pageCount: 0,
+    filter: ''
   }
 }
 
 const getters = {
-  books: state => state.books.items,
-  movies: state => state.movies.items,
-  page: state => selector => state[selector].page,
-  pageCount: state => selector => state[selector].pageCount,
-  filter: state => selector => state[selector].filter,
-  item: state => selector => id => {
-    const res = state[selector].items.filter(({ _id }) => _id === id)
-    return !res.length ? null : res[0]
+  items: state => state[state.selector].items,
+  page: state => state[state.selector].page,
+  pageCount: state => state[state.selector].pageCount,
+  filter: state => state[state.selector].filter,
+  item: state => id => {
+    const res = state[state.selector].items.filter(({ _id }) => _id === id)
+    return res.length ? res[0] : null
   }
 }
 
 const mutations = {
-  setItems (state, { selector, data }) {
+  select (state, selector) {
+    state.selector = selector
+  },
+  setItems (state, { items, pages }) {
     // deserialize date
-    state[selector].items = data.items.map(item => {
+    state[state.selector].items = items.map(item => {
       item.completed = new Date(item.completed)
       return item
     })
-    state[selector].pageCount = data.pages
+    state[state.selector].pageCount = pages
   },
-  setPage (state, { selector, page }) {
-    state[selector].page = page
+  setPage (state, page) {
+    state[state.selector].page = page
   },
-  setFilter (state, { selector, filter }) {
-    state[selector].filter = filter
+  setFilter (state, filter) {
+    state[state.selector].filter = filter
   }
 }
 
-const httpGetItems = async (rootState, selector, params) => {
-  const endpoint = config.apiUrl + '/' + selector
+const httpGetItems = async (rootState, state, params) => {
+  const endpoint = config.apiUrl + '/' + state.selector
   const headers = { Authorization: 'Bearer ' + rootState.auth.token }
   const { data } = await axios.get(endpoint, { headers, params })
   return data
@@ -63,69 +72,69 @@ const replaceForDownload = (key, value) => {
 
 const actions = {
 
-  async getItems ({ state, rootState, commit }, selector) {
-    const data = await httpGetItems(rootState, selector, {
-      page: state[selector].page,
-      term: state[selector].filter
+  async getItems ({ state, rootState, commit }) {
+    const data = await httpGetItems(rootState, state, {
+      page: state[state.selector].page,
+      term: state[state.selector].filter
     })
-    commit('setItems', { selector, data })
+    commit('setItems', data)
   },
 
-  async changePage ({ state, rootState, commit }, { selector, page }) {
-    const data = await httpGetItems(rootState, selector, {
+  async changePage ({ state, rootState, commit }, page) {
+    const data = await httpGetItems(rootState, state, {
       page,
-      term: state[selector].filter
+      term: state[state.selector].filter
     })
-    commit('setPage', { selector, page })
-    commit('setItems', { selector, data })
+    commit('setPage', page)
+    commit('setItems', data)
   },
 
-  async applyFilter ({ state, rootState, commit }, { selector, filter }) {
-    const data = await httpGetItems(rootState, selector, {
+  async applyFilter ({ state, rootState, commit }, filter) {
+    const data = await httpGetItems(rootState, state, {
       page: 1,
       term: filter
     })
-    commit('setPage', { selector, page: 1 })
-    commit('setFilter', { selector, filter })
-    commit('setItems', { selector, data })
+    commit('setPage', 1)
+    commit('setFilter', filter)
+    commit('setItems', data)
   },
 
-  async download ({ rootState }, selector) {
-    const data = await httpGetItems(rootState, selector, {
-      term: state[selector].filter
+  async download ({ rootState, state }) {
+    const data = await httpGetItems(rootState, state, {
+      term: state[state.selector].filter
     })
     const blob = new Blob(
       [JSON.stringify(data.items, replaceForDownload, 1)],
       { type: 'application/json' })
-    saveAs(blob, selector + '.json')
+    saveAs(blob, state.selector + '.json')
   },
 
-  async upload ({ rootState, dispatch }, { selector, file }) {
-    const endpoint = `${config.apiUrl}/${selector}/upload`
+  async upload ({ rootState, state, dispatch }, file) {
+    const endpoint = `${config.apiUrl}/${state.selector}/upload`
     const headers = { Authorization: 'Bearer ' + rootState.auth.token }
     await uploadRequest(endpoint, file, headers)
-    return dispatch('applyFilter', { selector, filter: '' })
+    return dispatch('applyFilter', '')
   },
 
-  async delete ({ rootState, dispatch }, { selector, id }) {
-    const endpoint = `${config.apiUrl}/${selector}/${id}`
+  async delete ({ rootState, state, dispatch }, id) {
+    const endpoint = `${config.apiUrl}/${state.selector}/${id}`
     const headers = { Authorization: 'Bearer ' + rootState.auth.token }
     await axios.delete(endpoint, { headers })
-    return dispatch('changePage', { selector, page: 1 })
+    return dispatch('changePage', 1)
   },
 
-  async create ({ rootState, dispatch }, { selector, item }) {
-    const endpoint = config.apiUrl + '/' + selector
+  async create ({ rootState, state, dispatch }, item) {
+    const endpoint = config.apiUrl + '/' + state.selector
     const headers = { Authorization: 'Bearer ' + rootState.auth.token }
     await axios.post(endpoint, item, { headers })
-    return dispatch('changePage', { selector, page: 1 })
+    return dispatch('changePage', 1)
   },
 
-  async modify ({ rootState, dispatch }, { selector, item, id }) {
-    const endpoint = `${config.apiUrl}/${selector}/${id}`
+  async modify ({ rootState, state, dispatch }, { item, id }) {
+    const endpoint = `${config.apiUrl}/${state.selector}/${id}`
     const headers = { Authorization: 'Bearer ' + rootState.auth.token }
     await axios.put(endpoint, item, { headers })
-    return dispatch('changePage', { selector, page: 1 })
+    return dispatch('changePage', 1)
   }
 }
 
