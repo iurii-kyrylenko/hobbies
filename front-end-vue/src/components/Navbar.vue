@@ -9,12 +9,20 @@
         </router-link>
       </div>
 
-      <dropdown-menu header="Community" icon="glyphicon-globe"
-                     :content="[{title: 'People', icon: 'glyphicon-search', path: '/people'}]" />
+      <ul class="nav navbar-nav">
+        <router-link tag="li" active-class="active" to="/people">
+          <a>
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+            &nbsp;People
+          </a>
+        </router-link>
+      </ul>
 
       <dropdown-menu v-if="isLoggedIn" v-once
                      header="Personal" icon="glyphicon-sunglasses"
                      :content="personal" />
+
+      <p class="navbar-text"><b>{{ status }}</b></p>
 
       <ul v-if="!isLoggedIn" class="nav navbar-nav navbar-right">
         <router-link tag="li" active-class="active" to="/login">
@@ -78,7 +86,8 @@
       ]
     }),
     computed: {
-      ...mapGetters('auth', ['isLoggedIn', 'currentUser'])
+      ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+      ...mapGetters('notification', ['status'])
     },
     methods: {
       ...mapMutations('notification', ['notify']),

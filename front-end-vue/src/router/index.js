@@ -3,8 +3,8 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
-import People from '@/components/People'
 import UserSettings from '@/components/UserSettings'
+import peopleRoutes from './people-routes'
 import bookRoutes from './book-routes'
 import movieRoutes from './movie-routes'
 import Store from '@/store'
@@ -25,10 +25,7 @@ const router = new Router({
       path: '/login',
       component: Login
     },
-    {
-      path: '/people',
-      component: People
-    },
+    { ...peopleRoutes },
     {
       path: '/profile',
       component: UserSettings

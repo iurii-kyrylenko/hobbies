@@ -1,6 +1,7 @@
 const state = {
   msg: '',
-  type: ''
+  type: '',
+  status: ''
 }
 
 const mutations = {
@@ -11,12 +12,16 @@ const mutations = {
   remove (state) {
     state.msg = ''
     state.type = ''
+  },
+  setStatus (state, status) {
+    state.status = status
   }
 }
 
 const getters = {
   message: state => state.msg,
-  alertClass: state => 'alert-' + state.type
+  alertClass: state => 'alert-' + state.type,
+  status: status => state.status
 }
 
 export default {
