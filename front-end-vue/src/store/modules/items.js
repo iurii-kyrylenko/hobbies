@@ -4,7 +4,9 @@ import { saveAs } from 'file-saver/fileSaver'
 import { uploadRequest } from '@/helpers/upload'
 
 const state = {
+  hobby: 'books',
   selector: 'shared',
+  uid: '',
   books: {
     items: [],
     page: 1,
@@ -26,6 +28,7 @@ const state = {
 }
 
 const getters = {
+  my: state => !state.uid,
   items: state => state[state.selector].items,
   page: state => state[state.selector].page,
   pageCount: state => state[state.selector].pageCount,
@@ -37,8 +40,10 @@ const getters = {
 }
 
 const mutations = {
-  select (state, selector) {
-    state.selector = selector
+  select (state, { hobby, uid = '' }) {
+    state.hobby = hobby
+    state.uid = uid
+    state.selector = uid ? 'shared' : hobby
   },
   setItems (state, { items, pages }) {
     // deserialize date
@@ -57,8 +62,15 @@ const mutations = {
 }
 
 const httpGetItems = async (rootState, state, params) => {
-  const endpoint = config.apiUrl + '/' + state.selector
-  const headers = { Authorization: 'Bearer ' + rootState.auth.token }
+  const endpoint = state.uid
+    ? config.apiUrl + '/shared/' + state.hobby
+    : config.apiUrl + '/' + state.hobby
+  const headers = state.uid
+    ? {}
+    : { Authorization: 'Bearer ' + rootState.auth.token }
+  params = state.uid
+    ? { user: state.uid, ...params }
+    : params
   const { data } = await axios.get(endpoint, { headers, params })
   return data
 }
@@ -106,7 +118,7 @@ const actions = {
     const blob = new Blob(
       [JSON.stringify(data.items, replaceForDownload, 1)],
       { type: 'application/json' })
-    saveAs(blob, state.selector + '.json')
+    saveAs(blob, state.hobby + '.json')
   },
 
   async upload ({ rootState, state, dispatch }, file) {

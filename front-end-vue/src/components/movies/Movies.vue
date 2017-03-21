@@ -12,7 +12,7 @@
       ...mapMutations('notification', ['setStatus'])
     },
     created () {
-      this.select('movies')
+      this.select({ hobby: 'movies' })
     },
     mounted () {
       this.setStatus('My Movies')

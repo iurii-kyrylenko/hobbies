@@ -27,7 +27,7 @@
             <i class="glyphicon glyphicon-remove-sign"></i>
           </a>
 
-          <router-link to="new" append class="btn btn-default" :title="addPrompt">
+          <router-link v-if="my" to="new" append class="btn btn-default" :title="addPrompt">
             <i class="glyphicon glyphicon-plus"></i>
           </router-link>
 
@@ -35,7 +35,7 @@
             <i class="glyphicon glyphicon-download"></i>
           </a>
 
-          <label for="file" class="btn btn-default" :title="uploadPrompt">
+          <label v-if="my" for="file" class="btn btn-default" :title="uploadPrompt">
             <i class="glyphicon glyphicon-upload"></i>
           </label>
 
@@ -76,7 +76,7 @@
     ],
     data: () => ({ itemId: '', itemTitle: '' }),
     computed: {
-      ...mapGetters('items', ['pageCount', 'page', 'filter'])
+      ...mapGetters('items', ['my', 'pageCount', 'page', 'filter'])
     },
     methods: {
       ...mapActions('items',
@@ -116,7 +116,8 @@
       }
     },
     mounted () {
-      this.getItems()
+      if (this.my) this.getItems()
+      else this.clearSearch()
     }
   }
 </script>

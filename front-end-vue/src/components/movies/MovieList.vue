@@ -10,7 +10,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th style="width: 10%"></th>
+              <th v-if="my" style="width: 10%"></th>
               <th style="width: 15%">Completed</th>
               <th style="width: 10%">Year</th>
               <th style="width: 40%">Title</th>
@@ -19,7 +19,7 @@
           </thead>
             <tbody>
               <tr v-for="movie in items">
-                <td>
+                <td v-if="my">
                   <div class="input-group-btn">
                       <router-link :to="movie._id" append class="btn btn-default" title="Edit Movie">
                         <i class="glyphicon glyphicon-pencil"></i>
@@ -43,17 +43,22 @@
 
 <script>
   import ItemList from '../ItemList'
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
 
   export default {
+    props: ['uid'],
     components: { ItemList },
     computed: {
-      ...mapGetters('items', ['items'])
+      ...mapGetters('items', ['my', 'items'])
     },
     methods: {
+      ...mapMutations('items', ['select']),
       remove (movie) {
         this.$refs.itemList.openConfirm(movie)
       }
+    },
+    created () {
+      this.select({ hobby: 'movies', uid: this.uid })
     }
   }
 </script>
