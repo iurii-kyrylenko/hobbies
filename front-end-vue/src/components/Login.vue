@@ -4,13 +4,13 @@
 
       <form @submit.prevent="validateBeforeSubmit">
 
-        <div class="form-group" :class="{ 'has-error': $v.email.$error }">
-          <label class="control-label" for="email">Email</label>
-          <input id="email"
-                 v-model.trim="email"
-                 @input="$v.email.$touch()"
-                 class="form-control" type="text" placeholder="Email address">
-          <p class="text-danger" v-show="$v.email.$error">{{ vmsgEmail }}</p>
+        <div class="form-group" :class="{ 'has-error': $v.name.$error }">
+          <label class="control-label" for="name">Name</label>
+          <input id="name"
+                 v-model.trim="name"
+                 @input="$v.name.$touch()"
+                 class="form-control" type="text" placeholder="User name">
+          <p class="text-danger" v-show="$v.name.$error">{{ vmsgName }}</p>
         </div>
 
         <div class="form-group" :class="{ 'has-error': $v.password.$error }">
@@ -33,22 +33,22 @@
 </template>
 
 <script>
-  import vh, { email, password } from '@/helpers/validators'
+  import vh, { userName, password } from '@/helpers/validators'
   import { mapMutations } from 'vuex'
 
   export default {
     data () {
       return {
-        email: '',
+        name: '',
         password: ''
       }
     },
     validations: {
-      email: vh.vrules(email),
+      name: vh.vrules(userName),
       password: vh.vrules(password)
     },
     computed: {
-      vmsgEmail () { return vh.vmsg(this.$v.email, email) },
+      vmsgName () { return vh.vmsg(this.$v.name, userName) },
       vmsgPassword () { return vh.vmsg(this.$v.password, password) }
     },
     methods: {

@@ -2,6 +2,13 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const request = require('request');
+const paging = require('../helpers/paging');
+
+const getUsers = (req, res) => paging.getPageItems(
+    // 'and' is here because the 'term' in paging is conjuncted by 'or'
+    () => ({ $and: [{}, { $or: [{ shareBooks: true }, { shareMovies: true }] }] }),
+    User, req, res);
+
 
 const validateCaptchaResponse = (req, res, next) => {
     const postData = {
@@ -98,6 +105,7 @@ const checkSharedData = (req, res, next) => {
 };
 
 module.exports = {
+    getUsers,
     validateCaptchaResponse,
     register,
     login,

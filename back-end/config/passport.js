@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 const strategy = new LocalStrategy(
-    { usernameField: 'email' },
+    { usernameField: 'name' },
     (username, password, done) => {
         User.findOne(
-            { email: username },
+            { name: username },
             (err, user) => {
                 if (err) { return done(err); }
                 // Return if user not found in database

@@ -44,7 +44,7 @@
         <li>
           <a>
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            Logged in as: &lt;{{ currentUser.name }}&gt;{{ currentUser.email }}
+            Logged in as <b>{{ currentUser.name }}</b>
           </a>
         </li>
 

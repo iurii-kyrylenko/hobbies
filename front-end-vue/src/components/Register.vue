@@ -111,7 +111,7 @@
           this.$router.push('/home')
         } catch (e) {
           this.reset()
-          this.notify({ msg: 'You have failed to register. Try again with another email address.', type: 'danger' })
+          this.notify({ msg: 'You have failed to register. Try again with another name/email address.', type: 'danger' })
         }
       }
     }
