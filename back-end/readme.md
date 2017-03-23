@@ -11,7 +11,7 @@
 | /books, /movies               | get, post        | +     |
 | /books/id, /movies/id         | get, put, delete | +     |
 | /books/upload, /movies/upload | post             | +     |
-| /settings                     | get, put         | +     |
+| /users/settings               | get, put         | +     |
 
 
 ##### build/run:

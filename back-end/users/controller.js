@@ -9,6 +9,41 @@ const getUsers = (req, res) => paging.getPageItems(
     () => ({ $and: [{}, { $or: [{ shareBooks: true }, { shareMovies: true }] }] }),
     User, req, res);
 
+const getSettings = (req, res) => {
+    User.findById(req.user._id, (err, user) => {
+        if (err) {
+            res.sendStatus(400);
+            return;
+        }
+        if (!user) {
+            res.sendStatus(404);
+            return;
+         }
+        res.send(user);
+    });
+};
+
+const updateSettings = (req, res) => {
+    User.findById(req.user._id, (err, user) => {
+        if (err) {
+            res.sendStatus(400);
+            return;
+        }
+        if (!user) {
+            res.sendStatus(404);
+            return;
+        }
+        user.setFromObject(req.body);
+        user.save((err) => {
+            if (err) {
+                res.sendStatus(400);
+                return;
+            }
+            res.sendStatus(204);
+        });
+    });
+};
+
 
 const validateCaptchaResponse = (req, res, next) => {
     const postData = {
@@ -106,6 +141,8 @@ const checkSharedData = (req, res, next) => {
 
 module.exports = {
     getUsers,
+    getSettings,
+    updateSettings,
     validateCaptchaResponse,
     register,
     login,

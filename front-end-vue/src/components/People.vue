@@ -20,8 +20,6 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-
   export default {
     data: () => ({
       users: [
@@ -40,15 +38,6 @@
           movies: 'tester\'s movies'
         }
       ]
-    }),
-    methods: {
-      ...mapMutations('notification', ['setStatus'])
-    },
-    mounted () {
-      this.setStatus('People')
-    },
-    beforeDestroy () {
-      this.setStatus('')
-    }
+    })
   }
 </script>

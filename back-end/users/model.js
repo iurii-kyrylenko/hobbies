@@ -45,5 +45,9 @@ userSchema.methods.generateJwt = function () {
     }, process.env.JWT_SECRET);
 };
 
+userSchema.methods.setFromObject = function (object) {
+    this.shareBooks = object.shareBooks;
+    this.shareMovies = object.shareMovies;
+};
 
 mongoose.model('User', userSchema);
