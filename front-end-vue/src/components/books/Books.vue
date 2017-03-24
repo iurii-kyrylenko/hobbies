@@ -15,7 +15,7 @@
       this.select({ hobby: 'books' })
     },
     mounted () {
-      this.setStatus('My Books')
+      this.setStatus('My books')
     },
     beforeDestroy () {
       this.setStatus('')

@@ -12,12 +12,12 @@ export default {
       component: People
     },
     {
-      path: ':uid/b',
+      path: ':uid/:name/b',
       component: BookList,
       props: true
     },
     {
-      path: ':uid/m',
+      path: ':uid/:name/m',
       component: MovieList,
       props: true
     }

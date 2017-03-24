@@ -46,19 +46,24 @@
   import { mapGetters, mapMutations } from 'vuex'
 
   export default {
-    props: ['uid'],
+    props: ['uid', 'name'],
     components: { ItemList },
     computed: {
       ...mapGetters('items', ['my', 'items'])
     },
     methods: {
       ...mapMutations('items', ['select']),
+      ...mapMutations('notification', ['setStatus']),
       remove (book) {
         this.$refs.itemList.openConfirm(book)
       }
     },
     created () {
       this.select({ hobby: 'books', uid: this.uid })
+      if (!this.my) this.setStatus(`${this.name}'s books`)
+    },
+    beforeDestroy () {
+      this.setStatus('')
     }
   }
 </script>

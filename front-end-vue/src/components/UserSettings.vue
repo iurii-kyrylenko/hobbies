@@ -48,7 +48,7 @@
       ...mapGetters('users', ['settings'])
     },
     mounted () {
-      this.setStatus('My Settings')
+      this.setStatus('My settings')
       this.getSettings()
     },
     beforeDestroy () {

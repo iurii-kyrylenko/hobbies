@@ -50,8 +50,7 @@
       <slot></slot>
     </div>
 
-    <pager v-if="true"
-           :frame="8"
+    <pager :frame="8"
            :pageCount="pageCount"
            :page="page"
            @change="changePage">
