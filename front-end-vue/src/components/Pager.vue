@@ -72,8 +72,14 @@
   }
   .pagination > li > a, .pagination > li > a:hover {
     padding: 8px 0 6px;
+    color: #000;
     width: 32px;
     height: 40px;
     text-align: center;
+  }
+  .active > a {
+    background-color: #aaa !important;
+    color: #fff !important;
+    border-color: #000 !important;
   }
 </style>

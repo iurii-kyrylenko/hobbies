@@ -7,7 +7,7 @@ export const userName = [
   },
   {
     rule (value) {
-      const regexp = /^[A-Za-z][A-Za-z0-9]{4,}$/
+      const regexp = /^[A-Za-z_][A-Za-z0-9_-]{4,}$/
       return regexp.test(value)
     },
     msg: 'Name requires at least 5 letters or digits and begins with letter'
