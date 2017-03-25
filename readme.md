@@ -13,9 +13,12 @@ After logging in you are able to:
 * Download items as a file in JSON format.
 * Upload items from JSON file.
 
-Soon you will have the possibilities to:
+Also you have the possibilities to:
+
 * Share data with other people.
 * Change you personal settings.
+
+Unathorized people can see and download the shared data.
 
 ### Technologies
 Node.js, Express, MongoDB, JWT, Angular 2, Vue.js, webpack

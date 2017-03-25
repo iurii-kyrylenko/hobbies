@@ -19,12 +19,15 @@
           <li>Upload items from JSON file.</li>
       </ul>
       <p>
-          Soon you will have the possibilities to:
+          Also you have the possibilities to:
       </p>
       <ul>
           <li>Share data with other people.</li>
           <li>Change you personal settings.</li>
       </ul>
+      <p>
+          Unathorized people can see and download the shared data.
+      </p>
       <p>
           <b>This site is for demonstartion purposes only: you can loose data at any time.</b>
       </p>

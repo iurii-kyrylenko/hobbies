@@ -6,7 +6,7 @@
             <div class="checkbox form-control">
               <label>
                 <input ref="shareBooks" type="checkbox" :checked="settings.shareBooks">
-                Share Books
+                Share my books
               </label>
             </div>
           </div>
@@ -14,7 +14,7 @@
             <div class="checkbox form-control">
               <label>
                 <input ref="shareMovies" type="checkbox" :checked="settings.shareMovies">
-                Share Movies
+                Share my movies
               </label>
             </div>
           </div>
