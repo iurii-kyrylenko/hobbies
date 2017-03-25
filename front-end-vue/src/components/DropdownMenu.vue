@@ -40,8 +40,8 @@
     props: ['content', 'header', 'icon'],
     computed: {
       isGroupActive () {
-        return this.$props.content.some(({ path }) =>
-          this.$route.path.includes(path))
+        return this.$props.content.reduce((a, { path }) =>
+          a || (this.$route.path.indexOf(path) !== -1), false)
       }
     },
     data: () => ({ isVisible: false })
