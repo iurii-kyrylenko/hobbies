@@ -1,52 +1,47 @@
 <template>
   <div class="row">
+    <div class="col-sm-4">
 
-      <div class="col-sm-4">
-          <h4>{{ header }}</h4>
-      </div>
+      <form @submit.prevent="validateBeforeSubmit">
 
-      <div class="col-sm-4">
+          <div class="form-group" :class="{ 'has-error': $v.title.$error }">
+            <label class="control-label" for="title">Title</label>
+            <input id="title"
+                   v-model.trim="title"
+                   @input="$v.title.$touch()"
+                   class="form-control" type="text" placeholder="Movie title">
+            <p class="text-danger" v-show="$v.title.$error">{{ vmsgTitle }}</p>
+          </div>
 
-        <form @submit.prevent="validateBeforeSubmit">
+          <div class="form-group" :class="{ 'has-error': $v.year.$error }">
+            <label class="control-label" for="year">Year</label>
+            <input id="year"
+                   v-model.trim="year"
+                   @input="$v.year.$touch()"
+                   class="form-control" type="text" placeholder="Production year">
+            <p class="text-danger" v-show="$v.year.$error">{{ vmsgYear }}</p>
+          </div>
 
-            <div class="form-group" :class="{ 'has-error': $v.title.$error }">
-              <label class="control-label" for="title">Title</label>
-              <input id="title"
-                     v-model.trim="title"
-                     @input="$v.title.$touch()"
-                     class="form-control" type="text" placeholder="Movie title">
-              <p class="text-danger" v-show="$v.title.$error">{{ vmsgTitle }}</p>
-            </div>
+          <div class="form-group">
+            <label class="control-label" for="notes">Notes</label>
+            <input id="notes"
+                   v-model.trim="notes"
+                   class="form-control" type="text" placeholder="Notes on movie">
+          </div>
 
-            <div class="form-group" :class="{ 'has-error': $v.year.$error }">
-              <label class="control-label" for="year">Year</label>
-              <input id="year"
-                     v-model.trim="year"
-                     @input="$v.year.$touch()"
-                     class="form-control" type="text" placeholder="Production year">
-              <p class="text-danger" v-show="$v.year.$error">{{ vmsgYear }}</p>
-            </div>
+          <div class="form-group" :class="{ 'has-error': $v.completed.$error }">
+            <date-input id="completed"
+                        v-model="completed"
+                        @input="$v.completed.$touch()">
+              <label class="control-label" for="completed">Completed on&nbsp;</label>
+            </date-input>
+          </div>
 
-            <div class="form-group">
-              <label class="control-label" for="notes">Notes</label>
-              <input id="notes"
-                     v-model.trim="notes"
-                     class="form-control" type="text" placeholder="Notes on movie">
-            </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+        <router-link to="../" append class="btn btn-default">Reject</router-link>
+      </form>
 
-            <div class="form-group" :class="{ 'has-error': $v.completed.$error }">
-              <date-input id="completed"
-                          v-model="completed"
-                          @input="$v.completed.$touch()">
-                <label class="control-label" for="completed">Completed on&nbsp;</label>
-              </date-input>
-            </div>
-
-          <button type="submit" class="btn btn-default">Submit</button>
-          <router-link to="../" append class="btn btn-default">Reject</router-link>
-        </form>
-
-      </div>
+    </div>
   </div>
 </template>
 
@@ -73,12 +68,12 @@
     },
     computed: {
       ...mapGetters('items', ['item']),
-      header () { return this.id ? 'Edit Movie' : 'New Movie' },
+      header () { return this.id ? 'Edit movie' : 'New movie' },
       vmsgTitle () { return vh.vmsg(this.$v.title, movieTitle) },
       vmsgYear () { return vh.vmsg(this.$v.year, year) }
     },
     methods: {
-      ...mapMutations('notification', ['notify']),
+      ...mapMutations('notification', ['notify', 'setStatus']),
       ...mapActions('items', ['create', 'modify']),
       validateBeforeSubmit () {
         this.$v.$touch()
@@ -119,6 +114,12 @@
       this.year = movie.year
       this.notes = movie.notes
       this.completed = movie.completed
+    },
+    mounted () {
+      this.setStatus(this.header)
+    },
+    beforeDestroy () {
+      this.setStatus('')
     }
   }
 </script>

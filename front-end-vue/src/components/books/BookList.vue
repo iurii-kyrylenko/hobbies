@@ -60,7 +60,10 @@
     },
     created () {
       this.select({ hobby: 'books', uid: this.uid })
-      if (!this.my) this.setStatus(`${this.name}'s books`)
+    },
+    mounted () {
+      const status = this.my ? 'My books' : `${this.name}'s books`
+      this.setStatus(status)
     },
     beforeDestroy () {
       this.setStatus('')

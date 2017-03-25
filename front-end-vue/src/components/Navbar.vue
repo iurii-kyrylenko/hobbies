@@ -22,7 +22,7 @@
                      header="Personal" icon="glyphicon-sunglasses"
                      :content="personal" />
 
-      <p class="navbar-text"><b>{{ status }}</b></p>
+      <p class="navbar-text"><b class="status">{{ status }}</b></p>
 
       <ul v-if="!isLoggedIn" class="nav navbar-nav navbar-right">
         <router-link tag="li" active-class="active" to="/login">
@@ -44,7 +44,7 @@
         <li>
           <a>
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            Logged in as <b>{{ currentUser.name }}</b>
+            Logged in as <b class="status">{{ currentUser.name }}</b>
           </a>
         </li>
 
@@ -107,5 +107,8 @@
   a.active {
     color: #000 !important;
     text-shadow: 2px 2px #ccc;
+  }
+  .status {
+    color: #337ab7;
   }
 </style>
