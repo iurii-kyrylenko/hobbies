@@ -81,6 +81,7 @@
       ...mapActions('items',
         ['getItems', 'changePage', 'applyFilter', 'download', 'upload', 'delete']),
       ...mapMutations('notification', ['notify']),
+      ...mapMutations('items', ['clear']),
       applySearch () {
         this.applyFilter(this.$refs.search.value.trim())
       },
@@ -115,8 +116,8 @@
       }
     },
     mounted () {
-      if (this.my) this.getItems()
-      else this.clearSearch()
+      if (!this.my) this.clear('shared')
+      this.getItems()
     }
   }
 </script>

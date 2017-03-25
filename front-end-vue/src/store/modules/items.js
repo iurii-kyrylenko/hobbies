@@ -40,6 +40,13 @@ const getters = {
 }
 
 const mutations = {
+  clear (state, selector) {
+    const ss = state[selector]
+    ss.items = []
+    ss.page = 1
+    ss.pageCount = 0
+    ss.filter = ''
+  },
   select (state, { hobby, uid = '' }) {
     state.hobby = hobby
     state.uid = uid

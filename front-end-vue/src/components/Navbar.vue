@@ -91,8 +91,11 @@
     },
     methods: {
       ...mapMutations('notification', ['notify']),
+      ...mapMutations('items', ['clear']),
       logout () {
         this.$store.dispatch('auth/logout')
+        this.clear('books')
+        this.clear('movies')
         this.notify({ msg: 'You have been logged out.', type: 'info' })
         this.$router.push('/home')
       }
@@ -100,7 +103,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   a.active {
     color: #000 !important;
     text-shadow: 2px 2px #ccc;

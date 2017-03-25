@@ -24,6 +24,13 @@ if(process.env.ALLOW_CORS === 'yes') {
 
 server.use(passport.initialize());
 
+/*
+ * An artificial delay for debug purpose
+ */
+// server.use((req, res, next) => {
+//   setTimeout(() => next(), 1000);
+// });
+
 server.use('/api/users', usersRouter);
 server.use('/api/books', itemsRouter.personal('Book'));
 server.use('/api/movies', itemsRouter.personal('Movie'));

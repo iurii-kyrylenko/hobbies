@@ -1,5 +1,5 @@
 <template>
-  <ul class="pagination">
+  <ul v-if="pageCount" class="pagination">
 
     <li v-if="page > 1">
       <a href="" @click.prevent="previous">
@@ -7,8 +7,8 @@
       </a>
     </li>
 
-    <li v-for="p in pages">
-      <a href="" :class="{ active: p == page }" @click.prevent="select($event, p)">{{ p }}</a>
+    <li v-for="p in pages" :class="{ active: p == page }">
+      <a href="" @click.prevent="select($event, p)">{{ p }}</a>
     </li>
 
     <li v-if="page < pageCount">
@@ -71,7 +71,6 @@
     margin-top: 0px;
   }
   .pagination > li > a, .pagination > li > a:hover {
-    color: #000;
     padding: 8px 0 6px;
     width: 32px;
     height: 40px;
