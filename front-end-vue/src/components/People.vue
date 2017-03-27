@@ -31,13 +31,13 @@
                   {{ user.name }}
                 </td>
                 <td>
-                  <router-link v-if="user.shareBooks" class="btn btn-default" :to="user.tob" append>
+                  <router-link v-if="user.shareBooks" :to="user.tob" append>
                     <i class="glyphicon glyphicon-book"></i>
                     {{ user.name + '\'s books' }}
                   </router-link>
                 </td>
                 <td>
-                  <router-link v-if="user.shareMovies" class="btn btn-default" :to="user.tom" append>
+                  <router-link v-if="user.shareMovies" :to="user.tom" append>
                     <i class="glyphicon glyphicon-film"></i>
                     {{ user.name + '\'s movies' }}
                   </router-link>
@@ -82,3 +82,14 @@
     }
   }
 </script>
+
+<style scoped>
+  td > a {
+    color: #000;
+    text-decoration: none;
+    opacity: 0.6;
+  }
+  td > a:hover {
+    opacity: 1;
+  }
+</style>

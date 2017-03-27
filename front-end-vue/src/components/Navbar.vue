@@ -109,6 +109,6 @@
     text-shadow: 2px 2px #ccc;
   }
   .status {
-    color: #000;
+    color: #555;
   }
 </style>

@@ -12,7 +12,7 @@
             <tr>
               <th v-if="my" style="width: 10%"></th>
               <th style="width: 15%">Completed</th>
-              <th style="width: 8%">Mode</th>
+              <th style="width: 8%">Kind</th>
               <th style="width: 25%">Author</th>
               <th>Title</th>
             </tr>

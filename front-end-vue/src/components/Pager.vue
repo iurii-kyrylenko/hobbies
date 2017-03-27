@@ -80,6 +80,6 @@
   .active > a {
     background-color: #aaa !important;
     color: #fff !important;
-    border-color: #000 !important;
+    border-color: #aaa !important;
   }
 </style>
