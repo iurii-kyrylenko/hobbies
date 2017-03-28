@@ -10,7 +10,7 @@ const getUsers = (req, res) => paging.getPageItems(
     User, req, res);
 
 const getSettings = (req, res) => {
-    User.findById(req.user._id, (err, user) => {
+    User.findById(req.user._id, User.projectionFields, (err, user) => {
         if (err) {
             res.sendStatus(400);
             return;
