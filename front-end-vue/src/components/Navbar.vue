@@ -16,6 +16,12 @@
             &nbsp;People
           </a>
         </router-link>
+        <router-link tag="li" active-class="active" to="/fractals">
+          <a>
+            <span class="glyphicon glyphicon-grain" aria-hidden="true"></span>
+            &nbsp;Fractals
+          </a>
+        </router-link>
       </ul>
 
       <dropdown-menu v-if="isLoggedIn" v-once
