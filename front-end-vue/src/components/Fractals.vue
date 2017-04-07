@@ -1,5 +1,5 @@
 <template>
-  <fdraw-r :value="{ width: 340, height: 440 }"></fdraw-r>
+  <fdraw-r :value="{ width: 320, height: 440 }"></fdraw-r>
 </template>
 
 <script>
