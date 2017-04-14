@@ -5,7 +5,6 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import UserSettings from '@/components/UserSettings'
 import peopleRoutes from './people-routes'
-import Fractals from '@/components/Fractals'
 import bookRoutes from './book-routes'
 import movieRoutes from './movie-routes'
 import Store from '@/store'
@@ -27,10 +26,6 @@ const router = new Router({
       component: Login
     },
     { ...peopleRoutes },
-    {
-      path: '/fractals',
-      component: Fractals
-    },
     {
       path: '/profile',
       component: UserSettings
