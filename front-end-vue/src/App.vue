@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import Navbar from './components/navbar'
-  import Notifier from './components/notifier'
+  import Navbar from './components/Navbar'
+  import Notifier from './components/Notifier'
 
   export default {
     components: { Navbar, Notifier }

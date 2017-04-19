@@ -1,6 +1,6 @@
 import axios from 'axios'
 import config from '@/helpers/config'
-import { saveAs } from 'file-saver/fileSaver'
+import { saveAs } from 'file-saver/FileSaver'
 import { uploadRequest } from '@/helpers/upload'
 
 const state = {
