@@ -17,9 +17,10 @@
           </div>
 
           <div class="modal-footer">
-            <slot name="footer"></slot>
-            <button class="btn btn-default" @click="close(true)">Yes</button>
-            <button class="btn btn-default" @click="close(false)">No</button>
+            <slot name="footer">
+              <button class="btn btn-default" @click="close(true)">Yes</button>
+              <button class="btn btn-default" @click="close(false)">No</button>
+            </slot>
           </div>
 
         </div>
