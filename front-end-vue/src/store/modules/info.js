@@ -53,7 +53,7 @@ const actions = {
     commit('setMovieProgress', true)
 
     // const data = await mockedResponse(title)
-    const endpoint = 'http://www.omdbapi.com/'
+    const endpoint = 'https://www.omdbapi.com/'
     const params = { t: title }
     const { data } = await axios.get(endpoint, { params })
 
