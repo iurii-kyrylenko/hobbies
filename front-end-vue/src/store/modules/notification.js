@@ -21,7 +21,7 @@ const mutations = {
 const getters = {
   message: state => state.msg,
   alertClass: state => 'alert-' + state.type,
-  status: status => state.status
+  status: state => state.status
 }
 
 export default {
