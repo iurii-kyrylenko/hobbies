@@ -4,7 +4,14 @@
     <modal ref="info">
       <div slot="header"><h4>{{ movieTitle }}</h4></div>
       <div slot="body">
-        {{ info }}
+        <div v-if="movieProgress">Loading...</div>
+        <div v-else-if="movieError">{{ movieError }}</div>
+        <div v-else class="container-fluid movie-info">
+          <div class="row">
+            <div class="col-sm-5"><img :src="movieInfo.posterUrl"></div>
+            <div class="col-sm-7">{{ movieInfo.plot }}</div>
+          </div>
+        </div>
       </div>
       <div slot="footer">
         <button class="btn btn-default" @click="closeInfo">OK</button>
@@ -60,30 +67,27 @@
 <script>
   import ItemList from '../ItemList'
   import Modal from '../Modal'
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
 
   export default {
     props: ['uid', 'name'],
     components: { ItemList, Modal },
     computed: {
-      ...mapGetters('items', ['my', 'items'])
+      ...mapGetters('items', ['my', 'items']),
+      ...mapGetters('info', ['movieInfo', 'movieProgress', 'movieError'])
     },
-    data: () => ({
-      movieTitle: '',
-      info: ''
-    }),
+    data: () => ({ movieTitle: '' }),
     methods: {
       ...mapMutations('items', ['select']),
       ...mapMutations('notification', ['setStatus']),
+      ...mapActions('info', ['getMovieInfo']),
       remove (movie) {
         this.$refs.itemList.openConfirm(movie)
       },
       openInfo (movie) {
         this.movieTitle = movie.title
         this.$refs.info.open()
-        // This is the modeling code. An async action will be used instead.
-        this.info = 'Loading...'
-        setTimeout(() => { this.info = '-- INFORMATION --' }, 1000)
+        this.getMovieInfo(movie.title)
       },
       closeInfo () {
         this.$refs.info.close(false)
@@ -101,3 +105,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .movie-info img {
+    width: 100%;
+  }
+</style>
