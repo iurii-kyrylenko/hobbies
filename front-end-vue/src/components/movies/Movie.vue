@@ -29,6 +29,13 @@
                    class="form-control" type="text" placeholder="Notes on movie">
           </div>
 
+          <div class="form-group">
+            <label class="control-label" for="imdbId">IMDB ID</label>
+            <input id="imdbId"
+                   v-model.trim="imdbId"
+                   class="form-control" type="text" placeholder="IMDB index">
+          </div>
+
           <div class="form-group" :class="{ 'has-error': $v.completed.$error }">
             <date-input id="completed"
                         v-model="completed"
@@ -58,6 +65,7 @@
         title: '',
         year: '',
         notes: '',
+        imdbId: '',
         completed: null
       }
     },
@@ -113,6 +121,7 @@
       this.title = movie.title
       this.year = movie.year
       this.notes = movie.notes
+      this.imdbId = movie.imdbId
       this.completed = movie.completed
     },
     mounted () {

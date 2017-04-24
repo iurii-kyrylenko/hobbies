@@ -49,12 +49,12 @@ const getters = {
 // }
 
 const actions = {
-  async getMovieInfo ({ state, commit }, title) {
+  async getMovieInfo ({ state, commit }, movie) {
     commit('setMovieProgress', true)
 
     // const data = await mockedResponse(title)
     const endpoint = 'https://www.omdbapi.com/'
-    const params = { t: title }
+    const params = movie.imdbId ? { i: movie.imdbId } : { t: movie.title }
     const { data } = await axios.get(endpoint, { params })
 
     commit('setMovieInfo', data)

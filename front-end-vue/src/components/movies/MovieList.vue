@@ -87,7 +87,7 @@
       openInfo (movie) {
         this.movieTitle = movie.title
         this.$refs.info.open()
-        this.getMovieInfo(movie.title)
+        this.getMovieInfo(movie)
       },
       closeInfo () {
         this.$refs.info.close(false)
