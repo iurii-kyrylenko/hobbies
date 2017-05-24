@@ -1,4 +1,5 @@
 import axios from 'axios'
+import config from '@/helpers/config'
 
 const state = {
   movieInfo: {
@@ -12,15 +13,15 @@ const state = {
 
 const mutations = {
   setMovieInfo (state, response) {
-    if (response.Response === 'True') {
+    if (response.found) {
       state.movieInfo = {
-        title: response.Title,
-        posterUrl: response.Poster,
-        plot: response.Plot
+        title: response.title,
+        posterUrl: response.poster,
+        plot: response.plot
       }
       state.movieError = ''
     } else {
-      state.movieError = response.Error || 'Movie not found (:'
+      state.movieError = 'Movie not found (:'
     }
   },
   setMovieProgress (state, progress) {
@@ -38,10 +39,10 @@ const getters = {
 //   const promise = new Promise(resolve => {
 //     setTimeout(() => {
 //       resolve({
-//         Response: 'True',
-//         Title: title,
-//         Poster: 'http://aaa/bbb.jpg',
-//         Plot: 'blah blah blah'
+//         found: true,
+//         title: title,
+//         poster: 'http://aaa/bbb.jpg',
+//         plot: 'blah blah blah'
 //       })
 //     }, 1000)
 //   })
@@ -52,9 +53,9 @@ const actions = {
   async getMovieInfo ({ state, commit }, movie) {
     commit('setMovieProgress', true)
 
-    // const data = await mockedResponse(title)
-    const endpoint = 'https://www.omdbapi.com/'
-    const params = movie.imdbId ? { i: movie.imdbId } : { t: movie.title }
+    // const data = await mockedResponse(movie.title)
+    const endpoint = config.apiUrl + (movie.imdbId ? '/get-movie' : '/search-movie')
+    const params = movie.imdbId ? { imdbId: movie.imdbId } : { title: movie.title }
     const { data } = await axios.get(endpoint, { params })
 
     commit('setMovieInfo', data)

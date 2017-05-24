@@ -11,6 +11,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const usersRouter = require('./users/router');
 const itemsRouter = require('./items/router');
+const movieInfoController = require('./info/movieController');
 
 const server = express();
 
@@ -36,6 +37,10 @@ server.use('/api/books', itemsRouter.personal('Book'));
 server.use('/api/movies', itemsRouter.personal('Movie'));
 server.use('/api/shared/books', itemsRouter.shared('Book'));
 server.use('/api/shared/movies', itemsRouter.shared('Movie'));
+// Get info by movie id (qs=imdbId)
+server.get('/api/get-movie', movieInfoController.get);
+// Get info by movie title (qs=title)
+server.get('/api/search-movie', movieInfoController.search);
 
 server.route('/*').get(function(req, res) {
     return res.sendFile(path.join(__dirname, 'public/index.html'));

@@ -44,6 +44,8 @@
     JWT_SECRET = <JWT secret key>
     CAPTCHA_SECRET = <The shared key between my site and ReCAPTCHA>
     CAPTCHA_API = https://www.google.com/recaptcha/api/siteverify
+    TMDB_API = https://api.themoviedb.org/3/
+    TMDB_API_KEY = <TMDB api key>
     ALLOW_CORS = < yes when the separate server is used for hosting front-end application>
     PORT = 3000
 ```
@@ -54,6 +56,8 @@
     JWT_SECRET = <JWT secret key>
     CAPTCHA_SECRET = <The shared key between my site and ReCAPTCHA>
     CAPTCHA_API = https://www.google.com/recaptcha/api/siteverify
+    TMDB_API = https://api.themoviedb.org/3/
+    TMDB_API_KEY = <TMDB api key>
     ALLOW_CORS = no
 ```
 
