@@ -3,7 +3,7 @@ const request = require('request')
 const getPosterUrl = (path) => {
   // Supported formats:
   // w92, w154, w185, w342, w500, w780, original
-  return 'http://image.tmdb.org/t/p/w185' + path
+  return process.env.TMDB_IMAGE_STORE + 'w185' + path
 }
 
 const getResultFromTmdb = (entries) => {

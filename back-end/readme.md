@@ -46,6 +46,7 @@
     CAPTCHA_API = https://www.google.com/recaptcha/api/siteverify
     TMDB_API = https://api.themoviedb.org/3/
     TMDB_API_KEY = <TMDB api key>
+    TMDB_IMAGE_STORE = https://image.tmdb.org/t/p/
     ALLOW_CORS = < yes when the separate server is used for hosting front-end application>
     PORT = 3000
 ```
@@ -58,6 +59,7 @@
     CAPTCHA_API = https://www.google.com/recaptcha/api/siteverify
     TMDB_API = https://api.themoviedb.org/3/
     TMDB_API_KEY = <TMDB api key>
+    TMDB_IMAGE_STORE = https://image.tmdb.org/t/p/
     ALLOW_CORS = no
 ```
 
