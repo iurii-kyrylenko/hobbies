@@ -107,6 +107,10 @@
 </script>
 
 <style scoped>
+  .movie-info {
+    overflow-y: auto;
+    max-height: 360px;
+  }
   .movie-info img {
     width: 100%;
   }
