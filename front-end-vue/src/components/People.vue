@@ -28,18 +28,18 @@
               <tr v-for="user in users">
                 <td>
                   <i class="glyphicon glyphicon-user"></i>
-                  {{ user.name }}
+                  {{ `${user.name} [${user.total}]` }}
                 </td>
                 <td>
                   <router-link v-if="user.shareBooks" :to="user.tob" append>
                     <i class="glyphicon glyphicon-book"></i>
-                    {{ user.name + '\'s books' }}
+                    {{ `${user.name}'s books [${user.books}]` }}
                   </router-link>
                 </td>
                 <td>
                   <router-link v-if="user.shareMovies" :to="user.tom" append>
                     <i class="glyphicon glyphicon-film"></i>
-                    {{ user.name + '\'s movies' }}
+                    {{ `${user.name}'s movies [${user.movies}]` }}
                   </router-link>
                 </td>
               </tr>

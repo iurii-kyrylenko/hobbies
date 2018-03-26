@@ -19,10 +19,6 @@ const userSchema = new mongoose.Schema({
     shareMovies: Boolean
 });
 
-userSchema.statics.projectionFields = 'name shareBooks shareMovies';
-userSchema.statics.sortFields = 'name';
-userSchema.statics.searchFields = 'name';
-
 userSchema.methods.setPassword = function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(

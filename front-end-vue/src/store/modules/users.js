@@ -12,10 +12,13 @@ const state = {
 const getters = {
   settings: state => state.settings,
   users: state => state.users
-    .map(({ name, shareBooks, shareMovies, _id }) => ({
+    .map(({ name, shareBooks, shareMovies, books, movies, total, _id }) => ({
       name,
       shareBooks,
       shareMovies,
+      books,
+      movies,
+      total,
       tob: _id + '/' + name + '/b',
       tom: _id + '/' + name + '/m'
     })),
