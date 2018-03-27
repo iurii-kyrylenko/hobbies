@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="container-fluid">
 
       <div class="my-search input-group">
         <input type="text" class="form-control"
