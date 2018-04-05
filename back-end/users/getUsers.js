@@ -32,7 +32,7 @@ const fetchUsers = async (term, page) => {
       movies: { $size: "$movies" },
       total: { $add: [{ $size: '$books' }, { $size: '$movies' }] }
     })
-    .sort({ total: -1 });
+    .sort({ total: -1, name: 1 });
 
   if (page > 0) {
     const itemsToSkip = itemsPerPage * (page - 1);
