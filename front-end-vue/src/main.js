@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import Vuelidate from 'vuelidate'
 import { formatDate } from './helpers/formatters'
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-css-only/css/bootstrap.css'
 
 Vue.config.productionTip = false
 
