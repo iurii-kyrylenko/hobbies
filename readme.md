@@ -21,11 +21,10 @@ Also you have the possibilities to:
 Unathorized people can see and download the shared data.
 
 ### Technologies
-Node.js, Express, MongoDB, JWT, Angular 2, Vue.js, webpack
+Node.js, Express, MongoDB, JWT, Vue.js, webpack
 
 ### Detailed descriptions
 * [back-end](back-end/readme.md)
-* [front-end Angular-2](front-end-ng2/readme.md)
 * [front-end Vue.js](front-end-vue/README.md)
 
 ### License
