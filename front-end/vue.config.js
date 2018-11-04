@@ -1,4 +1,4 @@
 module.exports = {
-  runtimeCompiler: true,
+  runtimeCompiler: false,
   outputDir: '../back-end/public'
 }
