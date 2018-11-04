@@ -33,6 +33,9 @@
       <p>
         <ul>
           <li>
+            Nov 4, 2018: Filter out people without hobbies
+          </li>
+          <li>
             Nov 3, 2018: Update to latest versions of Vue.js and other libraries
           </li>
           <li>
