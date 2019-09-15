@@ -13,6 +13,7 @@ const getters = {
   settings: state => state.settings,
   users: state => state.users
     .map(({ name, shareBooks, shareMovies, books, movies, total, _id }) => ({
+      _id,
       name,
       shareBooks,
       shareMovies,
@@ -75,7 +76,7 @@ const actions = {
     commit('setUsers', data)
   },
 
-  async applyFilter ({ state, commit }, filter) {
+  async applyFilter ({ commit }, filter) {
     const data = await httpGetUsers({
       page: 1,
       term: filter

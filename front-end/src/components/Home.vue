@@ -29,20 +29,23 @@
           Unathorized people can see and download the shared data.
       </p>
       <hr />
-      <b>Support</b>
+      <b>Change log</b>
       <p>
         <ul>
           <li>
-            Nov 4, 2018: Filter out people without hobbies
+            Sep 15, 2019: Handle errors from TMDb API. Update dependencies.
           </li>
           <li>
-            Nov 3, 2018: Update to latest versions of Vue.js and other libraries
+            Nov 4, 2018: Filter out people without hobbies.
           </li>
           <li>
-            May 25, 2017: Change movie info service from <a href="http://www.omdbapi.com/" target="_blank">OMDb</a> to <a href="https://www.themoviedb.org/" target="_blank">TMDb</a>
+            Nov 3, 2018: Update to latest versions of Vue.js and other libraries.
           </li>
           <li>
-            Apr 24, 2017: Wire up the <a href="http://www.omdbapi.com/" target="_blank">OMDb</a> api service to obtain the movie info
+            May 25, 2017: Change movie info service from <a href="http://www.omdbapi.com/" target="_blank">OMDb</a> to <a href="https://www.themoviedb.org/" target="_blank">TMDb</a>.
+          </li>
+          <li>
+            Apr 24, 2017: Wire up the <a href="http://www.omdbapi.com/" target="_blank">OMDb</a> api service to obtain the movie info.
           </li>
         </ul>
       </p>

@@ -25,7 +25,7 @@
         <div class="table-responsive">
           <table class="table table-striped">
             <tbody>
-              <tr v-for="user in users">
+              <tr v-for="user in users" :key="user._id">
                 <td>
                   <i class="glyphicon glyphicon-user"></i>
                   {{ `${user.name} [${user.total}]` }}

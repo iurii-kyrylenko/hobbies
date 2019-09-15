@@ -7,8 +7,8 @@
       </a>
     </li>
 
-    <li v-for="p in pages" :class="{ active: p == page }">
-      <a href="" @click.prevent="select($event, p)">{{ p }}</a>
+    <li v-for="p in pages" :key="p" :class="{ active: p == page }">
+      <a href="" @click.prevent="select(p)">{{ p }}</a>
     </li>
 
     <li v-if="page < pageCount">
@@ -43,13 +43,13 @@
         let max = min + this.frame - 1
         return { min, max }
       },
-      select (event, page) {
+      select (page) {
         this.$emit('change', page)
       },
-      previous (event) {
+      previous () {
         this.$emit('change', this.page - 1)
       },
-      next (event) {
+      next () {
         this.$emit('change', this.page + 1)
       }
     },

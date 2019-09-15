@@ -44,9 +44,15 @@ const get = (req, res) => {
       res.sendStatus(400)
       return
     }
-    const tmdbResult = JSON.parse(body)
-    const result = getResultFromTmdbFind(tmdbResult)
-    res.send(result)
+    try {
+      const tmdbResult = JSON.parse(body)
+      const result = getResultFromTmdbFind(tmdbResult)
+      res.send(result)
+    }
+    catch(e) {
+      res.sendStatus(502)
+      return
+    }
   })
 }
 
@@ -72,9 +78,15 @@ const search = (req, res) => {
       res.sendStatus(400)
       return
     }
-    const tmdbResult = JSON.parse(body)
-    const result = getResultFromTmdbSearch(tmdbResult)
-    res.send(result)
+    try {
+      const tmdbResult = JSON.parse(body)
+      const result = getResultFromTmdbSearch(tmdbResult)
+      res.send(result)
+    }
+    catch(e) {
+      res.sendStatus(502)
+      return
+    }
   })
 }
 

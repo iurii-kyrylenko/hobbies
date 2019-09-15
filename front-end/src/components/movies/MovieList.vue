@@ -36,7 +36,7 @@
             </tr>
           </thead>
             <tbody>
-              <tr v-for="movie in items">
+              <tr v-for="movie in items" :key="movie._id">
                 <td>
                   <div class="input-group-btn">
                       <a @click="openInfo(movie)" class="btn btn-default" title="Movie Info">

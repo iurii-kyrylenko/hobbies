@@ -26,6 +26,9 @@ const mutations = {
   },
   setMovieProgress (state, progress) {
     state.movieProgress = progress
+  },
+  setMovieError (state, error) {
+    state.movieError = error
   }
 }
 
@@ -50,16 +53,21 @@ const getters = {
 // }
 
 const actions = {
-  async getMovieInfo ({ state, commit }, movie) {
+  async getMovieInfo ({ commit }, movie) {
     commit('setMovieProgress', true)
 
     // const data = await mockedResponse(movie.title)
     const endpoint = config.apiUrl + (movie.imdbId ? '/get-movie' : '/search-movie')
     const params = movie.imdbId ? { imdbId: movie.imdbId } : { title: movie.title }
-    const { data } = await axios.get(endpoint, { params })
-
-    commit('setMovieInfo', data)
-    commit('setMovieProgress', false)
+    try {
+      const { data } = await axios.get(endpoint, { params })
+      commit('setMovieInfo', data)
+      commit('setMovieProgress', false)
+    }
+    catch(e) {
+      commit('setMovieProgress', false)
+      commit('setMovieError', e.message)
+    }
   }
 }
 

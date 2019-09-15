@@ -18,7 +18,7 @@
             </tr>
           </thead>
             <tbody>
-              <tr v-for="book in items">
+              <tr v-for="book in items" :key="book._id">
                 <td v-if="my">
                   <div class="input-group-btn">
                       <router-link :to="book._id" append class="btn btn-default" title="Edit Book">

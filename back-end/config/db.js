@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.CONNECTION_STRING);
+mongoose.connect(process.env.CONNECTION_STRING, { useMongoClient: true });
 
 mongoose.connection
     .on('connected', () => console.log('mongo connected'))
