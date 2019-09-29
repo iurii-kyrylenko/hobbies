@@ -44,6 +44,7 @@
           </div>
 
         <button type="submit" class="btn btn-default">Submit</button>
+        &nbsp;
         <router-link to="../" append class="btn btn-default">Reject</router-link>
       </form>
 
