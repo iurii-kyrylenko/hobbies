@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.CONNECTION_STRING, { useMongoClient: true });
+mongoose.connect(process.env.CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 mongoose.connection
     .on('connected', () => console.log('mongo connected'))
@@ -11,4 +14,3 @@ mongoose.connection
 require('../items/book.model');
 require('../items/movie.model');
 require('../users/model');
-
