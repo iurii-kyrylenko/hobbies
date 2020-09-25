@@ -33,6 +33,9 @@
       <p>
         <ul>
           <li>
+            Sep 22, 2020: Migrate database from <a href="https://mlab.com" target="_blank">mLab</a> to <a href="https://www.mongodb.com/cloud/atlas" target="_blank">MongoDB Atlas</a>.
+          </li>
+          <li>
             Sep 15, 2019: Handle errors from TMDb API. Update dependencies.
           </li>
           <li>
