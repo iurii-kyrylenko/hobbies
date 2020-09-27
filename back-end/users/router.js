@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('express-jwt');
-const auth = jwt({ secret: process.env.JWT_SECRET });
+const auth = jwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'] });
 const userController = require('./controller');
 
 router.use('/register', userController.validateCaptchaResponse);

@@ -2,7 +2,7 @@ const ItemsControllerFactory = require('../items/controller');
 const usersController = require('../users/controller');
 const jwt = require('express-jwt');
 const multer  = require('multer');
-const auth = jwt({ secret: process.env.JWT_SECRET });
+const auth = jwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'] });
 const express = require('express');
 
 const personal = (modelName) => {
